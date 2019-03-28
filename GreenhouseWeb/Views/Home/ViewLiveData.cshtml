@@ -1,0 +1,122 @@
+﻿@using Microsoft.AspNet.Identity
+@using Moq;
+@using GreenhouseWeb.Tests.Mock;
+ 
+
+@if (Request.IsAuthenticated)
+{
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <!--Script Reference[1]-->
+        <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <!--Chart Placement[2]-->
+            <div id="InTemperature"></div>
+            <script>
+
+
+                var chartData = {
+                    type: 'gauge',  // Specify your chart type here.
+                    title: {
+                        text: 'Inside Temperature' // Adds a title to your chart
+                    },
+                
+                    series: [  // Insert your series data here.
+                        { values: [35, 40] }
+
+                    ]
+                };
+                zingchart.render({ // Render Method[3]
+                    id: 'InTemperature',
+                    data: chartData,
+                    height: 200,
+                    width: 300
+                });
+            </script>
+
+
+            <div id="OutTemperature"></div>
+            <script>
+                var chartData = {
+                    type: 'gauge',  // Specify your chart type here.
+                    title: {
+                        text: 'Outside Temperature' // Adds a title to your chart
+                    },
+
+                    series: [  // Insert your series data here.
+                        { values: [35, 40] }
+
+                    ]
+                };
+                zingchart.render({ // Render Method[3]
+                    id: 'OutTemperature',
+                    data: chartData,
+                    height: 200,
+                    width: 300
+                });
+            </script>
+
+            <div id="Humidity"></div>
+            <script>
+                var chartData = {
+                    type: 'gauge',  // Specify your chart type here.
+                    title: {
+                        text: 'Humidity' // Adds a title to your chart
+                    },
+
+                    series: [  // Insert your series data here.
+                        { values: [0, 100] }
+
+                    ]
+                };
+                zingchart.render({ // Render Method[3]
+                    id: 'Humidity',
+                    data: chartData,
+                    height: 200,
+                    width: 300
+                });
+            </script>
+
+            <div id="WaterLevel"></div>
+            <script>
+                var chartData = {
+                    type: 'gauge',  // Specify your chart type here.
+                    title: {
+                        text: 'Water level' // Adds a title to your chart
+                    },
+
+                    series: [  // Insert your series data here.
+                        { values: [0, 100] }
+
+                    ]
+                };
+                zingchart.render({ // Render Method[3]
+                    id: 'WaterLevel',
+                    data: chartData,
+                    height: 200,
+                    width: 300
+                });
+
+            </script>
+        </div>
+
+
+    </body>
+</html>
+
+
+}
+else
+{
+
+
+}
+
+
+
+
