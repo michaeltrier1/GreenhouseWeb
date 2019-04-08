@@ -14,7 +14,7 @@
         <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     </head>
     <body>
-        <div>
+        <div id="gauges">
             <!--Chart Placement[2]-->
             <div id="InTemperature"></div>
             <script>
@@ -22,13 +22,36 @@
 
                 var chartData = {
                     type: 'gauge',  // Specify your chart type here.
+                    "scale-r": {
+                        "aperture": 200,     //Specify your scale range.
+                        "values": "0:40:1"
+                    },
                     title: {
                         text: 'Inside Temperature' // Adds a title to your chart
+                        
                     },
                 
-                    series: [  // Insert your series data here.
-                        { values: [35, 40] }
-
+                    "series": [
+                        {
+                            "values": [10],
+                            "csize": "5%",
+                            "size": "65%",
+                            "background-color": "#CC0066"
+                        },
+                        {
+                            "values": [30],
+                            "csize": "5%",
+                            "size": "65%",
+                            "background-color": "#CC0066"
+                        },
+                        {
+                            "values": [18],
+                            "indicator": [0, 10, 0, 0, 0.3],
+                            "csize": "10%",
+                            "size": "70%",
+                            "background-color": "#66CCFF #FFCCFF"
+                            
+                        }
                     ]
                 };
                 zingchart.render({ // Render Method[3]
@@ -91,7 +114,7 @@
                     },
 
                     series: [  // Insert your series data here.
-                        { values: [0, 100] }
+                        { values: [0, 100, 20] }
 
                     ]
                 };
@@ -101,9 +124,10 @@
                     height: 200,
                     width: 300
                 });
-
+               
             </script>
         </div>
+        
 
 
     </body>

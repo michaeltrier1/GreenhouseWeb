@@ -14,7 +14,9 @@ namespace GreenhouseWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
-    {
+    {/// <summary>
+    /// 
+    /// </summary>
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -47,7 +49,7 @@ namespace GreenhouseWeb.Controllers
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
-            {
+            {   
                 _userManager = value;
             }
         }
