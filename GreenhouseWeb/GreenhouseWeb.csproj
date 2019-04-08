@@ -237,7 +237,10 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Class1.cs" />
+    <Compile Include="Services\Communication\CommunicationFacade.cs" />
+    <Compile Include="Services\IncomingCommunication.cs" />
+    <Compile Include="Services\Servicesfacade.cs" />
+    <Compile Include="Services\Watchdog\WatchdogFacade.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

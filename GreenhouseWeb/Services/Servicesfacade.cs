@@ -5,7 +5,7 @@ using System.Web;
 
 namespace GreenhouseWeb.Services
 {
-    public class Class1
+    public class Servicesfacade
     {
     }
 }
