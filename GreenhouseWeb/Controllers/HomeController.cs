@@ -28,6 +28,7 @@ namespace GreenhouseWeb.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+            ViewBag.Whatever = "I made this";
 
             return View();
         }
