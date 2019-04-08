@@ -18,7 +18,9 @@
             <!--Chart Placement[2]-->
             <div id="InTemperature"></div>
             <script>
-
+                var minSetPoint = [15];
+                var temperature = [24];
+                var maxSetPoint = [30];
 
                 var chartData = {
                     type: 'gauge',  // Specify your chart type here.
@@ -33,19 +35,19 @@
                 
                     "series": [
                         {
-                            "values": [10],
+                            "values": minSetPoint,
                             "csize": "5%",
                             "size": "65%",
                             "background-color": "#CC0066"
                         },
                         {
-                            "values": [30],
+                            "values": temperature,
                             "csize": "5%",
                             "size": "65%",
                             "background-color": "#CC0066"
                         },
                         {
-                            "values": [18],
+                            "values": maxSetPoint,
                             "indicator": [0, 10, 0, 0, 0.3],
                             "csize": "10%",
                             "size": "70%",
