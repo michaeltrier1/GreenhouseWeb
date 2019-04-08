@@ -239,6 +239,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Communication\CommunicationFacade.cs" />
     <Compile Include="Services\IncomingCommunication.cs" />
+    <Compile Include="Services\LiveData.cs" />
+    <Compile Include="Services\Measurements.cs" />
     <Compile Include="Services\Servicesfacade.cs" />
     <Compile Include="Services\Watchdog\WatchdogFacade.cs" />
     <Compile Include="Startup.cs" />
