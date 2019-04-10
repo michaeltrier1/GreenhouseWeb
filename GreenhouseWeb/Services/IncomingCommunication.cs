@@ -15,9 +15,11 @@ namespace GreenhouseWeb.Services
 
         private IPAddress ipAddress;
         private TcpListener listener;
+        private ServicesFacade servicesFacade;
 
-        public IncomingCommunicator()
+        public IncomingCommunicator(ServicesFacade servicesFacade)
         {
+            this.servicesFacade = servicesFacade;
             this.ipAddress = IPAddress.Parse("127.0.0.1");
             this.listener = new TcpListener(ipAddress, 8090);
         }       
