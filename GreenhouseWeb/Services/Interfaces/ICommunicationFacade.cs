@@ -8,5 +8,7 @@ namespace GreenhouseWeb.Services.Interfaces
 {
     interface ICommunicationFacade
     {
+        
     }
+
 }

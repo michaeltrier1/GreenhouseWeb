@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Web;
 using GreenhouseWeb.Services;
+using GreenhouseWeb.Services.Interfaces;
 
 namespace GreenhouseWeb.Services
 {
@@ -15,9 +16,9 @@ namespace GreenhouseWeb.Services
 
         private IPAddress ipAddress;
         private TcpListener listener;
-        private ServicesFacade servicesFacade;
+        private IServicesFacadeForServices servicesFacade;
 
-        public IncomingCommunicator(ServicesFacade servicesFacade)
+        public IncomingCommunicator(IServicesFacadeForServices servicesFacade)
         {
             this.servicesFacade = servicesFacade;
             this.ipAddress = IPAddress.Parse("127.0.0.1");

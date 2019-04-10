@@ -10,20 +10,24 @@ namespace GreenhouseWeb.Services.WatchdogModule
 {
     public class WatchdogFacade : IWatchdogFacade
     {
-        public ServicesFacade ServicesFadace { get; }
+        IServicesFacadeForServices servicesFacade;
 
         private Watchdog watchdog;
         private Thread thr;
-        public WatchdogFacade(ServicesFacade servicesFacade)
+        public WatchdogFacade(IServicesFacadeForServices servicesFacade)
         {
-            this.ServicesFadace = servicesFacade;
+            this.servicesFacade = servicesFacade;
         
-        watchdog = new Watchdog();
+        watchdog = new Watchdog(this);
 
             thr = new Thread(new ThreadStart(watchdog.StartWatchdog));
         }
 
         public void PetWatchdog(string greenhouseID) => Watchdog.PetWatchdog(greenhouseID);
 
+        public void RetryConnection(string greenhouseID)
+        {
+            servicesFacade.RetryConnection(greenhouseID);
+        }
     }
 }

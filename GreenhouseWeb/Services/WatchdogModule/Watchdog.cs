@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using GreenhouseWeb.Services.Interfaces;
 
 namespace GreenhouseWeb.Services.WatchdogModule
 {
     public class Watchdog
     {
 
+       
         private static Dictionary<string, DateTime> greenhouses;
+        private WatchdogFacade watchdogFacade;
+
+        public Watchdog(WatchdogFacade facade)
+        {
+            watchdogFacade = facade;
+        }
 
         public static void PetWatchdog(string greenhouseID)
         {
@@ -34,13 +42,18 @@ namespace GreenhouseWeb.Services.WatchdogModule
                     TimeSpan difference = now.Subtract(entry.Value);
                     if (difference.Minutes > 2)
                     {
-
+                        RetryConnection(entry.Key);
                     }
 
                 }
 
             }
 
+        }
+
+        private void RetryConnection(string greenhouseID)
+        {
+            watchdogFacade.RetryConnection(greenhouseID);
         }
 
     }
