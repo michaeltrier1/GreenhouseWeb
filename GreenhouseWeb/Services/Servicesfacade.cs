@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using GreenhouseWeb.Services.WatchdogModule;
 using GreenhouseWeb.Services.Interfaces;
+using GreenhouseWeb.Services.Communication;
 
 namespace GreenhouseWeb.Services
 {
@@ -12,13 +13,14 @@ namespace GreenhouseWeb.Services
         private IncomingCommunicator incommingCommunication;
         private LiveData liveData;
         private WatchdogFacade wactchdogFacade;
+        private CommunicationFacade communicationFacade;
 
         public ServicesFacade()
         {
             this.incommingCommunication = new IncomingCommunicator(this);
             this.liveData = new LiveData();
             this.wactchdogFacade = new WatchdogFacade(this);
-
+            this.communicationFacade = new CommunicationFacade();
 
         }
 
@@ -34,7 +36,7 @@ namespace GreenhouseWeb.Services
 
         public void RetryConnection(string greenhouseID)
         {
-            throw new NotImplementedException();
+            communicationFacade.RetryConnection(greenhouseID);
         }
 
         public void SetMeasurement(string greenhouseID, IMeasurement measurement)
