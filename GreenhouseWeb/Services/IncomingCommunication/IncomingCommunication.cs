@@ -37,9 +37,9 @@ namespace GreenhouseWeb.Services
 
                     TcpClient client = listener.AcceptTcpClient();
 
-                    SocketHandler socketHandler = new SocketHandler(client);
+                    SocketHandler socketHandler = new SocketHandler(client, this);
 
-                    Thread thread = new Thread(new ThreadStart(socketHandler.handleSocketAsync));
+                    Thread thread = new Thread(new ThreadStart(socketHandler.handleSocket));
                     thread.Start();
 
 
@@ -49,6 +49,16 @@ namespace GreenhouseWeb.Services
                     Console.Write(e.StackTrace);
                 }
             }
+        }
+
+        internal void petWatchdog(string greenhouseID)
+        {
+            this.servicesFacade.PetWatchdog(greenhouseID);
+        }
+
+        internal void setMeasurements(string greenhouseID, Measurements measurements)
+        {
+            this.servicesFacade.SetMeasurement(greenhouseID, measurements);
         }
 
 
