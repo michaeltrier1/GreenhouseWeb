@@ -7,5 +7,7 @@ namespace GreenhouseWeb.Services.Communication
 {
     public class GreenhouseIPRetriever
     {
+
+
     }
 }

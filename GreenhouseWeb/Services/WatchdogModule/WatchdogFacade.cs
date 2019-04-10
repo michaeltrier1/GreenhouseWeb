@@ -8,12 +8,13 @@ using System.Threading;
 
 namespace GreenhouseWeb.Services.WatchdogModule
 {
-    public class WatchdogFacade : IWatchdogFacade
+    public class WatchdogFacade
     {
         IServicesFacadeForServices servicesFacade;
 
         private Watchdog watchdog;
         private Thread thr;
+
         public WatchdogFacade(IServicesFacadeForServices servicesFacade)
         {
             this.servicesFacade = servicesFacade;
