@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace GreenhouseWeb.Services.Watchdog
+namespace GreenhouseWeb.Services
 {
-    public class WatchdogFacade
+    public class ServiceMediator
     {
+
+
+
+
     }
 }
