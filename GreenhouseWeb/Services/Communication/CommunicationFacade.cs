@@ -8,6 +8,15 @@ namespace GreenhouseWeb.Services.Communication
 {
     public class CommunicationFacade : ICommunicationFacade
     {
+        public void RetryConnection(string greenhouseID)
+        {
+
+            string greenhouseConnectionInfo = new GreenhouseIPRetriever().GetIP(greenhouseID);
+            new Communicator().SendRetryConnection(greenhouseConnectionInfo);
+
+        }
+
+
 
     }
 }
