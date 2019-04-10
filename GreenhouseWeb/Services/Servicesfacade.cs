@@ -5,12 +5,12 @@ using System.Web;
 
 namespace GreenhouseWeb.Services
 {
-    public class Servicesfacade
+    public class ServicesFacade
     {
 
         private LiveData liveData;
 
-        public Servicesfacade()
+        public ServicesFacade()
         {
             this.liveData = new LiveData();
         }

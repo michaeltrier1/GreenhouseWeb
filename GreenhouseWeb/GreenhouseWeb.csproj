@@ -241,7 +241,9 @@
     <Compile Include="Services\IncomingCommunication.cs" />
     <Compile Include="Services\LiveData.cs" />
     <Compile Include="Services\Measurements.cs" />
-    <Compile Include="Services\Servicesfacade.cs" />
+    <Compile Include="Services\ProcedureInterpreter.cs" />
+    <Compile Include="Services\ServicesFacade.cs" />
+    <Compile Include="Services\SocketHandler.cs" />
     <Compile Include="Services\Watchdog\WatchdogFacade.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
