@@ -31,8 +31,6 @@ namespace GreenhouseWeb.Services
             {
                 try
                 {
-                    System.Diagnostics.Debug.WriteLine("Mjallo");
-
                     listener.Start();
 
                     TcpClient client = listener.AcceptTcpClient();
