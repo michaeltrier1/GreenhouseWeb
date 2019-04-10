@@ -244,6 +244,8 @@
     <Compile Include="Services\ProcedureInterpreter.cs" />
     <Compile Include="Services\ServicesFacade.cs" />
     <Compile Include="Services\SocketHandler.cs" />
+    <Compile Include="Services\Interfaces\ICommunicationFacade.cs" />
+    <Compile Include="Services\Interfaces\IWatchdogFacade.cs" />
     <Compile Include="Services\WatchdogModule\WatchdogFacade.cs" />
     <Compile Include="Services\WatchdogModule\Watchdog.cs" />
     <Compile Include="Startup.cs" />
