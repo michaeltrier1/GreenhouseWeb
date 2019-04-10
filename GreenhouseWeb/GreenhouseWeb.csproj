@@ -238,14 +238,12 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Communication\CommunicationFacade.cs" />
-    <Compile Include="Services\IncomingCommunication.cs" />
-    <Compile Include="Services\LiveData.cs" />
+    <Compile Include="Services\IncomingCommunication\IncomingCommunication.cs" />
+    <Compile Include="Services\LiveData\LiveData.cs" />
     <Compile Include="Services\Measurements.cs" />
-    <Compile Include="Services\ProcedureInterpreter.cs" />
+    <Compile Include="Services\IncomingCommunication\ProcedureInterpreter.cs" />
     <Compile Include="Services\ServicesFacade.cs" />
-    <Compile Include="Services\SocketHandler.cs" />
-    <Compile Include="Services\Interfaces\ICommunicationFacade.cs" />
-    <Compile Include="Services\Interfaces\IWatchdogFacade.cs" />
+    <Compile Include="Services\IncomingCommunication\SocketHandler.cs" />
     <Compile Include="Services\WatchdogModule\WatchdogFacade.cs" />
     <Compile Include="Services\WatchdogModule\Watchdog.cs" />
     <Compile Include="Startup.cs" />
@@ -1345,6 +1343,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="NewFolder1\" />
+    <Folder Include="Services\Interfaces\" />
     <Folder Include="Views\Application\" />
     <Folder Include="Views\Greenhouse\" />
   </ItemGroup>

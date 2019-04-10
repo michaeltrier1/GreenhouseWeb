@@ -30,7 +30,6 @@ namespace GreenhouseWeb.Services
             {
                 try
                 {
-
                     System.Diagnostics.Debug.WriteLine("Mjallo");
 
                     listener.Start();
