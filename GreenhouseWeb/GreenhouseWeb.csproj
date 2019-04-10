@@ -240,6 +240,12 @@
     <Compile Include="Services\Communication\CommunicationFacade.cs" />
     <Compile Include="Services\IncomingCommunication\IncomingCommunication.cs" />
     <Compile Include="Services\LiveData\LiveData.cs" />
+    <Compile Include="Services\Communication\Communicator.cs" />
+    <Compile Include="Services\Communication\GreenhouseIPRetriever.cs" />
+    <Compile Include="Services\IncomingCommunication.cs" />
+    <Compile Include="Services\Interfaces\IMeasurement.cs" />
+    <Compile Include="Services\Interfaces\IServicesFacadeForServices.cs" />
+    <Compile Include="Services\LiveData.cs" />
     <Compile Include="Services\Measurements.cs" />
     <Compile Include="Services\IncomingCommunication\ProcedureInterpreter.cs" />
     <Compile Include="Services\ServicesFacade.cs" />
