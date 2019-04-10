@@ -244,7 +244,8 @@
     <Compile Include="Services\ProcedureInterpreter.cs" />
     <Compile Include="Services\ServicesFacade.cs" />
     <Compile Include="Services\SocketHandler.cs" />
-    <Compile Include="Services\Watchdog\WatchdogFacade.cs" />
+    <Compile Include="Services\WatchdogModule\WatchdogFacade.cs" />
+    <Compile Include="Services\WatchdogModule\Watchdog.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
