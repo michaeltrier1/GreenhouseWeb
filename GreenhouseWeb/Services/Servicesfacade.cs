@@ -15,7 +15,7 @@ namespace GreenhouseWeb.Services
             this.liveData = new LiveData();
         }
 
-        public Measurements getLCurrentLiveData(String greenhouseID)
+        public Measurements getCurrentLiveData(String greenhouseID)
         {
             return this.liveData.getMeasurements(greenhouseID);
         }

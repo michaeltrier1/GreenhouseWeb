@@ -14,7 +14,7 @@ namespace GreenhouseWeb.Services
             this.liveData = new Dictionary<string, Measurements>();
 
 
-            this.liveData.Add("testgreenhouse", new Measurements(5,5,5,5));
+            this.liveData.Add("testgreenhouse", new Measurements(5,6,7,8));
         }
 
         public Measurements getMeasurements(String greenhouseID)
