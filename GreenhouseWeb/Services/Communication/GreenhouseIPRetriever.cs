@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace GreenhouseWeb.Services
+namespace GreenhouseWeb.Services.Communication
 {
-    public class IncomingCommunication
+    public class GreenhouseIPRetriever
     {
+
+
     }
 }
