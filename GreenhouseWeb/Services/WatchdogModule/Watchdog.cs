@@ -10,7 +10,7 @@ namespace GreenhouseWeb.Services.WatchdogModule
     {
 
        
-        private static Dictionary<string, DateTime> greenhouses;
+        private static Dictionary<string, DateTime> greenhouses = new Dictionary<string, DateTime>();
         private WatchdogFacade watchdogFacade;
 
         public Watchdog(WatchdogFacade facade)

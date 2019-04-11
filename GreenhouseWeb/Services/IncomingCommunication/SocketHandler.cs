@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Web;
 
-namespace GreenhouseWeb.Services
+namespace GreenhouseWeb.Services.Incoming
 {
     public class SocketHandler
     {
@@ -18,6 +18,7 @@ namespace GreenhouseWeb.Services
 
         public SocketHandler(TcpClient client, IncomingCommunicator incomingCommunicator)
         {
+            this.interpreter = new ProcedureInterpreter();
             this.client = client;
             this.incomingCommunicator = incomingCommunicator;
         }

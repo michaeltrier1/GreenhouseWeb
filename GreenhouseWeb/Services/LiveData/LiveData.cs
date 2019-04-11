@@ -24,7 +24,7 @@ namespace GreenhouseWeb.Services
 
         public void setMeasurements(string greenhouseID, IMeasurement measurements)
         {
-            this.liveData.Add(greenhouseID, );
+            this.liveData.Add(greenhouseID, measurements);
         }
 
 
