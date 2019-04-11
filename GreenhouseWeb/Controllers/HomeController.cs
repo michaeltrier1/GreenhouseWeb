@@ -7,6 +7,7 @@ using GreenhouseWeb.Models;
 using GreenhouseWeb.Services;
 using GreenhouseWeb.Tests;
 using GreenhouseWeb.Tests.Mock;
+using GreenhouseWeb.Services.LiveData;
 
 namespace GreenhouseWeb.Controllers
 {
@@ -39,12 +40,7 @@ namespace GreenhouseWeb.Controllers
         }
         public ActionResult ViewLiveData()
         {
-            Servicesfacade sF = new Servicesfacade();
-            //ViewBag.Measurements = sF.getCurrentLiveData("testgreenhouse");  
-            Random rnd = new Random();
-            ViewBag.Measurements = rnd.NextDouble()*100;
-
-            return View();
+           return View();
         }
 
 
