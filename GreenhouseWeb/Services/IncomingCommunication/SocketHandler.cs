@@ -13,26 +13,22 @@ namespace GreenhouseWeb.Services
     {
 
         private TcpClient client;
+        private IncomingCommunicator incomingCommunicator;
+        private ProcedureInterpreter interpreter;
 
-        public SocketHandler(TcpClient client)
+        public SocketHandler(TcpClient client, IncomingCommunicator incomingCommunicator)
         {
             this.client = client;
+            this.incomingCommunicator = incomingCommunicator;
         }
 
-        public void handleSocketAsync()
+        public void handleSocket()
         {
             NetworkStream stream = client.GetStream();
             StreamReader reader = new StreamReader(stream);
             String message = reader.ReadLine();
 
-
-            System.Diagnostics.Debug.WriteLine(message);
-            for (int i=0; i<5; i++)
-            {
-                System.Diagnostics.Debug.WriteLine("Mjallo");
-                Thread.Sleep(1000);
-            }
-            
+            this.interpreter.interpret(message, this.incomingCommunicator);
         }
 
 

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using GreenhouseWeb.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace GreenhouseWeb.Services
 {
-    public class Measurements
+    public class Measurements : IMeasurement
     {
         public double internalTemperature { get; set; }
         public double externalTemperature { get; set; }

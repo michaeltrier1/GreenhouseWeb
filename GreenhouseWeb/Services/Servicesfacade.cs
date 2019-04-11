@@ -24,7 +24,7 @@ namespace GreenhouseWeb.Services
 
         }
 
-        public Measurements getLCurrentLiveData(String greenhouseID)
+        public IMeasurement getLCurrentLiveData(String greenhouseID)
         {
             return this.liveData.getMeasurements(greenhouseID);
         }
@@ -41,7 +41,7 @@ namespace GreenhouseWeb.Services
 
         public void SetMeasurement(string greenhouseID, IMeasurement measurement)
         {
-            throw new NotImplementedException();
+            this.liveData.setMeasurements(greenhouseID, measurement);
         }
     }
 }
