@@ -8,7 +8,7 @@ namespace GreenhouseWeb.Models
     public class Data
     {
         public double getTemperature { get; set; }
-
+        
 
     } 
 }

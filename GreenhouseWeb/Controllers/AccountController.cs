@@ -14,7 +14,9 @@ namespace GreenhouseWeb.Controllers
 {
     [Authorize]
     public class AccountController : Controller
-    {
+    {/// <summary>
+    /// 
+    /// </summary>
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -47,7 +49,7 @@ namespace GreenhouseWeb.Controllers
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
-            {
+            {   
                 _userManager = value;
             }
         }
@@ -76,6 +78,13 @@ namespace GreenhouseWeb.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            Console.WriteLine(model.Email);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("This is LORT");
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+
             switch (result)
             {
                 case SignInStatus.Success:

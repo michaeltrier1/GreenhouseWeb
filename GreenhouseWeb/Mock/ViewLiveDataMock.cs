@@ -10,7 +10,11 @@ namespace GreenhouseWeb.Tests.Mock
     {
       public double getTemperature()
         {
-            return 36.00;
+          ///  
+          /// 
+          /// 
+          /// 
+          return 36.00;
         } 
    
     }
