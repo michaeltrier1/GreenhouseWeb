@@ -13,20 +13,24 @@ namespace GreenhouseWeb.Services.Communication
 
         public void SendRetryConnection(string greenhouseConnectionInfo)
         {
+            using (TcpClient client = new TcpClient()) {                 
+                char c = ':';
+                string[] ipAndPort = greenhouseConnectionInfo.Split(c);
+                client.Connect(ipAndPort[0], int.Parse(ipAndPort[1]));
+                NetworkStream stream = client.GetStream();
+                StreamWriter writer = new StreamWriter(stream);
 
-            TcpClient client = new TcpClient();
-            char c = ':';
-            string[] ipAndPort = greenhouseConnectionInfo.Split(c);
-            client.Connect(ipAndPort[0], int.Parse(ipAndPort[1]));
-            NetworkStream stream = client.GetStream();
-            StreamWriter writer = new StreamWriter(stream);
-            JObject jsonObject = new JObject("{}");
-            jsonObject.Add("procedure","retryConnection");
+                JObject jsonObject = new JObject("{}");
+                jsonObject.Add("procedure", "retryConnection");
 
-         
-            writer.Write(jsonObject);
+                writer.Write(jsonObject);
+                writer.Flush();
 
-           
+                writer.Close();
+                stream.Close();
+            }
+
+
 
         }
 

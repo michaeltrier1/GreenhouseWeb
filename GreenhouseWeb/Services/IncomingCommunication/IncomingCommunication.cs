@@ -9,7 +9,7 @@ using System.Web;
 using GreenhouseWeb.Services;
 using GreenhouseWeb.Services.Interfaces;
 
-namespace GreenhouseWeb.Services
+namespace GreenhouseWeb.Services.Incoming
 {
     public class IncomingCommunicator
     {

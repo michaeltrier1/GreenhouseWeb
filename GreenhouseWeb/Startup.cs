@@ -1,4 +1,5 @@
 ﻿using GreenhouseWeb.Services;
+using GreenhouseWeb.Services.Incoming;
 using Microsoft.Owin;
 using Owin;
 using System;
@@ -19,9 +20,9 @@ namespace GreenhouseWeb
 
         private void startServices()
         {
-            IncomingCommunicator communicator = new IncomingCommunicator();
-            Thread thread = new Thread(new ThreadStart(communicator.listenForConnections));
-            thread.Start();
+            //IncomingCommunicator communicator = new IncomingCommunicator();
+            //Thread thread = new Thread(new ThreadStart(communicator.listenForConnections));
+            //thread.Start();
         }
     }
 }

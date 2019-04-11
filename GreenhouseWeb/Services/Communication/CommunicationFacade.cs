@@ -6,7 +6,7 @@ using GreenhouseWeb.Services.Interfaces;
 
 namespace GreenhouseWeb.Services.Communication
 {
-    public class CommunicationFacade : ICommunicationFacade
+    public class CommunicationFacade
     {
         public void RetryConnection(string greenhouseID)
         {
