@@ -13,25 +13,35 @@ namespace GreenhouseWeb.Services.Communication
 
         public void SendRetryConnection(string greenhouseConnectionInfo)
         {
-            using (TcpClient client = new TcpClient()) {                 
-                char c = ':';
-                string[] ipAndPort = greenhouseConnectionInfo.Split(c);
+            JObject jsonObject = new JObject("{}");
+            jsonObject.Add("procedure", "retryConnection");
+
+            this.send(greenhouseConnectionInfo, jsonObject);
+        }
+
+        public void applySchedule(string greenhouseConnectionInfo, JObject schedule)
+        {
+            schedule.Add("procedure", "applySchedule");
+            this.send(greenhouseConnectionInfo, schedule);
+        }
+
+        private void send(string greenhouseConnectionInfo, JObject message)
+        {
+            char c = ':';
+            string[] ipAndPort = greenhouseConnectionInfo.Split(c);
+
+            using (TcpClient client = new TcpClient())
+            {
                 client.Connect(ipAndPort[0], int.Parse(ipAndPort[1]));
                 NetworkStream stream = client.GetStream();
                 StreamWriter writer = new StreamWriter(stream);
 
-                JObject jsonObject = new JObject("{}");
-                jsonObject.Add("procedure", "retryConnection");
-
-                writer.Write(jsonObject);
+                writer.Write(message);
                 writer.Flush();
 
                 writer.Close();
                 stream.Close();
             }
-
-
-
         }
 
 

@@ -9,7 +9,7 @@ namespace GreenhouseWeb.Services.Incoming
     public class ProcedureInterpreter
     {
 
-        public void interpret(String message, IncomingCommunicator incomingCommunicator)
+        public string interpret(String message, IncomingCommunicator incomingCommunicator)
         {
             JObject jsonMessage = JObject.Parse(message);
 
@@ -33,11 +33,11 @@ namespace GreenhouseWeb.Services.Incoming
 
                     Measurements measurements = new Measurements(internalTemperature, externalTemperature, humidity, waterLevel);
                     incomingCommunicator.setMeasurements(greenHouseID, measurements);
-                    break;
+                    return greenHouseID;
                 default:
                     break;
             }
-
+            return "";
         }
 
     }

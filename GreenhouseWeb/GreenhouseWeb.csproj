@@ -265,6 +265,8 @@
     <Compile Include="Services\Interfaces\IServicesFacadeForServices.cs" />
     <Compile Include="Services\Measurements.cs" />
     <Compile Include="Services\IncomingCommunication\ProcedureInterpreter.cs" />
+    <Compile Include="Services\Schedule\ScheduleRepacker.cs" />
+    <Compile Include="Services\Schedule\ScheduleFacade.cs" />
     <Compile Include="Services\ServiceFacadeGetter.cs" />
     <Compile Include="Services\ServicesFacade.cs" />
     <Compile Include="Services\IncomingCommunication\SocketHandler.cs" />
