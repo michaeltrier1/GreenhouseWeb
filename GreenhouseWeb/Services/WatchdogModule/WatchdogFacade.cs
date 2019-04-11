@@ -14,6 +14,7 @@ namespace GreenhouseWeb.Services.WatchdogModule
 
         private Watchdog watchdog;
         private Thread thr;
+
         public WatchdogFacade(IServicesFacadeForServices servicesFacade)
         {
             this.servicesFacade = servicesFacade;
