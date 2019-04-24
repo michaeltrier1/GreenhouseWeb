@@ -19,9 +19,7 @@ namespace GreenhouseWeb
 
         private void startServices()
         {
-          //IncomingCommunicator communicator = new IncomingCommunicator();
-            //Thread thread = new Thread(new ThreadStart(communicator.listenForConnections));
-            //thread.Start();
+            ServiceFacadeGetter.getInstance().initialiseServices();
         }
     }
 }

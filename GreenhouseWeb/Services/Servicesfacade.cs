@@ -6,10 +6,12 @@ using GreenhouseWeb.Services.WatchdogModule;
 using GreenhouseWeb.Services.Interfaces;
 using GreenhouseWeb.Services.Communication;
 using GreenhouseWeb.Services.Incoming;
+using System.Threading;
+using GreenhouseWeb.Interfaces;
 
 namespace GreenhouseWeb.Services
 {
-    public class ServicesFacade : IServicesFacadeForServices
+    public class ServicesFacade : IServicesFacadeForServices, IServiceFacade
     {
         private IncomingCommunicator incommingCommunication;
         private LiveData liveData;
@@ -18,11 +20,17 @@ namespace GreenhouseWeb.Services
 
         public ServicesFacade()
         {
-            this.incommingCommunication = new IncomingCommunicator(this);
             this.liveData = new LiveData();
-            this.wactchdogFacade = new WatchdogFacade(this);
-            this.communicationFacade = new CommunicationFacade();
+        }
 
+        internal void initialise()
+        {
+            this.wactchdogFacade = new WatchdogFacade(this);
+            this.incommingCommunication = new IncomingCommunicator(this);
+
+            incommingCommunication = new IncomingCommunicator(this);
+            Thread thread = new Thread(new ThreadStart(incommingCommunication.listenForConnections));
+            thread.Start();
         }
 
         public IMeasurement getLCurrentLiveData(String greenhouseID)
