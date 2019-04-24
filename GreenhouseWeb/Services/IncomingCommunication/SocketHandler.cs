@@ -31,11 +31,7 @@ namespace GreenhouseWeb.Services.Incoming
 
             this.interpreter.interpret(message, this.incomingCommunicator);
         }
-
-
+        
     }
-
-   
-
-
+    
 }
