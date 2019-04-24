@@ -49,11 +49,7 @@ namespace GreenhouseWeb.Services.Incoming
         {
             this.stopped = true;
         }
-
-
+        
     }
-
-   
-
-
+    
 }
