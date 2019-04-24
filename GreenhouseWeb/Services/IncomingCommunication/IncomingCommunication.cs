@@ -17,12 +17,14 @@ namespace GreenhouseWeb.Services.Incoming
         private IPAddress ipAddress;
         private TcpListener listener;
         private IServicesFacadeForServices servicesFacade;
+        private Dictionary<string, SocketHandler> activeHandlers;
 
         public IncomingCommunicator(IServicesFacadeForServices servicesFacade)
         {
             this.servicesFacade = servicesFacade;
             this.ipAddress = IPAddress.Parse("127.0.0.1");
             this.listener = new TcpListener(ipAddress, 8090);
+            this.activeHandlers = new Dictionary<string, SocketHandler>();
         }       
 
         public void listenForConnections()
@@ -39,8 +41,6 @@ namespace GreenhouseWeb.Services.Incoming
 
                     Thread thread = new Thread(new ThreadStart(socketHandler.handleSocket));
                     thread.Start();
-
-
                 }
                 catch (IOException e)
                 {
@@ -59,6 +59,21 @@ namespace GreenhouseWeb.Services.Incoming
             this.servicesFacade.SetMeasurement(greenhouseID, measurements);
         }
 
+
+        internal void registerSocketHandler(string greenhouseID, SocketHandler handler)
+        {
+            this.activeHandlers.Add(greenhouseID, handler);
+        }
+
+        internal void stopLiveData(string greenhouseID)
+        {
+            this.activeHandlers[greenhouseID].stop();
+        }
+
+        internal void unregisterSocketHandler(string greenhouseID)
+        {
+            this.activeHandlers.Remove(greenhouseID);
+        }
 
     }
 }

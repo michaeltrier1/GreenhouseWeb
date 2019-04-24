@@ -8,6 +8,8 @@ using GreenhouseWeb.Services.Communication;
 using GreenhouseWeb.Services.Incoming;
 using System.Threading;
 using GreenhouseWeb.Interfaces;
+using Newtonsoft.Json.Linq;
+using GreenhouseWeb.Services.Schedule;
 
 namespace GreenhouseWeb.Services
 {
@@ -17,14 +19,17 @@ namespace GreenhouseWeb.Services
         private LiveData liveData;
         private WatchdogFacade wactchdogFacade;
         private CommunicationFacade communicationFacade;
+        private ScheduleFacade scheduleFacade;
 
         public ServicesFacade()
         {
             this.liveData = new LiveData();
+            this.scheduleFacade = new ScheduleFacade();
         }
 
         internal void initialise()
         {
+            this.communicationFacade = new CommunicationFacade(this);
             this.wactchdogFacade = new WatchdogFacade(this);
             this.incommingCommunication = new IncomingCommunicator(this);
 
@@ -33,7 +38,7 @@ namespace GreenhouseWeb.Services
             thread.Start();
         }
 
-        public IMeasurement getLCurrentLiveData(String greenhouseID)
+        public IMeasurement getCurrentLiveData(String greenhouseID)
         {
             return this.liveData.getMeasurements(greenhouseID);
         }
@@ -51,6 +56,18 @@ namespace GreenhouseWeb.Services
         public void SetMeasurement(string greenhouseID, IMeasurement measurement)
         {
             this.liveData.setMeasurements(greenhouseID, measurement);
+        }
+
+        public void stopLiveData(string greenhouseID)
+        {
+            this.incommingCommunication.stopLiveData(greenhouseID);
+        }
+
+        public void applySchedule(string greenhouseID, JObject rawSchedule)
+        {
+            JObject processedSchedule = this.scheduleFacade.repackage(rawSchedule);
+
+            this.communicationFacade.applySchedule(greenhouseID, processedSchedule);
         }
     }
 }
