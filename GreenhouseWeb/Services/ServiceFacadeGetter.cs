@@ -26,7 +26,6 @@ namespace GreenhouseWeb.Services
 
         public void initialiseServices()
         {
-
             facade = new ServicesFacade();
             facade.initialise();
         }

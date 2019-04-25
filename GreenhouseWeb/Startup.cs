@@ -3,6 +3,8 @@ using Microsoft.Owin;
 using Owin;
 using System;
 using System.Threading;
+using System.Collections.Generic;
+using System.Web.Services.Description;
 
 [assembly: OwinStartupAttribute(typeof(GreenhouseWeb.Startup))]
 namespace GreenhouseWeb
@@ -14,6 +16,11 @@ namespace GreenhouseWeb
             ConfigureAuth(app);
 
             startServices();
+        }
+
+        public void ServicesStarter(ServiceCollection serviceCollection)
+        {
+
         }
 
 

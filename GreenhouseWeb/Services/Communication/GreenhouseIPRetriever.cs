@@ -11,7 +11,7 @@ namespace GreenhouseWeb.Services.Communication
 
         public string GetIP(string greenhouseID)
         {
-
+            //TODO
             /*
             string databaseConnectionString = "";//TODO databaseconnection string
             SqlConnection databaseConnection = new SqlConnection(databaseConnectionString);
