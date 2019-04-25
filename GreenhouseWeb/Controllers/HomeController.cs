@@ -24,10 +24,9 @@ namespace GreenhouseWeb.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Schedule()
         {
-            ViewBag.Message = "Your contact page.";
-            ViewBag.Whatever = "I made this";
+            ViewBag.Message = "Fill out the tabel below or load a premade schedule";
 
             return View();
         }
