@@ -11,130 +11,232 @@
 </head>
 <body>
 
-  
-        <div id="example1" style="text-align:center">
-            <script>
-                function getData() {
-                    return [
-                        { time: '00.00-02.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '02.00-04.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '04.00-06.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '06.00-08.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '08.00-10.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '10.00-12.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '12.00-14.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '14.00-16.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '16.00-18.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '18.00-20.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '20.00-22.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
-                        { time: '22.00-24.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 }
 
-                    ];
+    <div id="example1" style="text-align:center">
+        <script>
+            function getData() {
+                return [
+                    { time: '00.00-02.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '02.00-04.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '04.00-06.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '06.00-08.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '08.00-10.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '10.00-12.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '12.00-14.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '14.00-16.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '16.00-18.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '18.00-20.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '20.00-22.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
+                    { time: '22.00-24.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 }
+
+                ];
+            };
+            
+          
+
+            (function (Handsontable) {
+                function ligthValidator(a, callback) {
+                    if (a < 0 || a > 100) {
+                        callback(false);
+                        document.getElementById("btn1").disabled = true;
+                        document.getElementById("btn3").disabled = true;
+                        document.getElementById("label").innerHTML =
+                            "<span style='color:#FF0000'>One or more are incorrect</span>";
+                    } else {
+                        callback(true);
+                        document.getElementById("btn1").disabled = false;
+                        document.getElementById("btn3").disabled = false;
+
+                    }
+
                 }
-                (function (Handsontable) {
-                    function ligthValidator(a, callback) {
-                        if (a < 0 || a > 100) {
-                            callback(false);
-                        } else callback(true);
+                Handsontable.validators.registerValidator('ligth', ligthValidator);
 
-                    }
-                    Handsontable.validators.registerValidator('ligth', ligthValidator);
-
-                })
-                    (Handsontable);
-                (function (Handsontable) {
-                    function temperatureValidator(a, callback) {
-                        if (a < -100 || a > 100) {
-                            callback(false);
-                        } else callback(true);
-
-                    }
-                    Handsontable.validators.registerValidator('temp', temperatureValidator);
-
-                })(Handsontable);
-
+            })
                 (Handsontable);
-                (function (Handsontable) {
-                    function humidityValidator(a, callback) {
-                        if (a < 10 || a > 90) {
-                            callback(false);
-                        } else callback(true);
-
+            (function (Handsontable) {
+                function temperatureValidator(a, callback) {
+                    if (a < -100 || a > 100) {
+                        callback(false);
+                        document.getElementById("btn1").disabled = true;
+                        document.getElementById("btn3").disabled = true;
+                        document.getElementById("label").innerHTML =
+                            "<span style='color:#FF0000'>One or more are incorrect</span>";
+                    } else {
+                        callback(true);
+                        document.getElementById("btn1").disabled = false;
+                        document.getElementById("btn3").disabled = false;
                     }
-                    Handsontable.validators.registerValidator('humidity', humidityValidator);
 
-                })(Handsontable);
+                }
+                Handsontable.validators.registerValidator('temp', temperatureValidator);
 
-                (Handsontable);
-                (function (Handsontable) {
-                    function waterLevelValidator(a, callback) {
-                        if (a < 0 || a > 25) {
-                            callback(false);
-                        } else callback(true);
+            })(Handsontable);
 
+            (Handsontable);
+            (function (Handsontable) {
+                function humidityValidator(a, callback) {
+                    if (a < 10 || a > 90) {
+                        callback(false);
+                        document.getElementById("btn1").disabled = true;
+                        document.getElementById("btn3").disabled = true;
+                        document.getElementById("label").innerHTML =
+                            "<span style='color:#FF0000'>One or more are incorrect</span>";
+                    } else {
+                        callback(true);
+                        document.getElementById("btn1").disabled = false;
+                        document.getElementById("btn3").disabled = false;
                     }
-                    Handsontable.validators.registerValidator('waterlevel1', waterLevelValidator);
 
-                })(Handsontable);
+                }
+                Handsontable.validators.registerValidator('humidity', humidityValidator);
 
-                var container1 = document.getElementById('example1');
-                var hot1 = new Handsontable(container1, {
-                    data: getData(),
-                    licenseKey: 'non-commercial-and-evaluation',
-                    colWidths: 87,
-                    fillHandle: {
-                        direction: 'vertical',
-                        autoInsertRow: false
+            })(Handsontable);
+
+
+
+            (Handsontable);
+            (function (Handsontable) {
+                function waterLevelValidator(a, callback) {
+                    if (a < 0 || a > 25) {
+                        callback(false);
+                        document.getElementById("btn1").disabled = true;
+                        document.getElementById("btn3").disabled = true;
+                        document.getElementById("label").innerHTML =
+                            "<span style='color:#FF0000'>One or more are incorrect</span>";
+                    } else {
+                        callback(true);
+                        document.getElementById("btn1").disabled = false;
+                        document.getElementById("btn3").disabled = false;
+                    }
+
+                }
+                Handsontable.validators.registerValidator('waterlevel1', waterLevelValidator);
+
+            })(Handsontable);
+
+           
+
+            ;
+
+            var
+                $$ = function (id) {
+                    return document.getElementById(id);
+                },
+                container = $$('example1'),
+                exampleConsole = $$('example1console'),
+                apply = $$('apply'),
+                load = $$('load'),
+                save = $$('save'),
+                hot;
+
+            hot = new Handsontable(container, {
+                data: getData(),
+                licenseKey: 'non-commercial-and-evaluation',
+                colWidths: 87,
+                fillHandle: {
+                    direction: 'vertical',
+                    autoInsertRow: false
+                },
+                colHeaders: ['Time', 'Blue Light', 'Red Light', 'Temperature', 'Humidity', 'Waterlevel'],
+                allowEmpty: false,
+
+
+
+
+
+                columns: [
+                    {
+                        data: 'time',
+                        readOnly: true
                     },
-                    colHeaders: ['Time', 'Blue Light', 'Red Light', 'Temperature', 'Humidity', 'Waterlevel'],
-                    allowEmpty: false,
-                    columns: [
-                        {
-                            data: 'time',
-                            readOnly: true
-                        },
-                        {
-                            data: 'blueLight',
-                            type: 'numeric',
-                            validator: 'ligth'
+                    {
+                        data: 'blueLight',
+                        type: 'numeric',
+                        validator: 'ligth'
 
-                        },
-                        {
-                            data: 'redLight',
-                            type: 'numeric',
-                            validator: 'ligth'
-                        },
-                        {
-                            data: 'temperature',
-                            type: 'numeric',
-                            validator: 'temp'
-                        },
-                        {
-                            data: 'humidity',
-                            type: 'numeric',
-                            validator: 'humidity'
-                        },
+                    },
+                    {
+                        data: 'redLight',
+                        type: 'numeric',
+                        validator: 'ligth'
+                    },
+                    {
+                        data: 'temperature',
+                        type: 'numeric',
+                        validator: 'temp'
+                    },
+                    {
+                        data: 'humidity',
+                        type: 'numeric',
+                        validator: 'humidity'
+                    },
 
-                        {
-                            data: 'waterlevel',
-                            type: 'numeric',
-                            validator: 'waterlevel1'
-                        },
+                    {
+                        data: 'waterlevel',
+                        type: 'numeric',
 
-                    ],
+                        validator: 'waterlevel1'
+                    },
 
-                });
+                ],
+            });
 
-                console.log(JSON.stringify({ data: hot1.getData() }));
-            </script>
-        </div>
-        <div>
-            <button id="savebtn" type="button" onclick="">Save Schedule</button>
-            <button id="loadbtn" type="button" onclick="">Load Schedule</button>
-            <button id="applybtn" type="button" onclick="">Apply Schedule</button>
-        </div>
-   </body>
-</html>
+
+
+
+
+            console.log(JSON.stringify({ data: hot.getData() }));
+
+        </script>
+
+    </div>
+    <div>
+        <script>
+            function save() {
+
+                var name = prompt("Choose save name.");
+                if (name === "") { // do nothing
+                    document.getElementById("label").innerHTML =
+                        "no name was chosen";
+                } else if (name) { // save schedule
+                    (document.getElementById("label").innerHTML =
+                        "Schedule" + " " + name + " " + "succesfully saved");
+                } else { // do nothing
+                    document.getElementById("label").innerHTML =
+                        "user chose to cancel";
+                }
+            }
+            function load() {
+                document.getElementById("label").innerHTML =
+                    "Schedule" + " " + name + " " + "succesfully loaded";
+
+                
+            }
+
+
+            function apply() {
+
+                document.getElementById("label").innerHTML =
+                    "Schedule" + " " + name + " " + "succesfully applied";
+            }
+        </script>
+
+
+        <button name="save" id="btn1" onclick="save()" class="intext-btn">Save Schedule</button>
+        <button name="load" id="btn2" onclick="load()" class="intext-btn">Load Schedule</button>
+        <button name="apply" id="btn3" onclick="apply()" class="intext-btn">Apply Schedule</button>
+        <br>
+        <p id="label"></p>
+
+    </div>
+
+    <p id="demo"></p>
+
+    
+
+       </body >
+</html >
 
 
 
