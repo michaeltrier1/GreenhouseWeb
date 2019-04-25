@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using GreenhouseWeb.Models;
 using GreenhouseWeb.Services;
+using GreenhouseWeb.Services.Interfaces;
 using GreenhouseWeb.Tests;
 using GreenhouseWeb.Tests.Mock;
 
@@ -38,10 +39,9 @@ namespace GreenhouseWeb.Controllers
         }
         public ActionResult ViewLiveData()
         {
-            // Servicesfacade sF = new Servicesfacade();
-            //ViewBag.Measurements = sF.getCurrentLiveData("testgreenhouse");  
-            Random rnd = new Random();
-            ViewBag.Measurements = rnd.NextDouble()*100;
+            IMeasurement imeasurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData("testgreenhouse");
+           
+          
 
             return View();
         }
