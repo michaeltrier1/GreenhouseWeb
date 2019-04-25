@@ -1,12 +1,21 @@
-﻿
+﻿var greenhouseID = "herp";
+function setA() {
+    alert("heehead");
+    greenhouseID = 'greenhouseID1';
+
+}
 function updateData() {
     var response;
     $.ajax({
         url: "getNewestData",
+        data: {
+            GreenhouseID: greenhouseID
+        },
         success: function (data) {
             update(data);
         }
     });
+  
     function update(data) {
         var internalTemp = [data.internalTemperature];
         var externalTemp = [data.externalTemperature];
