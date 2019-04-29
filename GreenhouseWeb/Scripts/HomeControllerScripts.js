@@ -1,9 +1,9 @@
-﻿var greenhouseID = "herp";
-function setA() {
-    alert("heehead");
-    greenhouseID = 'greenhouseID1';
+﻿var greenhouseID = "";
 
+function whatever(cunt) {
+    greenhouseID = cunt;   
 }
+
 function updateData() {
     var response;
     $.ajax({
@@ -191,5 +191,5 @@ function updateData() {
             width: 300
         });
 }
-
+    console.log(greenhouseID);
 }
