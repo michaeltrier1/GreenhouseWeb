@@ -11,6 +11,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.ScheduleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScheduleID)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Blocknumber)
         </dt>
 
@@ -19,11 +27,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Temperature)
+            @Html.DisplayNameFor(model => model.InternalTemperature)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Temperature)
+            @Html.DisplayFor(model => model.InternalTemperature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExternalTemperature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExternalTemperature)
         </dd>
 
         <dt>
@@ -35,11 +51,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Waterlevel)
+            @Html.DisplayNameFor(model => model.WaterLevel)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Waterlevel)
+            @Html.DisplayFor(model => model.WaterLevel)
         </dd>
 
         <dt>
@@ -61,6 +77,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Schedule_ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

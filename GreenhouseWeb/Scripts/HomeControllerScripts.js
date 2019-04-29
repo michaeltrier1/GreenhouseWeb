@@ -1,12 +1,9 @@
-﻿var greenhouseID = "herp";
-function setA() {
-    alert("heehead");
-    greenhouseID = 'greenhouseID1';
+﻿var greenhouseID = "";
 
+function setGreenhouseID(id) {
+    greenhouseID = id;   
 }
-function seeID(clicked_id) {
-    alert(clicked_id);
-}
+
 function updateData() {
     var response;
     $.ajax({
@@ -194,5 +191,5 @@ function updateData() {
             width: 300
         });
 }
-
+    console.log(greenhouseID);
 }

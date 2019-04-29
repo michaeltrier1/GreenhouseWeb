@@ -10,107 +10,107 @@ using GreenhouseWeb.Models;
 
 namespace GreenhouseWeb.Controllers
 {
-    public class GreenhousesController : Controller
+    public class SchedulesController : Controller
     {
         private GreenhouseDBContext db = new GreenhouseDBContext();
 
-        // GET: Greenhouses
+        // GET: Schedules
         public ActionResult Index()
         {
-            return View(db.Greenhouses.ToList());
+            return View(db.Schedules.ToList());
         }
 
-        // GET: Greenhouses/Details/5
+        // GET: Schedules/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Greenhouse greenhouse = db.Greenhouses.Find(id);
-            if (greenhouse == null)
+            Schedule schedule = db.Schedules.Find(id);
+            if (schedule == null)
             {
                 return HttpNotFound();
             }
-            return View(greenhouse);
+            return View(schedule);
         }
 
-        // GET: Greenhouses/Create
+        // GET: Schedules/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Greenhouses/Create
+        // POST: Schedules/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,GreenhouseID,Password,IP,Port")] Greenhouse greenhouse)
+        public ActionResult Create([Bind(Include = "ID,ScheduleID,Blocknumber,InternalTemperature,ExternalTemperature,Humidity,WaterLevel,RedLight,BlueLight")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
-                db.Greenhouses.Add(greenhouse);
+                db.Schedules.Add(schedule);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(greenhouse);
+            return View(schedule);
         }
 
-        // GET: Greenhouses/Edit/5
+        // GET: Schedules/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Greenhouse greenhouse = db.Greenhouses.Find(id);
-            if (greenhouse == null)
+            Schedule schedule = db.Schedules.Find(id);
+            if (schedule == null)
             {
                 return HttpNotFound();
             }
-            return View(greenhouse);
+            return View(schedule);
         }
 
-        // POST: Greenhouses/Edit/5
+        // POST: Schedules/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,GreenhouseID,Password,IP,Port")] Greenhouse greenhouse)
+        public ActionResult Edit([Bind(Include = "ID,ScheduleID,Blocknumber,InternalTemperature,ExternalTemperature,Humidity,WaterLevel,RedLight,BlueLight")] Schedule schedule)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(greenhouse).State = EntityState.Modified;
+                db.Entry(schedule).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(greenhouse);
+            return View(schedule);
         }
 
-        // GET: Greenhouses/Delete/5
+        // GET: Schedules/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Greenhouse greenhouse = db.Greenhouses.Find(id);
-            if (greenhouse == null)
+            Schedule schedule = db.Schedules.Find(id);
+            if (schedule == null)
             {
                 return HttpNotFound();
             }
-            return View(greenhouse);
+            return View(schedule);
         }
 
-        // POST: Greenhouses/Delete/5
+        // POST: Schedules/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Greenhouse greenhouse = db.Greenhouses.Find(id);
-            db.Greenhouses.Remove(greenhouse);
+            Schedule schedule = db.Schedules.Find(id);
+            db.Schedules.Remove(schedule);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -8,6 +8,7 @@ using GreenhouseWeb.Services;
 using GreenhouseWeb.Services.Interfaces;
 using GreenhouseWeb.Tests;
 using GreenhouseWeb.Tests.Mock;
+using GreenhouseWeb.Services;
 
 namespace GreenhouseWeb.Controllers
 {
@@ -33,20 +34,19 @@ namespace GreenhouseWeb.Controllers
         }
         
         [HttpGet]
-        public JsonResult getNewestData()
+        public JsonResult getNewestData(string GreenhouseID)
         {
-            return Json(new { internalTemperature = new Random().NextDouble() * 100, externalTemperature = new Random().NextDouble() * 100, humidity = new Random().NextDouble() * 100, waterlevel = new Random().NextDouble() * 100 }, JsonRequestBehavior.AllowGet);
+            IMeasurement measurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData(GreenhouseID);
+            return Json(new { internalTemperature = measurement.InternalTemperature, externalTemperature = measurement.ExternalTemperature,
+                humidity = measurement.Humidity, waterlevel = measurement.Waterlevel }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult ViewLiveData()
         {
             IMeasurement imeasurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData("testgreenhouse");
            
-          
-
             return View();
         }
-
-
 
     }
 }
