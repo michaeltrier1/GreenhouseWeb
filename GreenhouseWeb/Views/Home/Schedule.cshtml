@@ -4,16 +4,16 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <script src="~/Scripts/handsontable/handsontable.full.min.js"></script>
-        <link href="~/Content/handsontable/handsontable.full.min.css" rel="stylesheet" media="screen">
-        <title></title>
-    </head>
-    <body>
-    
-    
-        <div id="example1" style="text-align:center">
-            <script>
+<head>
+    <script src="~/Scripts/handsontable/handsontable.full.min.js"></script>
+    <link href="~/Content/handsontable/handsontable.full.min.css" rel="stylesheet" media="screen">
+    <title></title>
+</head>
+<body>
+
+
+    <div id="example1" style="text-align:center">
+        <script>
             function getData() {
                 return [
                     { time: '00.00-02.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
@@ -46,12 +46,14 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+
                     }
+
                 }
                 Handsontable.validators.registerValidator('ligth', ligthValidator);
-            })
 
-            (Handsontable);
+            })
+                (Handsontable);
             (function (Handsontable) {
                 function temperatureValidator(a, callback) {
                     if (a < -100 || a > 100) {
@@ -65,6 +67,7 @@
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
                     }
+
                 }
                 Handsontable.validators.registerValidator('temp', temperatureValidator);
 
@@ -87,6 +90,7 @@
 
                 }
                 Handsontable.validators.registerValidator('humidity', humidityValidator);
+
             })(Handsontable);
 
 
@@ -178,40 +182,29 @@
                 ],
             });
 
-
-
-
-
-            console.log(JSON.stringify({ data: hot.getData() }));
         </script>
-        </div>
-        <div>
-            <script>
-                function save() {
-                    var name = prompt("Choose save name.");
-                    if (name === "") { // do nothing
-                        document.getElementById("label").innerHTML =
-                            "no name was chosen";
-                    } else if (name) { // save schedule
-                        (document.getElementById("label").innerHTML =
-                            "Schedule" + " " + name + " " + "succesfully saved");
-                    } else { // do nothing
-                        document.getElementById("label").innerHTML =
-                            "user chose to cancel";
-                    }
-                }
 
-                function load() {
-                    document.getElementById("label").innerHTML =
-                        "Schedule" + " " + name + " " + "succesfully loaded"; 
-                }
+    </div>
+    <div>
+        <script>
+           
+            
+            function save() {
+                            
+                var schedule = (JSON.stringify({ data: hot.getData() }));
+                
+            }
+            function load() {
+                document.getElementById("label").innerHTML =
+                    "Schedule" + " " + name + " " + "succesfully loaded";                
+            }
 
-                function apply() {
-                    document.getElementById("label").innerHTML =
-                        "Schedule" + " " + name + " " + "succesfully applied";
-                    console.log(JSON.stringify({ data: hot.getData() }));
-                }
-            </script>
+            function apply() {
+
+                document.getElementById("label").innerHTML =
+                    "Schedule" + " " + name + " " + "succesfully applied";
+            }
+        </script>
 
 
         <button name="save" id="btn1" onclick="save()" class="intext-btn">Save Schedule</button>
@@ -221,12 +214,12 @@
         <p id="label"></p>
 
     </div>
+
+    <p id="demo"></p>
+
     
-        <p id="demo"></p>
-    
-        
-    
-    </body >
+
+       </body >
 </html >
 
 
