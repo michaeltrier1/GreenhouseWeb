@@ -8,12 +8,12 @@ namespace GreenhouseWeb.Services
 {
     public class Measurements : IMeasurement
     {
-        public double InternalTemperature { get; set; }
-        public double ExternalTemperature { get; set; }
-        public double Humidity { get; set; }
-        public double Waterlevel { get; set; }
+        public Nullable<double> InternalTemperature { get; set; }
+        public Nullable<double> ExternalTemperature { get; set; }
+        public Nullable<double> Humidity { get; set; }
+        public Nullable<double> Waterlevel { get; set; }
         
-        public Measurements(double internalTemperature, double externalTemperature, double humidity, double waterlevel)
+        public Measurements(Nullable<double> internalTemperature, Nullable<double> externalTemperature, Nullable<double> humidity, Nullable<double> waterlevel)
         {
             this.InternalTemperature = internalTemperature;
             this.ExternalTemperature = externalTemperature;

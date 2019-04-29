@@ -1,10 +1,12 @@
-﻿namespace GreenhouseWeb.Services.Interfaces
+﻿using System;
+
+namespace GreenhouseWeb.Services.Interfaces
 {
     public interface IMeasurement
     {
-       double InternalTemperature { get; }
-       double ExternalTemperature { get; }
-       double Humidity { get; }
-       double Waterlevel { get; }
+        Nullable<double> InternalTemperature { get; }
+        Nullable<double> ExternalTemperature { get; }
+        Nullable<double> Humidity { get; }
+        Nullable<double> Waterlevel { get; }
     }
 }

@@ -15,7 +15,7 @@ namespace GreenhouseWeb.Services
             this.liveData = new Dictionary<string, IMeasurement>();
             // TODO remove testvalue
             this.liveData.Add("testgreenhouse", new Measurements(5,5,5,5));
-            this.liveData.Add("somethingelse", new Measurements(15,20,25,35));
+            this.liveData.Add("somethingelse", new Measurements(15, null, 25, 35));
             
         }
 

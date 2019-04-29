@@ -1,0 +1,82 @@
+﻿@model GreenhouseWeb.Models.Schedule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Schedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ScheduleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScheduleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blocknumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blocknumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InternalTemperature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InternalTemperature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExternalTemperature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExternalTemperature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Humidity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Humidity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WaterLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WaterLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RedLight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RedLight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BlueLight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BlueLight)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
