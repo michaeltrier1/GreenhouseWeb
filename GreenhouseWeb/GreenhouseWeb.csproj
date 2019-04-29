@@ -1400,7 +1400,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Application\" />
     <Folder Include="Views\Greenhouse\" />
-    <Folder Include="Views\MaltesFlotte\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
