@@ -40,16 +40,13 @@ namespace GreenhouseWeb.Controllers
             return Json(new { internalTemperature = measurement.InternalTemperature, externalTemperature = measurement.ExternalTemperature,
                 humidity = measurement.Humidity, waterlevel = measurement.Waterlevel }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult ViewLiveData()
         {
             IMeasurement imeasurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData("testgreenhouse");
            
-          
-
             return View();
         }
-
-
 
     }
 }
