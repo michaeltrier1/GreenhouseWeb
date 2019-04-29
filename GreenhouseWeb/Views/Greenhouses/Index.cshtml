@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.GreenhouseID)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
@@ -29,9 +26,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.GreenhouseID)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Password)
         </td>
         <td>
@@ -41,9 +35,9 @@
             @Html.DisplayFor(modelItem => item.Port)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.GreenhouseID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GreenhouseID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GreenhouseID })
         </td>
     </tr>
 }

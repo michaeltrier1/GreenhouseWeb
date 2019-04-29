@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GreenhouseWeb.Models.Schedule>
+﻿@model IEnumerable<GreenhouseWeb.Models.Datalog>
 
 @{
     ViewBag.Title = "Index";
@@ -12,25 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ScheduleID)
+            @Html.DisplayNameFor(model => model.Greenhouse_ID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Blocknumber)
+            @Html.DisplayNameFor(model => model.TimeOfReading)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.InternalTemperature)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.ExternalTemperature)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Humidity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WaterLevel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RedLight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BlueLight)
+            @Html.DisplayNameFor(model => model.Waterlevel)
         </th>
         <th></th>
     </tr>
@@ -38,25 +35,22 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ScheduleID)
+            @Html.DisplayFor(modelItem => item.Greenhouse_ID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Blocknumber)
+            @Html.DisplayFor(modelItem => item.TimeOfReading)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.InternalTemperature)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.ExternalTemperature)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Humidity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WaterLevel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RedLight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlueLight)
+            @Html.DisplayFor(modelItem => item.Waterlevel)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

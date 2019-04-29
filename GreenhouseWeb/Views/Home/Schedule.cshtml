@@ -191,25 +191,26 @@
            
             
             function save() {
-                var schedule = JSON.stringify({data :hot.getData() });
-                
-                    $.ajax({
-                        type: "POST",
-                        url: "Schedule",
-                        data: schedule,
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (r) {
-                            Document.getElementById("label").innerHTML = "ScheduleSaved";
-                        }
-                    });   
+                var schedule = JSON.stringify({ rawSchedule: hot.getData() });
 
+                console.log(schedule);
+
+                $.ajax({
+                    type: "POST",
+                    url: "saveSchedule",
+                    data: { rawSchedule : schedule, scheduleID : "testID" }, //insert id as parameter
+                    success: function (data) {
+                        document.getElementById("label").innerHTML =
+                            "Schedule" + " " + name + " " + "succesfully saved";    
+                    }
+                });
                    
                 }
                 
                 
             
             function load() {
+        
                 document.getElementById("label").innerHTML =
                     "Schedule" + " " + name + " " + "succesfully loaded";                
             }
