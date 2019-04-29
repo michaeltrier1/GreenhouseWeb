@@ -1,5 +1,4 @@
-﻿@model GreenhouseWeb.Models.Schedule
-@{
+﻿@{
     ViewBag.Title = "Greenhouse Schedule";
 }
 <h2>@ViewBag.Title.</h2>
@@ -47,6 +46,7 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+                        document.getElementById("label").innerHTML = " ";
 
                     }
 
@@ -67,6 +67,7 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+                        document.getElementById("label").innerHTML = " ";
                     }
 
                 }
@@ -87,6 +88,7 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+                        document.getElementById("label").innerHTML = " ";
                     }
 
                 }
@@ -109,6 +111,7 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+                        document.getElementById("label").innerHTML = " ";
                     }
 
                 }
@@ -172,7 +175,6 @@
                         type: 'numeric',
                         validator: 'humidity'
                     },
-
                     {
                         data: 'waterlevel',
                         type: 'numeric',
@@ -187,8 +189,7 @@
 
     </div>
     <div>
-        <script>
-           
+        <script>         
             
             function save() {
                 var schedule = JSON.stringify({ rawSchedule: hot.getData() });
