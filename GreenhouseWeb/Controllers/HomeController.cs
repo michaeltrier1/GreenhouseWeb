@@ -32,6 +32,8 @@ namespace GreenhouseWeb.Controllers
 
             return View();
         }
+
+
         
         [HttpGet]
         public JsonResult getNewestData(string GreenhouseID)
