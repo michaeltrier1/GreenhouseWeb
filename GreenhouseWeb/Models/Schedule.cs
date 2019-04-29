@@ -11,7 +11,6 @@ namespace GreenhouseWeb.Models
         public string ScheduleID { get; set; }
         public int Blocknumber { get; set; }
         public double InternalTemperature  { get; set; }
-        public double ExternalTemperature  { get; set; }
         public double Humidity  { get; set; }
         public double WaterLevel  { get; set; }
         public double RedLight  { get; set; }
