@@ -21,6 +21,6 @@ namespace GreenhouseWeb.Models
         public double RedLight  { get; set; }
         public double BlueLight  { get; set; }
 
-}
+    }
         
 }

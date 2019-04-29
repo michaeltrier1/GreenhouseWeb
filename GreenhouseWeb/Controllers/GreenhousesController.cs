@@ -21,7 +21,7 @@ namespace GreenhouseWeb.Controllers
         }
 
         // GET: Greenhouses/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
@@ -46,7 +46,7 @@ namespace GreenhouseWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,GreenhouseID,Password,IP,Port")] Greenhouse greenhouse)
+        public ActionResult Create([Bind(Include = "GreenhouseID,Password,IP,Port")] Greenhouse greenhouse)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace GreenhouseWeb.Controllers
         }
 
         // GET: Greenhouses/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -78,7 +78,7 @@ namespace GreenhouseWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,GreenhouseID,Password,IP,Port")] Greenhouse greenhouse)
+        public ActionResult Edit([Bind(Include = "GreenhouseID,Password,IP,Port")] Greenhouse greenhouse)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace GreenhouseWeb.Controllers
         }
 
         // GET: Greenhouses/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -107,7 +107,7 @@ namespace GreenhouseWeb.Controllers
         // POST: Greenhouses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
             Greenhouse greenhouse = db.Greenhouses.Find(id);
             db.Greenhouses.Remove(greenhouse);

@@ -192,13 +192,26 @@
         <script>         
             
             function save() {
-                var schedule = (JSON.stringify({ data: hot.getData() }));
+                var schedule = JSON.stringify({ rawSchedule: hot.getData() });
+
                 console.log(schedule);
 
-            }                        
-                                
+                $.ajax({
+                    type: "POST",
+                    url: "saveSchedule",
+                    data: { rawSchedule : schedule, scheduleID : "testID" }, //insert id as parameter
+                    success: function (data) {
+                        document.getElementById("label").innerHTML =
+                            "Schedule" + " " + name + " " + "succesfully saved";    
+                    }
+                });
+                   
+                }
+                
+                
             
             function load() {
+        
                 document.getElementById("label").innerHTML =
                     "Schedule" + " " + name + " " + "succesfully loaded";                
             }

@@ -245,6 +245,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DatalogsController.cs" />
     <Compile Include="Controllers\GreenhousesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\Datalog.cs" />
     <Compile Include="Models\ScheduleVievModels.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1386,16 +1388,21 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\ViewLiveData.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Greenhouses\Create.cshtml" />
-    <Content Include="Views\Greenhouses\Delete.cshtml" />
-    <Content Include="Views\Greenhouses\Details.cshtml" />
-    <Content Include="Views\Greenhouses\Edit.cshtml" />
-    <Content Include="Views\Greenhouses\Index.cshtml" />
     <Content Include="Views\Schedules\Create.cshtml" />
     <Content Include="Views\Schedules\Delete.cshtml" />
     <Content Include="Views\Schedules\Details.cshtml" />
     <Content Include="Views\Schedules\Edit.cshtml" />
     <Content Include="Views\Schedules\Index.cshtml" />
+    <Content Include="Views\Greenhouses\Create.cshtml" />
+    <Content Include="Views\Greenhouses\Delete.cshtml" />
+    <Content Include="Views\Greenhouses\Details.cshtml" />
+    <Content Include="Views\Greenhouses\Edit.cshtml" />
+    <Content Include="Views\Greenhouses\Index.cshtml" />
+    <Content Include="Views\Datalogs\Create.cshtml" />
+    <Content Include="Views\Datalogs\Delete.cshtml" />
+    <Content Include="Views\Datalogs\Details.cshtml" />
+    <Content Include="Views\Datalogs\Edit.cshtml" />
+    <Content Include="Views\Datalogs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -38,31 +38,36 @@ namespace GreenhouseWeb.Controllers
 
             return View();
         }
+
         [HttpPost]
-        public void Schedule(JObject rawSchedule)
+        public JsonResult saveSchedule(string rawSchedule, string scheduleID)
         {
+            
 
-                //get raw data to readable format
-                JArray data = (JArray)rawSchedule.GetValue("data");
+            JObject scheduleJson = JObject.Parse(rawSchedule);
 
-                //get number of days
-                int numberOfDays = 1;
-               
-                for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++)
+
+            //get raw data to readable format
+            JArray data = (JArray)scheduleJson.GetValue("rawSchedule");
+
+            ////get number of days
+            int numberOfDays = 1;
+
+            for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++)
+            {
+
+
+                for (int blockNumber = 1; blockNumber < 13; blockNumber++)
                 {
-                 
 
-                    for (int blockNumber = 1; blockNumber < 13; blockNumber++)
-                    {
 
-                        
-                        JArray blockData = (JArray)data[blockNumber - 1];
-                        Schedule schedule = new Schedule();
-                        double blueLight = (double)blockData[1];
-                        double redLight = (double)blockData[2];
-                        double temperature = (double)blockData[3];
-                        double humidity = (double)blockData[4];
-                        double waterlevel = (double)blockData[5];
+                    JArray blockData = (JArray)data[blockNumber - 1];
+                    Schedule schedule = new Schedule();
+                    double blueLight = (double)blockData[1];
+                    double redLight = (double)blockData[2];
+                    double temperature = (double)blockData[3];
+                    double humidity = (double)blockData[4];
+                    double waterlevel = (double)blockData[5];
 
                     //insert Data
                     //setpoints.Add("temperature", temperature);
@@ -86,11 +91,11 @@ namespace GreenhouseWeb.Controllers
                 }
 
 
-                }
-
+            }
+            return Json(new { stuff = "success" }, JsonRequestBehavior.AllowGet);
        }
                   
-[HttpGet]
+    [HttpGet]
         public JsonResult getNewestData(string GreenhouseID)
         {
             IMeasurement measurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData(GreenhouseID);
@@ -104,6 +109,7 @@ namespace GreenhouseWeb.Controllers
            
             return View();
         }
+
 
     }
 }
