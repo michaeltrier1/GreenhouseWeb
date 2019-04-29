@@ -36,7 +36,6 @@ namespace GreenhouseWeb.Services.Incoming
                     listener.Start();
 
                     TcpClient client = listener.AcceptTcpClient();
-
                     SocketHandler socketHandler = new SocketHandler(client, this);
 
                     Thread thread = new Thread(new ThreadStart(socketHandler.handleSocket));
@@ -59,6 +58,10 @@ namespace GreenhouseWeb.Services.Incoming
             this.servicesFacade.SetMeasurement(greenhouseID, measurements);
         }
 
+        internal void setIPAddress(string id, string ip, string port)
+        {
+            throw new NotImplementedException();
+        }
 
         internal void registerSocketHandler(string greenhouseID, SocketHandler handler)
         {
@@ -74,6 +77,8 @@ namespace GreenhouseWeb.Services.Incoming
         {
             this.activeHandlers.Remove(greenhouseID);
         }
+
+        
 
     }
 }

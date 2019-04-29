@@ -243,9 +243,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\GreenhouseController.cs" />
+    <Compile Include="Controllers\GreenhousesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SchedulesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -253,8 +254,11 @@
     <Compile Include="Mock\ViewLiveDataMock.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Data.cs" />
+    <Compile Include="Models\Greenhouse.cs" />
+    <Compile Include="Models\GreenhouseDBContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\ScheduleVievModels.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1343,7 +1347,9 @@
     <Content Include="Scripts\ZingChart\modules\zingchart-yx.min.js" />
     <Content Include="Scripts\ZingChart\modules\zingchart-zoom.min.js" />
     <Content Include="Scripts\ZingChart\zingchart.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1379,12 +1385,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\ViewLiveData.cshtml" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Home\save.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Application\" />
     <Folder Include="Views\Greenhouse\" />
+    <Folder Include="Views\MaltesFlotte\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

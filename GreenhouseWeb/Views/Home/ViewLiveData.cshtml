@@ -1,4 +1,4 @@
-﻿    @using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity
 @using Moq;
 @using GreenhouseWeb.Tests.Mock;
  
@@ -18,14 +18,18 @@
     <body>
 
         <div class="col-4" style="width:20%">
-            <div onclick="setA()" name="testgreenhouse" class="list-group-item">
+            <div onclick="setGreenhouseID(this.id)" id="testgreenhouse" name="testgreenhouse" class="list-group-item">
                 <p>Greenhouse ID: TestGreenhouse</p>
+
+            </div>   
+            <div onclick="setGreenhouseID(this.id)" id="somethingelse" name="testgreenhouse" class="list-group-item">
+                <p>Greenhouse ID: something</p>
 
             </div>            
         </div>
         <script>
-            setInterval(updateData, 1000);
 
+            setInterval(updateData, 1000);
            
         </script>
 

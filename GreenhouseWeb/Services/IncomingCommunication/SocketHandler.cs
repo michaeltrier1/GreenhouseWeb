@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -24,12 +26,15 @@ namespace GreenhouseWeb.Services.Incoming
             NetworkStream stream = client.GetStream();
             StreamReader reader = new StreamReader(stream);
 
+            String ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
+
+
             bool registered = false;
             string registerID = "just once";
             while (registerID.Length != 0 && !stopped)
             {
                 string message = reader.ReadLine();
-                registerID = this.interpreter.interpret(message, this.incomingCommunicator);
+                registerID = this.interpreter.interpret(message, this.incomingCommunicator, ip);
 
                 if (!registered && registerID.Length != 0)
                 {
