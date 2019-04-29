@@ -46,6 +46,7 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+                        document.getElementById("label").innerHTML = " ";
 
                     }
 
@@ -66,6 +67,7 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+                        document.getElementById("label").innerHTML = " ";
                     }
 
                 }
@@ -86,6 +88,7 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+                        document.getElementById("label").innerHTML = " ";
                     }
 
                 }
@@ -108,6 +111,7 @@
                         callback(true);
                         document.getElementById("btn1").disabled = false;
                         document.getElementById("btn3").disabled = false;
+                        document.getElementById("label").innerHTML = " ";
                     }
 
                 }
@@ -171,7 +175,6 @@
                         type: 'numeric',
                         validator: 'humidity'
                     },
-
                     {
                         data: 'waterlevel',
                         type: 'numeric',
@@ -186,14 +189,15 @@
 
     </div>
     <div>
-        <script>
-           
+        <script>         
             
             function save() {
-                            
                 var schedule = (JSON.stringify({ data: hot.getData() }));
-                
-            }
+                console.log(schedule);
+
+            }                        
+                                
+            
             function load() {
                 document.getElementById("label").innerHTML =
                     "Schedule" + " " + name + " " + "succesfully loaded";                
