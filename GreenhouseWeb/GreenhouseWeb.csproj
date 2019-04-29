@@ -253,7 +253,6 @@
     <Compile Include="Interfaces\IServiceFacade.cs" />
     <Compile Include="Mock\ViewLiveDataMock.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Greenhouse.cs" />
     <Compile Include="Models\GreenhouseDBContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
