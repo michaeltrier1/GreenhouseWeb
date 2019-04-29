@@ -37,16 +37,13 @@ namespace GreenhouseWeb.Controllers
         {
             return Json(new { internalTemperature = new Random().NextDouble() * 100, externalTemperature = new Random().NextDouble() * 100, humidity = new Random().NextDouble() * 100, waterlevel = new Random().NextDouble() * 100 }, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult ViewLiveData()
         {
             IMeasurement imeasurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData("testgreenhouse");
            
-          
-
             return View();
         }
-
-
 
     }
 }

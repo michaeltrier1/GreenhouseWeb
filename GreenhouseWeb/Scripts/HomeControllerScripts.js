@@ -2,8 +2,8 @@
 function setA() {
     alert("heehead");
     greenhouseID = 'greenhouseID1';
-
 }
+
 function updateData() {
     var response;
     $.ajax({
@@ -33,7 +33,6 @@ function updateData() {
             },
             title: {
                 text: 'Inside Temperature' // Adds a title to your chart
-
             },
             "series": [
                 {
@@ -54,7 +53,6 @@ function updateData() {
                     "csize": "10%",
                     "size": "70%",
                     "background-color": "#66CCFF #FFCCFF"
-
                 }
             ]
         };
@@ -105,11 +103,7 @@ function updateData() {
             width: 300
         });
 
-
-
-
-
-        var chartData = {
+       var chartData = {
             type: 'gauge',  // Specify your chart type here.
             "scale-r": {
                 "aperture": 200,     //Specify your scale range.
@@ -117,7 +111,6 @@ function updateData() {
             },
             title: {
                 text: 'Humidity' // Adds a title to your chart
-
             },
             "series": [
                 {
@@ -159,7 +152,6 @@ function updateData() {
             },
             title: {
                 text: 'Waterlevel' // Adds a title to your chart
-
             },
             "series": [
                 {
@@ -190,6 +182,6 @@ function updateData() {
             height: 200,
             width: 300
         });
-}
+    }
 
 }
