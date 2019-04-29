@@ -1,7 +1,7 @@
 ﻿var greenhouseID = "";
 
-function whatever(cunt) {
-    greenhouseID = cunt;   
+function setGreenhouseID(id) {
+    greenhouseID = id;   
 }
 
 function updateData() {
