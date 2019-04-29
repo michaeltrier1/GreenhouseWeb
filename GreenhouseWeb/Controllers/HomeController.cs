@@ -39,7 +39,6 @@ namespace GreenhouseWeb.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public void Schedule(JObject rawSchedule)
         {
 
