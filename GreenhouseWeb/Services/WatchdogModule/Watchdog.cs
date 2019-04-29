@@ -8,8 +8,6 @@ namespace GreenhouseWeb.Services.WatchdogModule
 {
     public class Watchdog
     {
-
-       
         private static Dictionary<string, DateTime> greenhouses = new Dictionary<string, DateTime>();
         private WatchdogFacade watchdogFacade;
 
@@ -35,7 +33,6 @@ namespace GreenhouseWeb.Services.WatchdogModule
             Boolean stopped = false;
             while (!stopped)
             {
-
                 foreach (KeyValuePair<string, DateTime> entry in greenhouses)
                 {
                     DateTime now = DateTime.Now;
@@ -44,7 +41,6 @@ namespace GreenhouseWeb.Services.WatchdogModule
                     {
                         RetryConnection(entry.Key);
                     }
-
                 }
 
             }

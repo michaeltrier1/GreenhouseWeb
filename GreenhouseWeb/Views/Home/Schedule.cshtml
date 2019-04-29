@@ -93,6 +93,8 @@
 
             })(Handsontable);
 
+
+
             (Handsontable);
             (function (Handsontable) {
                 function waterLevelValidator(a, callback) {
@@ -113,7 +115,8 @@
 
             })(Handsontable);
 
-          
+           
+
             ;
 
             var
@@ -179,34 +182,22 @@
                 ],
             });
 
-            console.log(JSON.stringify({ data: hot.getData() }));
-
         </script>
 
     </div>
     <div>
         <script>
+           
+            
             function save() {
-
-                var name = prompt("Choose save name.");
-                if (name === "") { // do nothing
-                    document.getElementById("label").innerHTML =
-                        "no name was chosen";
-                } else if (name) { // save schedule
-                    (document.getElementById("label").innerHTML =
-                        "Schedule" + " " + name + " " + "succesfully saved");
-                } else { // do nothing
-                    document.getElementById("label").innerHTML =
-                        "user chose to cancel";
-                }
+                            
+                var schedule = (JSON.stringify({ data: hot.getData() }));
+                
             }
             function load() {
                 document.getElementById("label").innerHTML =
-                    "Schedule" + " " + name + " " + "succesfully loaded";
-
-                
+                    "Schedule" + " " + name + " " + "succesfully loaded";                
             }
-
 
             function apply() {
 
