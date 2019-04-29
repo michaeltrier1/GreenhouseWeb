@@ -8,6 +8,7 @@ using System.Threading;
 using System.Web;
 using GreenhouseWeb.Services;
 using GreenhouseWeb.Services.Interfaces;
+using Newtonsoft.Json.Linq;
 
 namespace GreenhouseWeb.Services.Incoming
 {
@@ -22,10 +23,10 @@ namespace GreenhouseWeb.Services.Incoming
         public IncomingCommunicator(IServicesFacadeForServices servicesFacade)
         {
             this.servicesFacade = servicesFacade;
-            this.ipAddress = IPAddress.Parse("127.0.0.1");
+            this.ipAddress = IPAddress.Parse("127.0.0.1"); //TODO set right ip
             this.listener = new TcpListener(ipAddress, 8090);
             this.activeHandlers = new Dictionary<string, SocketHandler>();
-        }       
+        }
 
         public void listenForConnections()
         {
@@ -58,11 +59,6 @@ namespace GreenhouseWeb.Services.Incoming
             this.servicesFacade.SetMeasurement(greenhouseID, measurements);
         }
 
-        internal void setIPAddress(string id, string ip, string port)
-        {
-            throw new NotImplementedException();
-        }
-
         internal void registerSocketHandler(string greenhouseID, SocketHandler handler)
         {
             this.activeHandlers.Add(greenhouseID, handler);
@@ -78,7 +74,23 @@ namespace GreenhouseWeb.Services.Incoming
             this.activeHandlers.Remove(greenhouseID);
         }
 
-        
+        internal void unregisterSocketHandler(object registerID)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void setIPAddress(string id, string ip, string port)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal JObject fetchSchedule(string greenHouseID)
+        {
+
+            throw new NotImplementedException();
+        }
+
+
 
     }
 }
