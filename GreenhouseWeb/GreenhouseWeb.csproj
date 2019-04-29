@@ -244,6 +244,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GreenhouseController.cs" />
+    <Compile Include="Controllers\GreenhousesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -252,9 +253,12 @@
     <Compile Include="Interfaces\IServiceFacade.cs" />
     <Compile Include="Mock\ViewLiveDataMock.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Data.cs" />
+    <Compile Include="Models\Datalog.cs" />
+    <Compile Include="Models\Greenhouse.cs" />
+    <Compile Include="Models\GreenhouseDBContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\ScheduleVievModels.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1343,7 +1347,9 @@
     <Content Include="Scripts\ZingChart\modules\zingchart-yx.min.js" />
     <Content Include="Scripts\ZingChart\modules\zingchart-zoom.min.js" />
     <Content Include="Scripts\ZingChart\zingchart.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1379,11 +1385,22 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\ViewLiveData.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Schedules\Create.cshtml" />
+    <Content Include="Views\Schedules\Delete.cshtml" />
+    <Content Include="Views\Schedules\Details.cshtml" />
+    <Content Include="Views\Schedules\Edit.cshtml" />
+    <Content Include="Views\Schedules\Index.cshtml" />
+    <Content Include="Views\Greenhouses\Create.cshtml" />
+    <Content Include="Views\Greenhouses\Delete.cshtml" />
+    <Content Include="Views\Greenhouses\Details.cshtml" />
+    <Content Include="Views\Greenhouses\Edit.cshtml" />
+    <Content Include="Views\Greenhouses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Application\" />
     <Folder Include="Views\Greenhouse\" />
+    <Folder Include="Views\HelloWorld\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

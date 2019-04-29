@@ -4,6 +4,9 @@ function setA() {
     greenhouseID = 'greenhouseID1';
 
 }
+function seeID(clicked_id) {
+    alert(clicked_id);
+}
 function updateData() {
     var response;
     $.ajax({

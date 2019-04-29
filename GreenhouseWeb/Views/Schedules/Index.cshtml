@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GreenhouseWeb.Models.Schedule>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Blocknumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Temperature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Humidity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Waterlevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RedLight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BlueLight)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Blocknumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Temperature)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Humidity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Waterlevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RedLight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BlueLight)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Schedule_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Schedule_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Schedule_ID })
+        </td>
+    </tr>
+}
+
+</table>
