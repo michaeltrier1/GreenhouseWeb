@@ -135,6 +135,11 @@ namespace GreenhouseWeb.Controllers
             return View(db.UserGreenhouses.ToList());
         }
 
+        public void StopLiveData(string ID)
+        {
+            ServiceFacadeGetter.getInstance().getFacade().stopLiveData(ID);
+
+        }
 
     }
 }
