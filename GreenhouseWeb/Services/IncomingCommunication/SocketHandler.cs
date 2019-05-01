@@ -97,7 +97,7 @@ namespace GreenhouseWeb.Services.Incoming
             string greenHouseID = (string)interpretedMessage.GetValue("id");
 
             double internalTemperature = (double)interpretedMessage.GetValue("internal temperature");
-            double externalTemperature = (double)interpretedMessage.GetValue("external temperature"));
+            double externalTemperature = (double)interpretedMessage.GetValue("external temperature");
             double humidity = (double)interpretedMessage.GetValue("humidity");
             double waterLevel = (double)interpretedMessage.GetValue("water level");
 
