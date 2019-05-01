@@ -1,4 +1,7 @@
-﻿@{
+﻿@model IEnumerable<GreenhouseWeb.Models.UserGreenhouse>
+@using Microsoft.AspNet.Identity
+
+@{
     ViewBag.Title = "Greenhouse Schedule";
 }
 <h2>@ViewBag.Title.</h2>
@@ -12,8 +15,26 @@
 <body>
 
 
+    @foreach (var item in Model)
+    {
+        if (item.User == User.Identity.GetUserName())
+        {
+            <div onclick="setGreenhouseID(this.id)" id="@item.GreenhouseID" name="testgreenhouse" class="list-group-item">
+                <p>Greenhouse ID: @item.GreenhouseID</p>
+            </div>
+        }
+
+    }
+
     <div id="example1" style="text-align:center">
         <script>
+            var greenhouseId = "";
+
+            function setGreenhouseID(id) {
+                greenhouseId = id;
+            }
+
+
             function getData() {
                 return [
                     { time: '00.00-02.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
@@ -31,8 +52,8 @@
 
                 ];
             };
-            
-          
+
+
 
             (function (Handsontable) {
                 function ligthValidator(a, callback) {
@@ -119,7 +140,7 @@
 
             })(Handsontable);
 
-           
+
 
             ;
 
@@ -189,8 +210,8 @@
 
     </div>
     <div>
-        <script>         
-            
+        <script>
+
             function save() {
                 var scheduleName = prompt("Enter name of the schedule");
                 if (scheduleName === "") { // do nothing
@@ -210,21 +231,31 @@
                     });
                 } else { // do nothing
                     document.getElementById("label").innerHTML = "user chose to cancel";
-                }         
-
-       
+                }
 
 
-                          }              
-                
-            
+
+
+            }
+
+
             function load() {
-        
+
                 document.getElementById("label").innerHTML =
-                    "Schedule" + " " + name + " " + "succesfully loaded";                
+                    "Schedule" + " " + name + " " + "succesfully loaded";
             }
 
             function apply() {
+                var schedule = JSON.stringify({ rawSchedule: hot.getData() });
+                $.ajax({
+                    type: "POST",
+                    url: "saveSchedule",
+                    data: { rawSchedule: schedule, greenhouseID: greenhouseId }, //insert id as parameter
+                    success: function (data) {
+                        document.getElementById("label").innerHTML =
+                            "Schedule" + " " + scheduleName + " " + "succesfully saved";
+                    }
+                });
 
                 document.getElementById("label").innerHTML =
                     "Schedule" + " " + name + " " + "succesfully applied";
@@ -242,10 +273,10 @@
 
     <p id="demo"></p>
 
-    
 
-       </body >
-</html >
+
+</body>
+</html>
 
 
 
