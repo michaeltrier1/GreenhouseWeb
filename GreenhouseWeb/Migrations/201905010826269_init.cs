@@ -33,6 +33,17 @@ namespace GreenhouseWeb.Migrations
                 .PrimaryKey(t => t.GreenhouseID);
             
             CreateTable(
+                "dbo.GreenhouseSchedules",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        GreenhouseID = c.String(),
+                        ScheduleID = c.String(),
+                        StartDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.Schedules",
                 c => new
                     {
@@ -63,6 +74,7 @@ namespace GreenhouseWeb.Migrations
         {
             DropTable("dbo.UserGreenhouses");
             DropTable("dbo.Schedules");
+            DropTable("dbo.GreenhouseSchedules");
             DropTable("dbo.Greenhouses");
             DropTable("dbo.Datalogs");
         }

@@ -246,6 +246,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DatalogsController.cs" />
+    <Compile Include="Controllers\GreenhouseSchedulesController.cs" />
     <Compile Include="Controllers\GreenhousesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -255,15 +256,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IServiceFacade.cs" />
-    <Compile Include="Migrations\201905010751506_init.cs" />
-    <Compile Include="Migrations\201905010751506_init.Designer.cs">
-      <DependentUpon>201905010751506_init.cs</DependentUpon>
+    <Compile Include="Migrations\201905010826269_init.cs" />
+    <Compile Include="Migrations\201905010826269_init.Designer.cs">
+      <DependentUpon>201905010826269_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mock\ViewLiveDataMock.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Greenhouse.cs" />
     <Compile Include="Models\GreenhouseDBContext.cs" />
+    <Compile Include="Models\GreenhouseSchedule.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Schedule.cs" />
@@ -1415,6 +1417,11 @@
     <Content Include="Views\UserGreenhouses\Details.cshtml" />
     <Content Include="Views\UserGreenhouses\Edit.cshtml" />
     <Content Include="Views\UserGreenhouses\Index.cshtml" />
+    <Content Include="Views\GreenhouseSchedules\Create.cshtml" />
+    <Content Include="Views\GreenhouseSchedules\Delete.cshtml" />
+    <Content Include="Views\GreenhouseSchedules\Details.cshtml" />
+    <Content Include="Views\GreenhouseSchedules\Edit.cshtml" />
+    <Content Include="Views\GreenhouseSchedules\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1438,8 +1445,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905010751506_init.resx">
-      <DependentUpon>201905010751506_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905010826269_init.resx">
+      <DependentUpon>201905010826269_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

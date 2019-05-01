@@ -12,5 +12,6 @@ namespace GreenhouseWeb.Models
         public DbSet<Datalog> Datalogs { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<UserGreenhouse> UserGreenhouses { get; set; }
+        public DbSet<GreenhouseSchedule> GreenhouseSchedules { get; set; }
     }
 }

@@ -1,0 +1,42 @@
+﻿@model GreenhouseWeb.Models.GreenhouseSchedule
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GreenhouseSchedule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GreenhouseID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GreenhouseID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ScheduleID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ScheduleID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
