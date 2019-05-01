@@ -109,7 +109,10 @@ namespace GreenhouseWeb.Services.Incoming
             {
                 this.incomingCommunicator.registerSocketHandler(registerID, this);
                 registered = true;
+                registerID = greenHouseID;
             }
+
+            
 
             return new JObject("{ }");
         }
