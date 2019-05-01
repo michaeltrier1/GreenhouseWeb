@@ -187,7 +187,7 @@ function apply() {
         data: { rawSchedule: schedule, greenhouseID: greenhouseId }, //insert id as parameter
         success: function (data) {
             document.getElementById("label").innerHTML =
-                "Schedule" + " " + scheduleName + " " + "succesfully saved";
+                "Schedule" + " " + greenhouseid + " " + "succesfully applied";
         }
     });
 
