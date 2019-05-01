@@ -1,4 +1,5 @@
-﻿@{
+﻿@model GreenhouseWeb.Models.Schedule
+@{
     ViewBag.Title = "Greenhouse Schedule";
 }
 <h2>@ViewBag.Title.</h2>
@@ -192,12 +193,10 @@
         <script>         
             
             function save() {
+                            
                 var schedule = (JSON.stringify({ data: hot.getData() }));
-                console.log(schedule);
-
-            }                        
-                                
-            
+                
+            }
             function load() {
                 document.getElementById("label").innerHTML =
                     "Schedule" + " " + name + " " + "succesfully loaded";                
