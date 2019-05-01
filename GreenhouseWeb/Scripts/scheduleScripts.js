@@ -175,6 +175,24 @@ function save() {
 
 function load() {
 
+    $.ajax({
+        type: "GET",
+        url: "getScheduleNames",
+        success: function (result) {
+            for (id of result){
+                var div = document.createElement("div");
+                div.id = id;
+                div.class = "listGroupItem";
+                div.onclick = "loadSchedule(this.id)";
+                document.getElementById("listView").appendChild(div);
+
+            }
+
+            console.log(result);
+        }
+
+
+    });
     document.getElementById("label").innerHTML =
         "Schedule" + " " + name + " " + "succesfully loaded";
 }
@@ -272,4 +290,5 @@ function showTable() {
         ],
     });
 }
+
 
