@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using GreenhouseWeb.Models;
 
 namespace GreenhouseWeb.Services.Communication
 {
@@ -11,6 +12,16 @@ namespace GreenhouseWeb.Services.Communication
 
         public string GetIP(string greenhouseID)
         {
+            GreenhouseDBContext db = new GreenhouseDBContext();
+
+            foreach (Greenhouse greenhouse in db.Greenhouses)
+            {
+                if(greenhouse.GreenhouseID == greenhouseID)
+                {
+                    return greenhouse.IP + greenhouse.Port;
+                }
+            }
+            
             //TODO
             /*
             string databaseConnectionString = "";//TODO databaseconnection string
