@@ -175,6 +175,16 @@ function save() {
 
 function load() {
 
+    $.ajax({
+        type: "GET",
+        url: "getScheduleNames",
+        success: function (result) {
+
+            console.log(result);
+        }
+
+
+    });
     document.getElementById("label").innerHTML =
         "Schedule" + " " + name + " " + "succesfully loaded";
 }

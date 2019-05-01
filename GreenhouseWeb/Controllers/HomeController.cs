@@ -106,12 +106,24 @@ namespace GreenhouseWeb.Controllers
 
             return Json(new { stuff = "success" }, JsonRequestBehavior.AllowGet);
         }
-    [HttpGet]
+        [HttpGet]
         public JsonResult getNewestData(string GreenhouseID)
         {
             IMeasurement measurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData(GreenhouseID);
             return Json(new { internalTemperature = measurement.InternalTemperature, externalTemperature = measurement.ExternalTemperature,
                 humidity = measurement.Humidity, waterlevel = measurement.Waterlevel }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult getScheduleNames()
+        {
+            HashSet<string> schedules = new HashSet<string>();
+            foreach (Schedule schedule in db.Schedules)
+            {
+                schedules.Add(schedule.ScheduleID);
+            }
+
+            return Json(schedules, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ViewLiveData()
