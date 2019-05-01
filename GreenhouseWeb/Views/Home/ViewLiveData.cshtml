@@ -18,10 +18,10 @@
     </head>
     <body>
 
-        <script> var currentID = ''; </script>
+        <script>var currentID = '';</script>
 
         <div class="col-4" style="width:20%">
-          
+
 
             @foreach (var item in Model)
             {
@@ -32,8 +32,8 @@
                     </div>
                 }
             }
-            </div>   
-            
+        </div>
+
         <script>
 
             setInterval(updateData, 1000);
@@ -47,10 +47,11 @@
             <div id="Humidity"></div>
             <div id="Waterlevel"></div>
         </div>
+       
 
-        <button onclick="">Stop Live Data</button>
-
-</body>
+        <button onclick="stopLiveData()">Stop Live Data</button>
+   
+    </body>
 </html>
 
                 

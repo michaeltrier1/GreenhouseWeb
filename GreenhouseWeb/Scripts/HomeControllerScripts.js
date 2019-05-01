@@ -1,6 +1,7 @@
 ﻿var greenhouseID = "";
 
 function setGreenhouseID(id) {
+    stopLiveData();
     greenhouseID = id;   
 }
 
@@ -192,4 +193,17 @@ function updateData() {
         });
 }
     console.log(greenhouseID);
+}
+
+
+function stopLiveData() {
+    $.ajax({
+        type: "POST",
+        url: "StopLiveData",
+        data: { greenhouseID: greenhouseID }, //insert id as parameter
+        success: function (data) {
+            document.getElementById("label").innerHTML =
+                "Live Data on Greenhouse with ID: " + " " + greenhouseid + " " + "succesfully stopped";
+        }
+    });
 }
