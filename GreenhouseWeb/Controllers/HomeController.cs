@@ -9,6 +9,7 @@ using GreenhouseWeb.Services.Interfaces;
 using GreenhouseWeb.Tests;
 using GreenhouseWeb.Tests.Mock;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace GreenhouseWeb.Controllers
 {
@@ -41,7 +42,7 @@ namespace GreenhouseWeb.Controllers
         [HttpPost]
         public JsonResult saveSchedule(string rawSchedule, string scheduleID)
         {
-            
+            scheduleID.Trim();
 
             JObject scheduleJson = JObject.Parse(rawSchedule);
 

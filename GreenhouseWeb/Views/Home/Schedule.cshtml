@@ -193,21 +193,28 @@
             
             function save() {
                 var scheduleName = prompt("Enter name of the schedule");
-                var schedule = JSON.stringify({ rawSchedule: hot.getData() });
-                $.ajax({
-                    type: "POST",
-                    url: "saveSchedule",
-                    data: { rawSchedule: schedule, scheduleID: scheduleName }, //insert id as parameter
-                    success: function (data) {
-                        document.getElementById("label").innerHTML =
-                            "Schedule" + " " + scheduleName + " " + "succesfully saved";    
-                    }
-                });
+                if (scheduleName === "") { // do nothing
+                    document.getElementById("label").innerHTML = "no name was chosen";
+                } else if (scheduleName) { // save schedule
+
+                    var schedule = JSON.stringify({ rawSchedule: hot.getData() });
+                    $.ajax({
+                        type: "POST",
+                        url: "saveSchedule",
+                        data: { rawSchedule: schedule, scheduleID: scheduleName }, //insert id as parameter
+                        success: function (data) {
+                            document.getElementById("label").innerHTML =
+                                "Schedule" + " " + scheduleName + " " + "succesfully saved";
+                        }
+                    });
+                } else { // do nothing
+                    document.getElementById("label").innerHTML = "user chose to cancel";
+                }         
+
+       
 
 
-
-                }
-                
+                          }              
                 
             
             function load() {
