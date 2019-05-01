@@ -1,7 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 @using Moq;
 @using GreenhouseWeb.Tests.Mock;
- 
+
+@model IEnumerable<GreenhouseWeb.Models.UserGreenhouse>
 
 @if (Request.IsAuthenticated)
 {
@@ -23,16 +24,24 @@
             <div onclick="setGreenhouseID(this.id); currentID = this.id" id="testgreenhouse" name="testgreenhouse" class="list-group-item">
                 <p>Greenhouse ID: TestGreenhouse</p>
 
+            @foreach (var item in Model)
+            {
+                if (item.User == User.Identity.GetUserName())
+                {
+                    <div onclick="setGreenhouseID(this.id)" id="@item.GreenhouseID" name="testgreenhouse" class="list-group-item">
+                        <p>Greenhouse ID: @item.GreenhouseID</p>
+                    </div>
+                }
             </div>   
             <div onclick="setGreenhouseID(this.id); currentID = this.id" id="somethingelse" name="testgreenhouse" class="list-group-item">
                 <p>Greenhouse ID: something</p>
 
-            </div>            
+            }
         </div>
         <script>
 
             setInterval(updateData, 1000);
-           
+
         </script>
 
         <div id="gauges">

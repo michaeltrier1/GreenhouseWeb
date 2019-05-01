@@ -256,9 +256,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IServiceFacade.cs" />
-    <Compile Include="Migrations\201905010826269_init.cs" />
-    <Compile Include="Migrations\201905010826269_init.Designer.cs">
-      <DependentUpon>201905010826269_init.cs</DependentUpon>
+    <Compile Include="Migrations\201905010954335_init.cs" />
+    <Compile Include="Migrations\201905010954335_init.Designer.cs">
+      <DependentUpon>201905010954335_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mock\ViewLiveDataMock.cs" />
@@ -1095,6 +1095,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Scripts\scheduleScripts.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -1445,8 +1446,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905010826269_init.resx">
-      <DependentUpon>201905010826269_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905010954335_init.resx">
+      <DependentUpon>201905010954335_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
