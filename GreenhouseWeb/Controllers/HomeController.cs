@@ -8,6 +8,7 @@ using GreenhouseWeb.Services;
 using GreenhouseWeb.Services.Interfaces;
 using GreenhouseWeb.Tests;
 using GreenhouseWeb.Tests.Mock;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json.Linq;
 
 namespace GreenhouseWeb.Controllers
@@ -31,11 +32,7 @@ namespace GreenhouseWeb.Controllers
         {
             ViewBag.Message = "Fill out the tabel below or load a premade schedule";
 
-
-
-
-
-            return View();
+            return View(db.UserGreenhouses.ToList());
         }
 
         [HttpPost]
@@ -98,6 +95,17 @@ namespace GreenhouseWeb.Controllers
             return Json(new { stuff = "success" }, JsonRequestBehavior.AllowGet);
        } 
                   
+
+        [HttpPost]
+        public JsonResult applySchedule(string rawSchedule, string greenhouseID)
+        {
+
+            JObject schedule = new JObject(rawSchedule);
+            ServiceFacadeGetter.getInstance().getFacade().applySchedule(greenhouseID, schedule);
+
+
+            return Json(new { stuff = "success" }, JsonRequestBehavior.AllowGet);
+        }
     [HttpGet]
         public JsonResult getNewestData(string GreenhouseID)
         {
@@ -108,9 +116,11 @@ namespace GreenhouseWeb.Controllers
 
         public ActionResult ViewLiveData()
         {
+            
             IMeasurement imeasurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData("testgreenhouse");
+
            
-            return View();
+            return View(db.UserGreenhouses.ToList());
         }
 
 

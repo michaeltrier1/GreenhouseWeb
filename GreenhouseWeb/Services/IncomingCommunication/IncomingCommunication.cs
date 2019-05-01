@@ -9,6 +9,7 @@ using System.Web;
 using GreenhouseWeb.Services;
 using GreenhouseWeb.Services.Interfaces;
 using Newtonsoft.Json.Linq;
+using GreenhouseWeb.Models;
 
 namespace GreenhouseWeb.Services.Incoming
 {
@@ -81,7 +82,18 @@ namespace GreenhouseWeb.Services.Incoming
 
         internal void setIPAddress(string id, string ip, string port)
         {
-            throw new NotImplementedException();
+            GreenhouseDBContext db = new GreenhouseDBContext();
+            Greenhouse greenhouse = new Greenhouse();
+            greenhouse.GreenhouseID = id;
+            greenhouse.IP = ip;
+            greenhouse.Port = int.Parse(port);
+            greenhouse.Password = "nothing";
+
+            db.Greenhouses.Add(greenhouse);
+            db.SaveChanges();
+
+            
+         
         }
 
         internal JObject fetchSchedule(string greenHouseID)
