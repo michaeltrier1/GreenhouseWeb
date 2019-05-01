@@ -10,107 +10,107 @@ using GreenhouseWeb.Models;
 
 namespace GreenhouseWeb.Controllers
 {
-    public class SchedulesController : Controller
+    public class DatalogsController : Controller
     {
         private GreenhouseDBContext db = new GreenhouseDBContext();
 
-        // GET: Schedules
+        // GET: Datalogs
         public ActionResult Index()
         {
-            return View(db.Schedules.ToList());
+            return View(db.Datalogs.ToList());
         }
 
-        // GET: Schedules/Details/5
+        // GET: Datalogs/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Schedule schedule = db.Schedules.Find(id);
-            if (schedule == null)
+            Datalog datalog = db.Datalogs.Find(id);
+            if (datalog == null)
             {
                 return HttpNotFound();
             }
-            return View(schedule);
+            return View(datalog);
         }
 
-        // GET: Schedules/Create
+        // GET: Datalogs/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Schedules/Create
+        // POST: Datalogs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ScheduleID,Blocknumber,InternalTemperature,Humidity,WaterLevel,RedLight,BlueLight")] Schedule schedule)
+        public ActionResult Create([Bind(Include = "ID,Greenhouse_ID,TimeOfReading,InternalTemperature,ExternalTemperature,Humidity,Waterlevel")] Datalog datalog)
         {
             if (ModelState.IsValid)
             {
-                db.Schedules.Add(schedule);
+                db.Datalogs.Add(datalog);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(schedule);
+            return View(datalog);
         }
 
-        // GET: Schedules/Edit/5
+        // GET: Datalogs/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Schedule schedule = db.Schedules.Find(id);
-            if (schedule == null)
+            Datalog datalog = db.Datalogs.Find(id);
+            if (datalog == null)
             {
                 return HttpNotFound();
             }
-            return View(schedule);
+            return View(datalog);
         }
 
-        // POST: Schedules/Edit/5
+        // POST: Datalogs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ScheduleID,Blocknumber,InternalTemperature,Humidity,WaterLevel,RedLight,BlueLight")] Schedule schedule)
+        public ActionResult Edit([Bind(Include = "ID,Greenhouse_ID,TimeOfReading,InternalTemperature,ExternalTemperature,Humidity,Waterlevel")] Datalog datalog)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(schedule).State = EntityState.Modified;
+                db.Entry(datalog).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(schedule);
+            return View(datalog);
         }
 
-        // GET: Schedules/Delete/5
+        // GET: Datalogs/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Schedule schedule = db.Schedules.Find(id);
-            if (schedule == null)
+            Datalog datalog = db.Datalogs.Find(id);
+            if (datalog == null)
             {
                 return HttpNotFound();
             }
-            return View(schedule);
+            return View(datalog);
         }
 
-        // POST: Schedules/Delete/5
+        // POST: Datalogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Schedule schedule = db.Schedules.Find(id);
-            db.Schedules.Remove(schedule);
+            Datalog datalog = db.Datalogs.Find(id);
+            db.Datalogs.Remove(datalog);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,5 +1,4 @@
-﻿@model GreenhouseWeb.Models.Schedule
-@{
+﻿@{
     ViewBag.Title = "Greenhouse Schedule";
 }
 <h2>@ViewBag.Title.</h2>
@@ -11,6 +10,8 @@
     <title></title>
 </head>
 <body>
+
+
     <div id="example1" style="text-align:center">
         <script>
             function getData() {
@@ -29,7 +30,9 @@
                     { time: '22.00-24.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 }
 
                 ];
-            };                    
+            };
+            
+          
 
             (function (Handsontable) {
                 function ligthValidator(a, callback) {
@@ -189,11 +192,26 @@
         <script>         
             
             function save() {
-                            
-                var schedule = (JSON.stringify({ data: hot.getData() }));
+                var schedule = JSON.stringify({ rawSchedule: hot.getData() });
+
+                console.log(schedule);
+
+                $.ajax({
+                    type: "POST",
+                    url: "saveSchedule",
+                    data: { rawSchedule : schedule, scheduleID : "testID" }, //insert id as parameter
+                    success: function (data) {
+                        document.getElementById("label").innerHTML =
+                            "Schedule" + " " + name + " " + "succesfully saved";    
+                    }
+                });
+                   
+                }
                 
-            }
+                
+            
             function load() {
+        
                 document.getElementById("label").innerHTML =
                     "Schedule" + " " + name + " " + "succesfully loaded";                
             }

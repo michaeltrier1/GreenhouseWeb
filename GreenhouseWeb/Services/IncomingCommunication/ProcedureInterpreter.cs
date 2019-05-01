@@ -9,18 +9,31 @@ namespace GreenhouseWeb.Services.Incoming
     public class ProcedureInterpreter
     {
 
-        public string interpret(String message, IncomingCommunicator incomingCommunicator, string ip)
+        public JObject interpret(String message)
         {
             JObject jsonMessage = JObject.Parse(message);
+            JObject interpretedMessage = new JObject("{ }");
 
             string procedure = (string)jsonMessage.GetValue("procedure");
 
             string greenHouseID;
+            string port;
+
             switch (procedure)
             {
+                case "Startup":
+                    greenHouseID = (string)jsonMessage.GetValue("id");
+                    port = (string)jsonMessage.GetValue("port");
+
+                    interpretedMessage.Add("id", greenHouseID);
+                    interpretedMessage.Add("port", port);
+                    interpretedMessage.Add("procedure", procedure);
+                    break;
                 case "petWatchdog":
                     greenHouseID = (string)jsonMessage.GetValue("id");
-                    incomingCommunicator.petWatchdog(greenHouseID);
+
+                    interpretedMessage.Add("id", greenHouseID);
+                    interpretedMessage.Add("procedure", procedure);
                     break;
                 case "live data":
                     greenHouseID = (string)jsonMessage.GetValue("id");
@@ -30,19 +43,26 @@ namespace GreenhouseWeb.Services.Incoming
                     double humidity = Double.Parse((string)jsonMessage.GetValue("humidity"));
                     double waterLevel = Double.Parse((string)jsonMessage.GetValue("water level"));
 
-                    Measurements measurements = new Measurements(internalTemperature, externalTemperature, humidity, waterLevel);
-                    incomingCommunicator.setMeasurements(greenHouseID, measurements);
-                    return greenHouseID;
+                    interpretedMessage.Add("id", greenHouseID);
+                    interpretedMessage.Add("internal temperature", internalTemperature);
+                    interpretedMessage.Add("external temperature", externalTemperature);
+                    interpretedMessage.Add("humidity", humidity);
+                    interpretedMessage.Add("water level", waterLevel);
+                    break;
                 case "IPAddress":
-                    String port = (string)jsonMessage.GetValue("port");
-                    String id = (string)jsonMessage.GetValue("id");
+                    port = (string)jsonMessage.GetValue("port");
+                    greenHouseID = (string)jsonMessage.GetValue("id");
 
-                    incomingCommunicator.setIPAddress(id, ip, port);
+                    interpretedMessage.Add("id", greenHouseID);
+                    interpretedMessage.Add("port", port);
+                    interpretedMessage.Add("procedure", procedure);
                     break;
                 default:
                     break;
             }
-            return "";
+
+
+            return interpretedMessage;
         }
 
     }

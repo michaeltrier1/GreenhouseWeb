@@ -1,4 +1,4 @@
-﻿@model GreenhouseWeb.Models.Schedule
+﻿@model GreenhouseWeb.Models.Datalog
 
 @{
     ViewBag.Title = "Delete";
@@ -8,23 +8,23 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Schedule</h4>
+    <h4>Datalog</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ScheduleID)
+            @Html.DisplayNameFor(model => model.Greenhouse_ID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ScheduleID)
+            @Html.DisplayFor(model => model.Greenhouse_ID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Blocknumber)
+            @Html.DisplayNameFor(model => model.TimeOfReading)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Blocknumber)
+            @Html.DisplayFor(model => model.TimeOfReading)
         </dd>
 
         <dt>
@@ -36,6 +36,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.ExternalTemperature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExternalTemperature)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Humidity)
         </dt>
 
@@ -44,27 +52,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WaterLevel)
+            @Html.DisplayNameFor(model => model.Waterlevel)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WaterLevel)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RedLight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RedLight)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BlueLight)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BlueLight)
+            @Html.DisplayFor(model => model.Waterlevel)
         </dd>
 
     </dl>
