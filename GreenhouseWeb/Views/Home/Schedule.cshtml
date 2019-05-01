@@ -196,12 +196,13 @@
                 if (scheduleName === "") { // do nothing
                     document.getElementById("label").innerHTML = "no name was chosen";
                 } else if (scheduleName) { // save schedule
+                    var scheduleNAME = scheduleName.trim();
 
                     var schedule = JSON.stringify({ rawSchedule: hot.getData() });
                     $.ajax({
                         type: "POST",
                         url: "saveSchedule",
-                        data: { rawSchedule: schedule, scheduleID: scheduleName }, //insert id as parameter
+                        data: { rawSchedule: schedule, scheduleID: scheduleNAME }, //insert id as parameter
                         success: function (data) {
                             document.getElementById("label").innerHTML =
                                 "Schedule" + " " + scheduleName + " " + "succesfully saved";
