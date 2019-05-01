@@ -74,6 +74,7 @@ namespace GreenhouseWeb.Controllers
                     //setpoints.Add("waterlevel", waterlevel);
                     //setpoints.Add("light_blue", blueLight);
                     //setpoints.Add("light_red", redLight);
+                    schedule.ScheduleID = scheduleID;
                     schedule.Blocknumber = blockNumber;
                     schedule.BlueLight = blueLight;
                     schedule.RedLight = redLight;
