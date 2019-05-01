@@ -113,6 +113,11 @@ namespace GreenhouseWeb.Controllers
             return View();
         }
 
+        public void StopLiveData(string ID)
+        {
+            ServiceFacadeGetter.getInstance().getFacade().stopLiveData(ID);
+
+        }
 
     }
 }
