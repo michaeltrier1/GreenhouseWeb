@@ -21,8 +21,7 @@
         <script> var currentID = ''; </script>
 
         <div class="col-4" style="width:20%">
-            <div onclick="setGreenhouseID(this.id); currentID = this.id" id="testgreenhouse" name="testgreenhouse" class="list-group-item">
-                <p>Greenhouse ID: TestGreenhouse</p>
+          
 
             @foreach (var item in Model)
             {
@@ -34,13 +33,7 @@
                 }
             }
             </div>   
-            <div onclick="setGreenhouseID(this.id); currentID = this.id" id="somethingelse" name="testgreenhouse" class="list-group-item">
-                <p>Greenhouse ID: something</p>
-
-            }
-        </div>
-        </div>
-              
+            
         <script>
 
             setInterval(updateData, 1000);
@@ -54,14 +47,14 @@
             <div id="Humidity"></div>
             <div id="Waterlevel"></div>
         </div>
-        
+
         <button onclick="">Stop Live Data</button>
-        
+
 </body>
-    </html>
+</html>
 
-
-}
+                
+            }
 else
 {
 
