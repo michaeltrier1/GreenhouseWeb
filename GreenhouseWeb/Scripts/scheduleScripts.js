@@ -180,11 +180,25 @@ function load() {
 }
 
 function apply() {
+    var schedule = JSON.stringify({ rawSchedule: hot.getData() });
+    $.ajax({
+        type: "POST",
+        url: "saveSchedule",
+        data: { rawSchedule: schedule, greenhouseID: greenhouseId }, //insert id as parameter
+        success: function (data) {
+            document.getElementById("label").innerHTML =
+                "Schedule" + " " + scheduleName + " " + "succesfully saved";
+        }
+    });
 
     document.getElementById("label").innerHTML =
         "Schedule" + " " + name + " " + "succesfully applied";
 }
+var greenhouseId = "";
 
+function setGreenhouseID(id) {
+    greenhouseId = id;
+}
 
 function getData() {
     return [
