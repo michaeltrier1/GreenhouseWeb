@@ -92,7 +92,7 @@ namespace GreenhouseWeb.Services.Incoming
             return new JObject("{ }");
         }
 
-        private JObject live(JObject interpretedMessage, bool registered)
+        private JObject live(JObject interpretedMessage)
         {
             string greenHouseID = (string)interpretedMessage.GetValue("id");
 
