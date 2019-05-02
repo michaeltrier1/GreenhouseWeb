@@ -9,6 +9,7 @@ using GreenhouseWeb.Services.Interfaces;
 using GreenhouseWeb.Tests;
 using GreenhouseWeb.Tests.Mock;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace GreenhouseWeb.Controllers
@@ -143,20 +144,22 @@ namespace GreenhouseWeb.Controllers
 
         public JsonResult loadSchedule(string scheduleID)
         {
-            string[][] blocks = new string[12][];
-
+            string[,] blocks = new string[12,5];
             foreach(Schedule schedule in db.Schedules)
             {
-                if(schedule.ScheduleID == scheduleID)
+                if (schedule.ScheduleID == scheduleID)
                 {
-                    blocks[schedule.Blocknumber][0] = schedule.BlueLight.ToString();
-                    blocks[schedule.Blocknumber][1] = schedule.RedLight.ToString();
-                    blocks[schedule.Blocknumber][2] = schedule.InternalTemperature.ToString();
-                    blocks[schedule.Blocknumber][3] = schedule.Humidity.ToString();
-                    blocks[schedule.Blocknumber][4] = schedule.WaterLevel.ToString();
-                }
-            }
+  
 
+                    blocks[schedule.Blocknumber - 1, 0] = schedule.BlueLight.ToString();
+                    blocks[schedule.Blocknumber - 1, 1] = schedule.RedLight.ToString();
+                    blocks[schedule.Blocknumber - 1, 2] = schedule.InternalTemperature.ToString();
+                    blocks[schedule.Blocknumber - 1, 3] = schedule.Humidity.ToString();
+                    blocks[schedule.Blocknumber - 1, 4] = schedule.WaterLevel.ToString();
+                    
+                }
+               
+            }
             return Json(blocks, JsonRequestBehavior.AllowGet);
 
         }
