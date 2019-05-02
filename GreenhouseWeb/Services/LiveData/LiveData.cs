@@ -16,7 +16,7 @@ namespace GreenhouseWeb.Services
             // TODO remove testvalue
             this.liveData.Add("testgreenhouse", new Measurements(5,5,5,5));
             this.liveData.Add("somethingelse", new Measurements(15, null, 25, 35));
-            
+            this.liveData.Add("herpderp", new Measurements(15,15,15,15));
         }
 
         public IMeasurement getMeasurements(String greenhouseID)

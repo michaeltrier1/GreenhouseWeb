@@ -122,7 +122,18 @@ function save() {
     }
 }
 function loadSchedule(id) {
-    
+
+    $.ajax({
+        type: "GET",
+        url: "loadSchedule",
+        data: { scheduleID: id },
+        success: function (result) {
+
+
+        }
+
+
+    });
 }
 
 function load() {

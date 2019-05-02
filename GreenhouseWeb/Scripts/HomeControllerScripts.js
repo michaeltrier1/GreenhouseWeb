@@ -197,13 +197,18 @@ function updateData() {
 
 
 function stopLiveData() {
-    $.ajax({
-        type: "POST",
-        url: "StopLiveData",
-        data: { greenhouseID: greenhouseID }, //insert id as parameter
-        success: function (data) {
-            document.getElementById("label").innerHTML =
-                "Live Data on Greenhouse with ID: " + " " + greenhouseid + " " + "succesfully stopped";
-        }
-    });
+    if (greenhouseID != null) {
+        $.ajax({
+            type: "POST",
+            url: "StopLiveData",
+            data: { GreenhouseID: greenhouseID }, //insert id as parameter
+            success: function (data) {
+                document.getElementById("label").innerHTML =
+                    "Live Data on Greenhouse with ID: " + " " + greenhouseid + " " + "succesfully stopped";
+            }
+        });
+    } else {
+        console.log("GreenhouseID is null");
+    }
+    
 }
