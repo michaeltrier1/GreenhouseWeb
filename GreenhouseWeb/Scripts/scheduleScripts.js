@@ -232,7 +232,6 @@ function getData() {
         { time: '18.00-20.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
         { time: '20.00-22.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 },
         { time: '22.00-24.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 }
-
     ];
 };
 function showTable() {
