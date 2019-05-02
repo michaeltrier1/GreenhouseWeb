@@ -96,10 +96,10 @@ namespace GreenhouseWeb.Services.Incoming
         {
             string greenHouseID = (string)interpretedMessage.GetValue("id");
 
-            double internalTemperature = (double)interpretedMessage.GetValue("internal temperature");
-            double externalTemperature = (double)interpretedMessage.GetValue("external temperature");
-            double humidity = (double)interpretedMessage.GetValue("humidity");
-            double waterLevel = (double)interpretedMessage.GetValue("water level");
+            Nullable<double> internalTemperature = (Nullable<double>)interpretedMessage.GetValue("internal temperature");
+            Nullable<double> externalTemperature = (Nullable<double>)interpretedMessage.GetValue("external temperature");
+            Nullable<double> humidity = (Nullable<double>)interpretedMessage.GetValue("humidity");
+            Nullable<double> waterLevel = (Nullable<double>)interpretedMessage.GetValue("water level");
 
             Measurements measurements = new Measurements(internalTemperature, externalTemperature, humidity, waterLevel);
 
