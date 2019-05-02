@@ -18,7 +18,7 @@ namespace GreenhouseWeb.Services.Communication
             {
                 if(greenhouse.GreenhouseID == greenhouseID)
                 {
-                    return greenhouse.IP + greenhouse.Port;
+                    return greenhouse.IP + ":"+ greenhouse.Port;
                 }
             }
             
@@ -35,7 +35,7 @@ namespace GreenhouseWeb.Services.Communication
             return greenhouseIP + ":" + greenhousePort;
             */
 
-            return "127.0.0.1" + ":" + "8080";  //DUMMY CONNECTION
+            return "127.0.0.1" + ":" + "8081";  //DUMMY CONNECTION
         }
 
 

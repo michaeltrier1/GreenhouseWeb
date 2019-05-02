@@ -33,9 +33,9 @@ namespace GreenhouseWeb.Services.Incoming
 
             string ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
 
-            bool readMore = true;
+           
 
-            while (readMore && !stopped)
+            while (!reader.EndOfStream && !stopped )
             {
                 string message = reader.ReadLine();
                 JObject interpretedMessage = this.interpreter.interpret(message);
@@ -54,6 +54,10 @@ namespace GreenhouseWeb.Services.Incoming
                         break;
                     case "IPAddress":
                         response = this.IP(interpretedMessage, ip);
+                        break;
+                    case "Datalog":
+                        this.datalog(interpretedMessage);
+                        response = new JObject("{}");
                         break;
                     default:
                         response = new JObject("{}");
@@ -128,6 +132,20 @@ namespace GreenhouseWeb.Services.Incoming
             return schedule;
         }
         
+        private void datalog(JObject interpretedMessage)
+        {
+            string greenHouseID = (string)interpretedMessage.GetValue("id");
+            long timeOfReading = long.Parse((string)interpretedMessage.GetValue("time of reading"));
+
+            Nullable<double> internalTemperature = Double.Parse((string)interpretedMessage.GetValue("internal temperature"));
+            Nullable<double> externalTemperature = Double.Parse((string)interpretedMessage.GetValue("external temperature"));
+            Nullable<double> humidity = Double.Parse((string)interpretedMessage.GetValue("humidity"));
+            Nullable<double> waterLevel = Double.Parse((string)interpretedMessage.GetValue("water level"));
+
+
+            incomingCommunicator.datalog(greenHouseID, timeOfReading, internalTemperature, externalTemperature, humidity, waterLevel);
+
+        }
     }
     
 }

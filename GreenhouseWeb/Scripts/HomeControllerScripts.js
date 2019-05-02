@@ -1,7 +1,10 @@
 ﻿var greenhouseID = "";
 
 function setGreenhouseID(id) {
-    stopLiveData();
+    if (greenhouseID != "") {
+        stopLiveData();
+    }
+    
     greenhouseID = id;   
 }
 
