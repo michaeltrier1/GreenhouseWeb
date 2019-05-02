@@ -128,6 +128,7 @@ function loadSchedule(id) {
         url: "loadSchedule",
         data: { scheduleID: id },
         success: function (schedule) {
+            table.destroy();
             var timeArray = [
             '00.00-02.00',
             '02.00-04.00',
@@ -203,7 +204,7 @@ function loadSchedule(id) {
 
                 ],
             });
-
+            
             table = hot;
         
             console.log(recreatedSchedule);
