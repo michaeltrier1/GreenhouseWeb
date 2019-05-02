@@ -127,9 +127,86 @@ function loadSchedule(id) {
         type: "GET",
         url: "loadSchedule",
         data: { scheduleID: id },
-        success: function (result) {
+        success: function (schedule) {
+            var timeArray = [
+            '00.00-02.00',
+            '02.00-04.00',
+            '04.00-06.00',
+            '06.00-08.00',
+            '08.00-10.00',
+            '10.00-12.00',
+            '12.00-14.00',
+            '14.00-16.00',
+            '16.00-18.00',
+            '18.00-20.00',
+            '20.00-22.00',
+            '22.00-24.00'];
 
+            var recreatedSchedule = [];
+            var j = 0;
+            for (i = 0; i < 12; i++) {
+                recreatedSchedule[i] = {
+                    time: timeArray[i], blueLight: schedule[j * 5], redLight: schedule[j * 5 + 1], temperature: schedule[j * 5 + 2],
+                    humidity: schedule[j * 5 + 3], waterlevel: schedule[j * 5 + 4]
+                };
+                j++;
+            }
+            var
+                $$ = function (id) {
+                    return document.getElementById(id);
+                },
+                container = $$('example1'),
+                hot;
 
+            hot = new Handsontable(container, {
+                data: recreatedSchedule,
+                licenseKey: 'non-commercial-and-evaluation',
+                colWidths: 87,
+                fillHandle: {
+                    direction: 'vertical',
+                    autoInsertRow: false
+                },
+                colHeaders: ['Time', 'Blue Light', 'Red Light', 'Temperature', 'Humidity', 'Waterlevel'],
+                allowEmpty: false,
+                columns: [
+                    {
+                        data: 'time',
+                        readOnly: true
+                    },
+                    {
+                        data: 'blueLight',
+                        type: 'numeric',
+                        validator: 'ligth'
+
+                    },
+                    {
+                        data: 'redLight',
+                        type: 'numeric',
+                        validator: 'ligth'
+                    },
+                    {
+                        data: 'temperature',
+                        type: 'numeric',
+                        validator: 'temp'
+                    },
+                    {
+                        data: 'humidity',
+                        type: 'numeric',
+                        validator: 'humidity'
+                    },
+                    {
+                        data: 'waterlevel',
+                        type: 'numeric',
+
+                        validator: 'waterlevel1'
+                    },
+
+                ],
+            });
+
+            table = hot;
+        
+            console.log(recreatedSchedule);
         }
 
 
@@ -149,7 +226,7 @@ function load() {
 
                 div.addEventListener("click", function (event) {
                     loadSchedule(this.id);
-            });
+                });
                 console.log(div);
                 div.innerHTML = id;
                 document.getElementById("listview").appendChild(div);
@@ -212,6 +289,7 @@ function showTable() {
 
     hot = new Handsontable(container, {
         data: getData(),
+
         licenseKey: 'non-commercial-and-evaluation',
         colWidths: 87,
         fillHandle: {
@@ -260,15 +338,7 @@ function showTable() {
 }
 function getSavedData(schedule) {
 
-    var schedule = [];
-    var j = 0;
-    for (i = 0; i < 12, i++){
-        schedule.add({
-            time: timeArray[i], blueLight: schedule[j*5], redLight: schedule[j*5+1], temperature: schedule[j*5+2],
-            humidity: schedule[j*5+3], waterlevel: schedule[j*5+4]
-        });
-        j++;
-    }
+
         return [
             { time: '00.00-02.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
             { time: '02.00-04.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
