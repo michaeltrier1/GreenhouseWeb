@@ -247,5 +247,35 @@ function showTable() {
 
     table = hot;
 }
+function getSavedData(schedule) {
+
+    var schedule = [];
+    var j = 0;
+    for (i = 0; i < 12, i++){
+        schedule.add({
+            time: timeArray[i], blueLight: schedule[j*5], redLight: schedule[j*5+1], temperature: schedule[j*5+2],
+            humidity: schedule[j*5+3], waterlevel: schedule[j*5+4]
+        });
+        j++;
+    }
+        return [
+            { time: '00.00-02.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '02.00-04.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '04.00-06.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '06.00-08.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '08.00-10.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '10.00-12.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '12.00-14.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '14.00-16.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '16.00-18.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '18.00-20.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '20.00-22.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+            { time: '22.00-00.00', blueLight: '', redLight: '', temperature: '', humidity: '', waterlevel: '' },
+
+        ];
+    
+
+
+}
 
 

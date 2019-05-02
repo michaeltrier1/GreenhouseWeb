@@ -156,7 +156,6 @@ namespace GreenhouseWeb.Controllers
                     blocks[schedule.Blocknumber][4] = schedule.WaterLevel.ToString();
                 }
             }
-
             return Json(blocks, JsonRequestBehavior.AllowGet);
 
         }
