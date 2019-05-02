@@ -43,8 +43,7 @@ namespace GreenhouseWeb.Controllers
             if (scheduleId != "")
             {
                 JObject scheduleJson = JObject.Parse(rawSchedule);
-
-
+                
                 //get raw data to readable format
                 JArray data = (JArray)scheduleJson.GetValue("rawSchedule");
 
@@ -53,12 +52,8 @@ namespace GreenhouseWeb.Controllers
 
                 for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++)
                 {
-
-
                     for (int blockNumber = 1; blockNumber < 13; blockNumber++)
                     {
-
-
                         JArray blockData = (JArray)data[blockNumber - 1];
                         Schedule schedule = new Schedule();
                         double blueLight = (double)blockData[1];
@@ -80,19 +75,17 @@ namespace GreenhouseWeb.Controllers
                         schedule.InternalTemperature = temperature;
                         schedule.Humidity = humidity;
                         schedule.WaterLevel = waterlevel;
+
                         if (ModelState.IsValid)
                         {
                             db.Schedules.Add(schedule);
                             db.SaveChanges();
-
                         }
 
                     }
-
-
                 }
-
             }
+
             return Json(new { stuff = "success" }, JsonRequestBehavior.AllowGet);
        } 
                   
@@ -100,13 +93,12 @@ namespace GreenhouseWeb.Controllers
         [HttpPost]
         public JsonResult applySchedule(string rawSchedule, string greenhouseID)
         {
-
             JObject schedule = new JObject(rawSchedule);
             ServiceFacadeGetter.getInstance().getFacade().applySchedule(greenhouseID, schedule);
 
-
             return Json(new { stuff = "success" }, JsonRequestBehavior.AllowGet);
         }
+
         [HttpGet]
         public JsonResult getNewestData(string GreenhouseID)
         {
@@ -129,17 +121,14 @@ namespace GreenhouseWeb.Controllers
 
         public ActionResult ViewLiveData()
         {
-            
             IMeasurement imeasurement = ServiceFacadeGetter.getInstance().getFacade().getCurrentLiveData("testgreenhouse");
 
-           
             return View(db.UserGreenhouses.ToList());
         }
 
         public void StopLiveData(string GreenhouseID)
         {
             ServiceFacadeGetter.getInstance().getFacade().stopLiveData(GreenhouseID);
-
         }
 
         public JsonResult loadSchedule(string scheduleID)
@@ -149,19 +138,15 @@ namespace GreenhouseWeb.Controllers
             {
                 if (schedule.ScheduleID == scheduleID)
                 {
-  
-
                     blocks[schedule.Blocknumber - 1, 0] = schedule.BlueLight.ToString();
                     blocks[schedule.Blocknumber - 1, 1] = schedule.RedLight.ToString();
                     blocks[schedule.Blocknumber - 1, 2] = schedule.InternalTemperature.ToString();
                     blocks[schedule.Blocknumber - 1, 3] = schedule.Humidity.ToString();
                     blocks[schedule.Blocknumber - 1, 4] = schedule.WaterLevel.ToString();
-                    
                 }
-               
             }
-            return Json(blocks, JsonRequestBehavior.AllowGet);
 
+            return Json(blocks, JsonRequestBehavior.AllowGet);
         }
 
     }

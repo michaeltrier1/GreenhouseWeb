@@ -70,6 +70,8 @@ namespace GreenhouseWeb.Tests.Behavior
             // Act
 
             // Assert
+            throw new NotImplementedException();
+
         }
 
         [TestMethod]
@@ -84,6 +86,7 @@ namespace GreenhouseWeb.Tests.Behavior
             // Act
 
             // Assert
+            throw new NotImplementedException();
         }
     }
 }

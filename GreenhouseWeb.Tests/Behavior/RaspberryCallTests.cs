@@ -3,15 +3,15 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GreenhouseWeb.Tests.Behavior
+namespace GreenhouseWeb.Tests
 {
     /// <summary>
-    /// Summary description for SaveSchedule
+    /// Summary description for RaspberryCalls
     /// </summary>
     [TestClass]
-    public class SaveScheduleTests
+    public class RaspberryCallTests
     {
-        public SaveScheduleTests()
+        public RaspberryCallTests()
         {
             //
             // TODO: Add constructor logic here
@@ -59,7 +59,7 @@ namespace GreenhouseWeb.Tests.Behavior
         #endregion
 
         [TestMethod]
-        public void ScheduleIsValid()
+        public void Startup()
         {
             //
             // TODO: Add test logic here
@@ -74,7 +74,7 @@ namespace GreenhouseWeb.Tests.Behavior
         }
 
         [TestMethod]
-        public void ScheduleIsInvalid()
+        public void IPAddress()
         {
             //
             // TODO: Add test logic here

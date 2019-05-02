@@ -246,7 +246,7 @@ function apply() {
     var schedule = JSON.stringify({ rawSchedule: table.getData() });
     $.ajax({
         type: "POST",
-        url: "saveSchedule",
+        url: "applySchedule",
         data: { rawSchedule: schedule, greenhouseID: greenhouseId }, //insert id as parameter
         success: function (data) {
             document.getElementById("label").innerHTML =
