@@ -10,6 +10,7 @@ using GreenhouseWeb.Services;
 using GreenhouseWeb.Services.Interfaces;
 using Newtonsoft.Json.Linq;
 using GreenhouseWeb.Models;
+using System.Data.Entity;
 
 namespace GreenhouseWeb.Services.Incoming
 {
@@ -67,7 +68,11 @@ namespace GreenhouseWeb.Services.Incoming
 
         internal void stopLiveData(string greenhouseID)
         {
-            this.activeHandlers[greenhouseID].stop();
+            if (greenhouseID == "") { }
+            else
+            {
+                this.activeHandlers[greenhouseID].stop();
+            }
         }
 
         internal void unregisterSocketHandler(string greenhouseID)
@@ -84,24 +89,55 @@ namespace GreenhouseWeb.Services.Incoming
         {
             GreenhouseDBContext db = new GreenhouseDBContext();
             Greenhouse greenhouse = new Greenhouse();
+
+            foreach (Greenhouse item in db.Greenhouses)
+            {
+                if (item.GreenhouseID == id)
+                {
+                    db.Greenhouses.Remove(item);
+                }
+            }
             greenhouse.GreenhouseID = id;
             greenhouse.IP = ip;
             greenhouse.Port = int.Parse(port);
             greenhouse.Password = "nothing";
 
-            db.Greenhouses.Add(greenhouse);
-            db.SaveChanges();
+           
 
             
-         
+          
+                db.Greenhouses.Add(greenhouse);
+            
+
+            db.SaveChanges();
+
+
         }
 
         internal JObject fetchSchedule(string greenHouseID)
         {
 
-            throw new NotImplementedException();
+            return new JObject();
         }
 
+
+        public void datalog(string greenHouseID, long timeofreading, Nullable<double> internalTemperature, Nullable<double> externalTemperature, Nullable<double> humidity, Nullable<double> waterlevel)
+        {
+            GreenhouseDBContext db = new GreenhouseDBContext();
+            Datalog datalog = new Datalog();
+
+            datalog.Greenhouse_ID = greenHouseID;
+            datalog.TimeOfReading = new DateTime(timeofreading);
+            datalog.InternalTemperature = (float)internalTemperature;
+            datalog.ExternalTemperature = (float)externalTemperature;
+            datalog.Humidity = (float)humidity;
+            datalog.Waterlevel = (float)waterlevel;
+
+            db.Datalogs.Add(datalog);
+            db.SaveChanges();
+
+
+        }
 
 
     }

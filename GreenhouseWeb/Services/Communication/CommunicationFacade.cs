@@ -30,7 +30,14 @@ namespace GreenhouseWeb.Services.Communication
             new Communicator().applySchedule(greenhouseConnectionInfo, schedule);
         }
 
+        public void getLiveData(string greenhouseID)
+        {
+            JObject message = new JObject();
+            message.Add("procedure", "getLiveData");
+            string greenhouseConnectionInfo = new GreenhouseIPRetriever().GetIP(greenhouseID);
 
+            new Communicator().getLiveData(greenhouseConnectionInfo, message);
+        }
 
     }
 }

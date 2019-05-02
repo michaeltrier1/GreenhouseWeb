@@ -44,6 +44,13 @@ namespace GreenhouseWeb.Services.Communication
             }
         }
 
+        public void getLiveData(string greenhouseConnectionInfo, JObject message)
+        {
+
+            this.send(greenhouseConnectionInfo, message);
+        }
+
+
 
     }
 }
