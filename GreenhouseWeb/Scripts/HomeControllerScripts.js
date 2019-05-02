@@ -25,6 +25,15 @@ function updateData() {
         console.log(internalTemp);
         var minSetPoint = [15];
         var maxSetPoint = [30];
+        var titleText = "";
+
+        console.log(externalTemp);
+
+        if (internalTemp[0] == null) {
+            titleText = "Inside Temperature\n doesn't work";
+        } else {
+            titleText = 'Inside Temperature';
+        }
 
         var chartData = {
             type: 'gauge',  // Specify your chart type here.
@@ -33,7 +42,7 @@ function updateData() {
                 "values": "0:40:1"
             },
             title: {
-                text: 'Inside Temperature' // Adds a title to your chart
+                text: titleText // Adds a title to your chart
 
             },
             "series": [
@@ -66,6 +75,12 @@ function updateData() {
             width: 300
         });
 
+  
+        if (externalTemp[0] == null) {
+            titleText = "Outside Temperature\n doesn't work";
+        } else {
+            titleText = 'Outside Temperature';
+        }
         var chartData = {
             type: 'gauge',  // Specify your chart type here.
             "scale-r": {
@@ -73,7 +88,7 @@ function updateData() {
                 "values": "0:40:1"
             },
             title: {
-                text: 'Outside Temperature' // Adds a title to your chart
+                text: titleText // Adds a title to your chart
 
             },
             "series": [
@@ -109,7 +124,11 @@ function updateData() {
 
 
 
-
+        if (humidity[0] == null) {
+            titleText = "Humidity\n doesn't work";
+    } else {
+        titleText = 'Humidity';
+    }
         var chartData = {
             type: 'gauge',  // Specify your chart type here.
             "scale-r": {
@@ -117,7 +136,7 @@ function updateData() {
                 "values": "0:40:1"
             },
             title: {
-                text: 'Humidity' // Adds a title to your chart
+                text: titleText // Adds a title to your chart
 
             },
             "series": [
@@ -151,7 +170,11 @@ function updateData() {
         });
 
 
-
+        if (waterlevel[0] == null) {
+            titleText = "Waterlevel\n doesn't work";
+    } else {
+        titleText = 'Waterlevel';
+    }
         var chartData = {
             type: 'gauge',  // Specify your chart type here.
             "scale-r": {
@@ -159,7 +182,7 @@ function updateData() {
                 "values": "0:40:1"
             },
             title: {
-                text: 'Waterlevel' // Adds a title to your chart
+                text: titleText // Adds a title to your chart
 
             },
             "series": [
