@@ -98,67 +98,16 @@ function getData() {
     ];
 };        
            
-                var
-                $$ = function (id) {
-                    return document.getElementById(id);
-                },
-                container = $$('example1'),
-                exampleConsole = $$('example1console'),
-                hot;
 
-            hot = new Handsontable(container, {
-                data: getData(),
-                licenseKey: 'non-commercial-and-evaluation',
-                colWidths: 87,
-                fillHandle: {
-                    direction: 'vertical',
-                    autoInsertRow: false
-                },
-                colHeaders: ['Time', 'Blue Light', 'Red Light', 'Temperature', 'Humidity', 'Waterlevel'],
-                allowEmpty: false,
-                columns: [
-                    {
-                        data: 'time',
-                        readOnly: true
-                    },
-                    {
-                        data: 'blueLight',
-                        type: 'numeric',
-                        validator: 'ligth'
-
-                    },
-                    {
-                        data: 'redLight',
-                        type: 'numeric',
-                        validator: 'ligth'
-                    },
-                    {
-                        data: 'temperature',
-                        type: 'numeric',
-                        validator: 'temp'
-                    },
-                    {
-                        data: 'humidity',
-                        type: 'numeric',
-                        validator: 'humidity'
-                    },
-                    {
-                        data: 'waterlevel',
-                        type: 'numeric',
-
-                        validator: 'waterlevel1'
-                    },
-
-                ],
-            });
 function save() {
     var scheduleName = prompt("Enter name of the schedule");
+
     if (scheduleName === "") { // do nothing
         document.getElementById("label").innerHTML = "no name was chosen";
     } else if (scheduleName) { // save schedule
         var scheduleNAME = scheduleName.trim();
 
-        var schedule = JSON.stringify({ rawSchedule: hot.getData() });
+        var schedule = JSON.stringify({ rawSchedule: table.getData() });
         $.ajax({
             type: "POST",
             url: "saveSchedule",
@@ -172,6 +121,9 @@ function save() {
         document.getElementById("label").innerHTML = "user chose to cancel";
     }
 }
+function loadSchedule(id) {
+    
+}
 
 function load() {
 
@@ -179,16 +131,20 @@ function load() {
         type: "GET",
         url: "getScheduleNames",
         success: function (result) {
-            for (id of result){
+            for (id of result) {
                 var div = document.createElement("div");
+                div.classList.add("list-group-item");
                 div.id = id;
-                div.class = "listGroupItem";
-                div.onclick = "loadSchedule(this.id)";
-                document.getElementById("listView").appendChild(div);
+
+                div.addEventListener("click", function (event) {
+                    loadSchedule(this.id);
+            });
+                console.log(div);
+                div.innerHTML = id;
+                document.getElementById("listview").appendChild(div);
 
             }
 
-            console.log(result);
         }
 
 
@@ -198,7 +154,7 @@ function load() {
 }
 
 function apply() {
-    var schedule = JSON.stringify({ rawSchedule: hot.getData() });
+    var schedule = JSON.stringify({ rawSchedule: table.getData() });
     $.ajax({
         type: "POST",
         url: "saveSchedule",
@@ -234,13 +190,13 @@ function getData() {
         { time: '22.00-24.00', blueLight: 20, redLight: 20, temperature: 20, humidity: 20, waterlevel: 20 }
     ];
 };
+var table;
 function showTable() {
     var
         $$ = function (id) {
             return document.getElementById(id);
         },
         container = $$('example1'),
-        exampleConsole = $$('example1console'),
         hot;
 
     hot = new Handsontable(container, {
@@ -288,6 +244,8 @@ function showTable() {
 
         ],
     });
+
+    table = hot;
 }
 
 

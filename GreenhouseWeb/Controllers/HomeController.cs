@@ -141,5 +141,25 @@ namespace GreenhouseWeb.Controllers
 
         }
 
+        public JsonResult loadSchedule(string scheduleID)
+        {
+            string[][] blocks = new string[12][];
+
+            foreach(Schedule schedule in db.Schedules)
+            {
+                if(schedule.ScheduleID == scheduleID)
+                {
+                    blocks[schedule.Blocknumber][0] = schedule.BlueLight.ToString();
+                    blocks[schedule.Blocknumber][1] = schedule.RedLight.ToString();
+                    blocks[schedule.Blocknumber][2] = schedule.InternalTemperature.ToString();
+                    blocks[schedule.Blocknumber][3] = schedule.Humidity.ToString();
+                    blocks[schedule.Blocknumber][4] = schedule.WaterLevel.ToString();
+                }
+            }
+
+            return Json(blocks, JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }
