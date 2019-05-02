@@ -1,7 +1,7 @@
 ﻿var greenhouseID = "";
 
 function setGreenhouseID(id) {
-    stopLiveData();
+  //  stopLiveData();
     greenhouseID = id;   
 }
 
@@ -200,7 +200,7 @@ function stopLiveData() {
     $.ajax({
         type: "POST",
         url: "StopLiveData",
-        data: { greenhouseID: greenhouseID }, //insert id as parameter
+        data: { GreenhouseID: greenhouseID }, //insert id as parameter
         success: function (data) {
             document.getElementById("label").innerHTML =
                 "Live Data on Greenhouse with ID: " + " " + greenhouseid + " " + "succesfully stopped";
