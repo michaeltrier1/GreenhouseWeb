@@ -26,7 +26,7 @@ namespace GreenhouseWeb
 
         private void startServices()
         {
-            ServiceFacadeGetter.getInstance().initialiseServices();
+            ServiceFacadeGetter.getInstance();
         }
     }
 }

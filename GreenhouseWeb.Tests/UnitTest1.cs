@@ -3,19 +3,24 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GreenhouseWeb.Tests.Behavior
+namespace GreenhouseWeb.Tests
 {
     /// <summary>
-    /// Summary description for PetWatchDogTests
+    /// Summary description for UnitTest1
     /// </summary>
     [TestClass]
-    public class PetWatchDogTests
+    public class UnitTest1
     {
-        public PetWatchDogTests()
+
+        String message;
+
+        public UnitTest1()
         {
             //
             // TODO: Add constructor logic here
             //
+
+            //message = "constructor";
         }
 
         private TestContext testContextInstance;
@@ -58,34 +63,29 @@ namespace GreenhouseWeb.Tests.Behavior
         //
         #endregion
 
-        [TestMethod]
-        public void WatchdogIsPetted()
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
         {
-            //
-            // TODO: Add test logic here
-            //
 
-            // Arrange
-
-            // Act
-
-            // Assert
-            Assert.IsTrue(false);
         }
 
         [TestMethod]
-        public void WatchdogIsNotPetted()
+        public void TestMethod1()
         {
             //
             // TODO: Add test logic here
             //
 
-            // Arrange
+            this.message = "1";
+        }
 
-            // Act
-
-            // Assert
-            Assert.IsTrue(false);
+        [TestMethod]
+        public void TestMethod2()
+        {
+            //
+            // TODO: Add test logic here
+            //
+            this.message = "2";
         }
     }
 }

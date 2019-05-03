@@ -15,6 +15,7 @@ namespace GreenhouseWeb.Tests.Mock
     class ClientMock
     {
         private IPAddress ipAddress;
+        private int port;
         private TcpListener listener;
         private Thread listeningThread;
 
@@ -28,7 +29,8 @@ namespace GreenhouseWeb.Tests.Mock
         public ClientMock()
         {
             this.ipAddress = IPAddress.Parse("127.0.0.1"); //TODO set right ip
-            this.listener = new TcpListener(ipAddress, 8090);
+            this.port = 8070;
+            this.listener = new TcpListener(ipAddress, port);
             /// 
             /// this.servicesFacade = servicesFacade;
             /// this.activeHandlers = new Dictionary<string, SocketHandler>();
@@ -76,7 +78,7 @@ namespace GreenhouseWeb.Tests.Mock
                     catch (SocketException e) { break; }
                 }
             });
-
+            listeningThread.Name = "ClientMock";
             listeningThread.Start();
         }
 

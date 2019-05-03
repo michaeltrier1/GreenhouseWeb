@@ -20,6 +20,8 @@ namespace GreenhouseWeb.Services
             if (instance == null)
             {
                 instance = new ServiceFacadeGetter();
+
+                instance.initialiseServices();
             }
             return instance;
         }

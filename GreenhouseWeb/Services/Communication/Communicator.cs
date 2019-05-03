@@ -29,19 +29,22 @@ namespace GreenhouseWeb.Services.Communication
         {
             char c = ':';
             string[] ipAndPort = greenhouseConnectionInfo.Split(c);
-
-            using (TcpClient client = new TcpClient())
+            try
             {
-                client.Connect(ipAndPort[0], int.Parse(ipAndPort[1]));
-                NetworkStream stream = client.GetStream();
-                StreamWriter writer = new StreamWriter(stream);
+                using (TcpClient client = new TcpClient())
+                {
+                    client.Connect(ipAndPort[0], int.Parse(ipAndPort[1]));
+                    NetworkStream stream = client.GetStream();
+                    StreamWriter writer = new StreamWriter(stream);
 
-                writer.Write(message);
-                writer.Flush();
+                    String messageString = message.ToString(Newtonsoft.Json.Formatting.None);
+                    writer.WriteLine(messageString);
+                    writer.Flush();
 
-                writer.Close();
-                stream.Close();
-            }
+                    writer.Close();
+                    stream.Close();
+                }
+            } catch (Exception e) { Console.WriteLine("Sending exception"); };
         }
 
         public void getLiveData(string greenhouseConnectionInfo, JObject message)

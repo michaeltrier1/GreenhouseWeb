@@ -35,7 +35,8 @@ namespace GreenhouseWeb.Services.Communication
             return greenhouseIP + ":" + greenhousePort;
             */
 
-            return "127.0.0.1" + ":" + "8081";  //DUMMY CONNECTION
+            //return "127.0.0.1" + ":" + "8081";  //DUMMY CONNECTION
+            return "";  
         }
 
 

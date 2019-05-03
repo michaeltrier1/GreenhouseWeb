@@ -93,8 +93,11 @@ namespace GreenhouseWeb.Controllers
         [HttpPost]
         public JsonResult applySchedule(string rawSchedule, string greenhouseID)
         {
-            JObject schedule = new JObject(rawSchedule);
-            ServiceFacadeGetter.getInstance().getFacade().applySchedule(greenhouseID, schedule);
+            try
+            {
+                JObject schedule = JObject.Parse(rawSchedule);
+                ServiceFacadeGetter.getInstance().getFacade().applySchedule(greenhouseID, schedule);
+            } catch (JsonReaderException e) { }
 
             return Json(new { stuff = "success" }, JsonRequestBehavior.AllowGet);
         }
