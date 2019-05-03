@@ -2,6 +2,9 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GreenhouseWeb.Models;
+using GreenhouseWeb.Tests.Mock;
+using GreenhouseWeb.Controllers;
 
 namespace GreenhouseWeb.Tests.Behavior
 {
@@ -11,6 +14,10 @@ namespace GreenhouseWeb.Tests.Behavior
     [TestClass]
     public class SaveScheduleTests
     {
+
+        private static GreenhouseDBContext db;
+        private static string scheduleID;
+
         public SaveScheduleTests()
         {
             //
@@ -58,34 +65,88 @@ namespace GreenhouseWeb.Tests.Behavior
         //
         #endregion
 
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            db = new GreenhouseDBContext();
+            scheduleID = "UnitTestSchedule";
+        }
+
+        [TestCleanup()]
+        public void MyTestCleanup()
+        {
+            foreach (Schedule block in db.Schedules)
+            {
+                if (block.ScheduleID == scheduleID)
+                {
+                    db.Schedules.Remove(block);
+                }
+            }
+
+            db.SaveChanges();
+        }
+
+
         [TestMethod]
         public void ScheduleIsValid()
         {
-            //
-            // TODO: Add test logic here
-            //
-
             // Arrange
+            string schedule = this.GetValidSchedule();
+            HomeController controller = new HomeController();
 
             // Act
+            controller.saveSchedule(schedule, scheduleID);
 
             // Assert
-            Assert.IsTrue(false);
+            int blocks = 0;
+            foreach (Schedule block in db.Schedules)
+            {
+                if (block.ScheduleID == scheduleID)
+                {
+                    blocks++;
+                }
+            }
+
+            Assert.AreEqual(12, blocks);
         }
 
         [TestMethod]
         public void ScheduleIsInvalid()
         {
-            //
-            // TODO: Add test logic here
-            //
-
             // Arrange
+            string schedule = this.GetInvalidSchedule();
+            HomeController controller = new HomeController();
 
             // Act
+            controller.saveSchedule(schedule, scheduleID);
 
             // Assert
-            Assert.IsTrue(false);
+            int blocks = 0;
+            foreach (Schedule block in db.Schedules)
+            {
+                if (block.ScheduleID == scheduleID)
+                {
+                    blocks++;
+                }
+            }
+
+            Assert.AreEqual(0,blocks);
         }
+
+        private string GetValidSchedule()
+        {
+            string schedule = "{\"data\":[[\"00.00-02.00\",20,20,20,20,20],[\"02.00-04.00\",20,20,20,20,20],[\"04.00-06.00\",20,20,20,20,20],[\"06.00-08.00\",20,20,20,20,20],[\"08.00-10.00\",20,20,20,20,20],[\"10.00-12.00\",20,20,20,20,20],[\"12.00-14.00\",20,20,20,20,20],[\"14.00-16.00\",20,20,20,20,20],[\"16.00-18.00\",20,20,20,20,20],[\"18.00-20.00\",20,20,20,20,20],[\"20.00-22.00\",20,20,20,20,20],[\"22.00-24.00\",20,20,20,20,20]]}";
+            return schedule;
+        }
+
+        private string GetInvalidSchedule()
+        {
+            string schedule = "{\"data\":[[\"00.00-02.00\",20,20,a,20,20],[\"02.00-04.00\",20,20,20,20,20],[\"04.00-06.00\",20,20,20,20,20],[\"06.00-08.00\",20,20,20,20,20],[\"08.00-10.00\",20,20,20,20,20],[\"10.00-12.00\",20,20,20,20,20],[\"12.00-14.00\",20,20,20,20,20],[\"14.00-16.00\",20,20,20,20,20],[\"16.00-18.00\",20,20,20,20,20],[\"18.00-20.00\",20,20,20,20,20],[\"20.00-22.00\",20,20,20,20,20],[\"22.00-24.00\",20,20,20,20,20]]}";
+            return schedule;
+        }
+
+
+
+
     }
 }

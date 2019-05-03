@@ -90,7 +90,7 @@ namespace GreenhouseWeb.Tests.Behavior
 
         [TestInitialize()]
         public void MyTestInitialize() {
-            client = new ClientMock();
+            client = new ClientMock(greenhouse.IP, greenhouse.Port);
             client.ID = greenhouse.GreenhouseID;
             client.ListenForCommunication();
         }

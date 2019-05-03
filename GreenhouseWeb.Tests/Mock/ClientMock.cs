@@ -26,10 +26,10 @@ namespace GreenhouseWeb.Tests.Mock
         ///
         ///private Dictionary<string, SocketHandler> activeHandlers;
 
-        public ClientMock()
+        public ClientMock(String ip, int port)
         {
-            this.ipAddress = IPAddress.Parse("127.0.0.1"); //TODO set right ip
-            this.port = 8070;
+            this.ipAddress = IPAddress.Parse(ip); //TODO set right ip
+            this.port = port;
             this.listener = new TcpListener(ipAddress, port);
             /// 
             /// this.servicesFacade = servicesFacade;

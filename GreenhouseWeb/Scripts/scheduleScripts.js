@@ -107,7 +107,7 @@ function save() {
     } else if (scheduleName) { // save schedule
         var scheduleNAME = scheduleName.trim();
 
-        var schedule = JSON.stringify({ rawSchedule: table.getData() });
+        var schedule = JSON.stringify({ data: table.getData() });
         $.ajax({
             type: "POST",
             url: "saveSchedule",
