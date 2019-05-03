@@ -70,6 +70,16 @@ namespace GreenhouseWeb.Tests.Behavior
         {
             db = new GreenhouseDBContext();
             scheduleID = "UnitTestSchedule";
+
+            foreach (Schedule block in db.Schedules)
+            {
+                if (block.ScheduleID == scheduleID)
+                {
+                    db.Schedules.Remove(block);
+                }
+            }
+
+            db.SaveChanges();
         }
 
         [TestCleanup()]

@@ -2,6 +2,10 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GreenhouseWeb.Controllers;
+using GreenhouseWeb.Models;
+using Newtonsoft.Json.Linq;
+using System.Web.Mvc;
 
 namespace GreenhouseWeb.Tests.Behavior
 {
@@ -11,6 +15,15 @@ namespace GreenhouseWeb.Tests.Behavior
     [TestClass]
     public class LoadScheduleTests
     {
+        private static GreenhouseDBContext db;
+        private static string scheduleID;
+        private static string wrongScheduleID;
+        private static int blueLight;
+        private static int redLight;
+        private static int temperature;
+        private static int humidity;
+        private static int waterlevel;
+
         public LoadScheduleTests()
         {
             //
@@ -58,34 +71,168 @@ namespace GreenhouseWeb.Tests.Behavior
         //
         #endregion
 
+
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            db = new GreenhouseDBContext();
+            scheduleID = "UnitTestSchedule";
+            wrongScheduleID = "UnitTestSchedule1";
+
+            blueLight = 20;
+            redLight = 30;
+            temperature = 40;
+            humidity = 50;
+            waterlevel = 10;
+
+            for (int blockNumber = 1; blockNumber < 13; blockNumber++)
+            {
+                Schedule schedule = new Schedule();
+                schedule.ScheduleID = scheduleID;
+                schedule.Blocknumber = blockNumber;
+                schedule.BlueLight = blueLight;
+                schedule.RedLight = redLight;
+                schedule.InternalTemperature = temperature;
+                schedule.Humidity = humidity;
+                schedule.WaterLevel = waterlevel;
+
+                db.Schedules.Add(schedule);
+                db.SaveChanges();
+            }
+
+            foreach (Schedule block in db.Schedules)
+            {
+                if (block.ScheduleID == wrongScheduleID)
+                {
+                    db.Schedules.Remove(block);
+                }
+            }
+
+            db.SaveChanges();
+        }
+
+        [ClassCleanup()]
+        public static void MyClassCleanup()
+        {
+            foreach (Schedule block in db.Schedules)
+            {
+                if (block.ScheduleID == scheduleID)
+                {
+                    db.Schedules.Remove(block);
+                }
+            }
+
+            db.SaveChanges();
+        }
+
+        [TestCleanup()]
+        public void MyTestCleanup()
+        {
+
+        }
+
         [TestMethod]
         public void LoadSuccess()
         {
-            //
-            // TODO: Add test logic here
-            //
-
             // Arrange
+            JObject schedule = this.GetValidSchedule();
+            HomeController controller = new HomeController();
 
             // Act
+            JsonResult loadedSchedule = controller.loadSchedule(scheduleID);
+            string[,] data = (string[,])loadedSchedule.Data;
 
             // Assert
-            Assert.IsTrue(false);
+            int numberOfBlocks = data.GetLength(0);
+            bool schedulesAreEqual = true;
+            for (int i = 0; i < 12; i++)
+            {
+                if (!data[i, 0].Equals(blueLight+""))
+                {
+                    schedulesAreEqual = false;
+                    break;
+                }
+
+                if (!data[i, 1].Equals(redLight+""))
+                {
+                    schedulesAreEqual = false;
+                    break;
+                }
+
+                if (!data[i, 2].Equals(temperature+""))
+                {
+                    schedulesAreEqual = false;
+                    break;
+                }
+
+                if (!data[i, 3].Equals(humidity+""))
+                {
+                    schedulesAreEqual = false;
+                    break;
+                }
+
+                if (!data[i, 4].Equals(waterlevel+""))
+                {
+                    schedulesAreEqual = false;
+                    break;
+                }
+            }
+
+            Assert.AreEqual(12, numberOfBlocks);
+            Assert.IsTrue(schedulesAreEqual);
         }
 
         [TestMethod]
         public void LoadFail()
         {
-            //
-            // TODO: Add test logic here
-            //
-
             // Arrange
+            JObject schedule = this.GetInvalidSchedule();
+            HomeController controller = new HomeController();
 
             // Act
+            JsonResult loadedSchedule = controller.loadSchedule(wrongScheduleID);
+            string[,] data = (string[,])loadedSchedule.Data;
 
             // Assert
-            Assert.IsTrue(false);
+            bool schedulesAreNull = true;
+            for (int i = 0; i < 12; i++)
+            {
+                if (data[i, 0] != null)
+                {
+                    schedulesAreNull = false;
+                    break;
+                }
+
+                if (data[i, 1] != null)
+                {
+                    schedulesAreNull = false;
+                    break;
+                }
+
+                if (data[i, 2] != null)
+                {
+                    schedulesAreNull = false;
+                    break;
+                }
+
+                if (data[i, 3] != null)
+                {
+                    schedulesAreNull = false;
+                    break;
+                }
+
+                if (data[i, 4] != null)
+                {
+                    schedulesAreNull = false;
+                    break;
+                }
+            }
+
+            Assert.IsTrue(schedulesAreNull);
         }
+
+        private JObject GetInvalidSchedule() { return new JObject(); }
+
+        private JObject GetValidSchedule() { return new JObject(); }
     }
 }
