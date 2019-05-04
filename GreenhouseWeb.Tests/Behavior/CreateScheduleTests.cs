@@ -67,6 +67,15 @@ namespace GreenhouseWeb.Tests.Behavior
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext) {
             db = new GreenhouseDBContext();
+        }
+
+        [ClassCleanup()]
+        public static void MyClassCleanup() {
+
+        }
+
+        [TestInitialize()]
+        public void MyTestInitialize() {
 
             greenhouse = new Greenhouse();
             greenhouse.GreenhouseID = "UnitTesting";
@@ -76,16 +85,7 @@ namespace GreenhouseWeb.Tests.Behavior
 
             db.Greenhouses.Add(greenhouse);
             db.SaveChanges();
-        }
 
-        [ClassCleanup()]
-        public static void MyClassCleanup() {
-            db.Greenhouses.Remove(greenhouse);
-            db.SaveChanges();
-        }
-
-        [TestInitialize()]
-        public void MyTestInitialize() {
             client = new ClientMock(greenhouse.IP, greenhouse.Port);
             client.ID = greenhouse.GreenhouseID;
             client.ListenForCommunication();
@@ -93,6 +93,9 @@ namespace GreenhouseWeb.Tests.Behavior
 
         [TestCleanup()]
         public void MyTestCleanup() {
+            db.Greenhouses.Remove(greenhouse);
+            db.SaveChanges();
+
             client.Stop();
             client = null;
             ServiceFacadeGetter.getInstance().clear();
@@ -138,6 +141,16 @@ namespace GreenhouseWeb.Tests.Behavior
         {
             // Arrange
             string greenhouseID = client.ID+"1";
+
+            foreach (Greenhouse greenhouse in db.Greenhouses)
+            {
+                if (greenhouse.GreenhouseID == greenhouseID)
+                {
+                    db.Greenhouses.Remove(greenhouse);
+                }
+            }
+            db.SaveChanges();
+
             string schedule = this.GetValidSchedule();
             HomeController controller = new HomeController();
 

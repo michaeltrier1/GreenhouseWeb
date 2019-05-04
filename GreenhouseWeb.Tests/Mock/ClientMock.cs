@@ -14,12 +14,23 @@ namespace GreenhouseWeb.Tests.Mock
 {
     class ClientMock
     {
-        private IPAddress ipAddress;
-        private int port;
+        private IPAddress clientIpAddress;
+        private int clientPort;
+        private IPAddress serverIpAddress;
+        private int serverPort;
+
         private TcpListener listener;
         private Thread listeningThread;
+
         private Thread pettingThread;
         private bool petting;
+
+        private Thread liveDataThread;
+        public bool SendLiveData { get; set; }
+        string internalTemperature;
+        string externalTemperature;
+        string humidity;
+        string waterLevel;
 
         public string ID { get; set; }
         public bool ReceivedSchedule { get; set; }
@@ -27,9 +38,12 @@ namespace GreenhouseWeb.Tests.Mock
 
         public ClientMock(String ip, int port)
         {
-            this.ipAddress = IPAddress.Parse(ip);
-            this.port = port;
-            this.listener = new TcpListener(ipAddress, port);
+            this.clientIpAddress = IPAddress.Parse(ip);
+            this.clientPort = port;
+            this.listener = new TcpListener(clientIpAddress, port);
+
+            this.serverIpAddress = IPAddress.Parse("127.0.0.1");
+            this.serverPort = 8090;
 
             this.ID = "";
             this.ReceivedSchedule = false;
@@ -62,6 +76,11 @@ namespace GreenhouseWeb.Tests.Mock
                             case "retryConnection":
                                 RecievedRetryConnection = true;
                                 break;
+                            case "getLiveData":
+                                IPAddress iPAddress = IPAddress.Parse((string)jsonMessage.GetValue("IPAddress"));
+                                int port = (int)jsonMessage.GetValue("port");
+                                this.sendLiveDataContinually(iPAddress, port);
+                                break;
                             default:
                                 break;
                         }
@@ -75,25 +94,12 @@ namespace GreenhouseWeb.Tests.Mock
             listeningThread.Start();
         }
 
-        internal void Stop()
-        {
-            if (listener != null)
-            {
-                this.listener.Stop();
-            }
 
-            if (pettingThread != null)
-            {
-                petting = false;
-                pettingThread.Interrupt();
-            } 
-        }
-
-        internal void pet(string greenhouseID)
+        internal void pet()
         {
             TcpClient client = new TcpClient();
             
-            client.Connect("127.0.0.1", 8090);
+            client.Connect(serverIpAddress, serverPort);
             NetworkStream stream = client.GetStream();
             StreamWriter writer = new StreamWriter(stream);
 
@@ -109,15 +115,16 @@ namespace GreenhouseWeb.Tests.Mock
             stream.Close();  
         }
 
-        internal void petContinually(string greenhouseID)
+        internal void petContinually()
         {
             pettingThread = new Thread(() =>
             {
                 TcpClient client = new TcpClient();
 
-                client.Connect("127.0.0.1", 8090);
+                client.Connect(serverIpAddress, serverPort);
                 NetworkStream stream = client.GetStream();
                 StreamWriter writer = new StreamWriter(stream);
+                petting = true;
 
                 while (petting)
                 {
@@ -138,6 +145,70 @@ namespace GreenhouseWeb.Tests.Mock
             pettingThread.Name = "Petting Thread";
             pettingThread.Start();
         }
+
+        internal void sendLiveDataContinually(IPAddress iPAddress, int port)
+        {
+            liveDataThread = new Thread(() =>
+            {
+                TcpClient client = new TcpClient();
+
+                client.Connect(iPAddress, port);
+                NetworkStream stream = client.GetStream();
+                StreamWriter writer = new StreamWriter(stream);
+                SendLiveData = true;
+
+                while (SendLiveData)
+                {
+                    JObject message = new JObject();
+                    message.Add("procedure", "live data");
+                    message.Add("greenhouseID", ID);
+                    message.Add("internal temperature", internalTemperature);
+                    message.Add("external temperature", externalTemperature);
+                    message.Add("humidity", humidity);
+                    message.Add("water level", waterLevel);
+
+                    String messageString = message.ToString(Newtonsoft.Json.Formatting.None);
+                    writer.WriteLine(messageString);
+                    writer.Flush();
+
+                    Thread.Sleep(1000);
+                }
+
+                writer.Close();
+                stream.Close();
+            });
+            liveDataThread.Name = "Live Data Thread";
+            liveDataThread.Start();
+        }
+
+        internal void setMeasurements(string internalTemperature, string externalTemperature, string humidity, string waterLevel)
+        {
+            this.internalTemperature = internalTemperature;
+            this.externalTemperature = externalTemperature;
+            this.humidity = humidity;
+            this.waterLevel = waterLevel;
+        }
+
+        internal void Stop()
+        {
+            if (listener != null)
+            {
+                this.listener.Stop();
+            }
+
+            if (pettingThread != null)
+            {
+                petting = false;
+                pettingThread.Interrupt();
+            }
+
+            if (liveDataThread != null)
+            {
+                SendLiveData = false;
+                liveDataThread.Interrupt();
+            }
+        }
+
     }
 
     

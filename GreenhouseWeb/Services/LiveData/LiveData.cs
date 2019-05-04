@@ -31,13 +31,20 @@ namespace GreenhouseWeb.Services
             }
             else
             {
-                return new Measurements(0, 0, 0, 0);
+                return new Measurements(null, null, null, null);
             }
         }
 
         public void setMeasurements(string greenhouseID, IMeasurement measurements)
         {
-            this.liveData.Add(greenhouseID, measurements);
+            if (liveData.ContainsKey(greenhouseID))
+            {
+                this.liveData[greenhouseID] = measurements;
+            }
+            else
+            {
+                this.liveData.Add(greenhouseID, measurements);
+            }
         }
 
 

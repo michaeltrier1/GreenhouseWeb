@@ -60,10 +60,10 @@ namespace GreenhouseWeb.Services.Incoming
                             break;
                         case "Datalog":
                             this.datalog(interpretedMessage);
-                            response = new JObject("{}");
+                            response = new JObject();
                             break;
                         default:
-                            response = new JObject("{}");
+                            response = new JObject();
                             break;
                     }
 
@@ -71,6 +71,8 @@ namespace GreenhouseWeb.Services.Incoming
                     writer.Flush();
                 }
                 catch (IOException e) { this.stopped = true; }
+                catch (SocketException e) { this.stopped = true; }
+
             }
 
             if (registered)
@@ -117,14 +119,12 @@ namespace GreenhouseWeb.Services.Incoming
 
             if (!registered)
             {
-                this.incomingCommunicator.registerSocketHandler(registerID, this);
                 registered = true;
                 registerID = greenHouseID;
+                this.incomingCommunicator.registerSocketHandler(registerID, this);
             }
 
-            
-
-            return new JObject("{ }");
+            return new JObject();
         }
 
         private JObject startup(JObject interpretedMessage, string ip)
