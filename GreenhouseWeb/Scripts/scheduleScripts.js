@@ -202,7 +202,6 @@ function loadSchedule(id) {
 
                         validator: 'waterlevel1'
                     },
-
                 ],
             });
             
@@ -210,8 +209,6 @@ function loadSchedule(id) {
         
             console.log(recreatedSchedule);
         }
-
-
     });
 }
 
@@ -232,12 +229,8 @@ function load() {
                 console.log(div);
                 div.innerHTML = id;
                 document.getElementById("listview").appendChild(div);
-
             }
-
         }
-
-
     });
     document.getElementById("label").innerHTML =
         "Schedule" + " " + name + " " + "succesfully loaded";

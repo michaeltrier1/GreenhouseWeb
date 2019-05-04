@@ -37,5 +37,12 @@ namespace GreenhouseWeb.Services
             return facade;
         }
 
+        public void clear()
+        {
+            instance = null;
+            facade.clear();
+            facade = null;
+        }
+
     }
 }

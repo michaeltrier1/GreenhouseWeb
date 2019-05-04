@@ -2,6 +2,10 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using GreenhouseWeb.Models;
+using GreenhouseWeb.Tests.Mock;
+using GreenhouseWeb.Services;
+using System.Threading;
 
 namespace GreenhouseWeb.Tests.Behavior
 {
@@ -11,11 +15,13 @@ namespace GreenhouseWeb.Tests.Behavior
     [TestClass]
     public class PetWatchDogTests
     {
+
+        private static GreenhouseDBContext db;
+        private static Greenhouse greenhouse;
+        private ClientMock client;
+
         public PetWatchDogTests()
         {
-            //
-            // TODO: Add constructor logic here
-            //
         }
 
         private TestContext testContextInstance;
@@ -58,34 +64,76 @@ namespace GreenhouseWeb.Tests.Behavior
         //
         #endregion
 
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
+        {
+            db = new GreenhouseDBContext();
+
+            greenhouse = new Greenhouse();
+            greenhouse.GreenhouseID = "UnitTesting";
+            greenhouse.IP = "127.0.0.1";
+            greenhouse.Password = "password";
+            greenhouse.Port = 8070;
+
+            db.Greenhouses.Add(greenhouse);
+            db.SaveChanges();
+        }
+
+        [ClassCleanup()]
+        public static void MyClassCleanup()
+        {
+            db.Greenhouses.Remove(greenhouse);
+            db.SaveChanges();
+        }
+
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            client = new ClientMock(greenhouse.IP, greenhouse.Port);
+            client.ID = greenhouse.GreenhouseID;
+            client.ListenForCommunication();
+
+            ServiceFacadeGetter.getInstance();
+        }
+
+        [TestCleanup()]
+        public void MyTestCleanup()
+        {
+            client.Stop();
+            client = null;
+            ServiceFacadeGetter.getInstance().clear();
+        }
+
+
         [TestMethod]
         public void WatchdogIsPetted()
         {
-            //
-            // TODO: Add test logic here
-            //
-
             // Arrange
+            string greenhouseID = client.ID;
+            client.pet(greenhouseID);
 
             // Act
+            client.petContinually(greenhouseID);
+            Thread.Sleep(5000);
 
             // Assert
-            Assert.IsTrue(false);
+            bool receivedRetry = client.RecievedRetryConnection;
+            Assert.IsFalse(receivedRetry);
         }
 
         [TestMethod]
         public void WatchdogIsNotPetted()
         {
-            //
-            // TODO: Add test logic here
-            //
-
             // Arrange
+            string greenhouseID = client.ID;
+            client.pet(greenhouseID);
 
             // Act
+            Thread.Sleep(5000);
 
             // Assert
-            Assert.IsTrue(false);
+            bool receivedRetry = client.RecievedRetryConnection;
+            Assert.IsTrue(receivedRetry);
         }
     }
 }

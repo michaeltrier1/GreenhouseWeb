@@ -22,7 +22,7 @@ namespace GreenhouseWeb.Services.Communication
                 }
             }
             
-            //TODO
+
             /*
             string databaseConnectionString = "";//TODO databaseconnection string
             SqlConnection databaseConnection = new SqlConnection(databaseConnectionString);

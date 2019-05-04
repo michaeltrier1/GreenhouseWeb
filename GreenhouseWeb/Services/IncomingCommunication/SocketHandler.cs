@@ -37,35 +37,40 @@ namespace GreenhouseWeb.Services.Incoming
 
             while (!reader.EndOfStream && !stopped )
             {
-                string message = reader.ReadLine();
-                JObject interpretedMessage = this.interpreter.interpret(message);
-                JObject response;
-
-                switch ((string)interpretedMessage.GetValue("procedure"))
+                try
                 {
-                    case "petWatchdog":
-                        response = this.pet(interpretedMessage);
-                        break;
-                    case "Startup":
-                        response = this.startup(interpretedMessage, ip);
-                        break;
-                    case "live data":
-                        response = this.live(interpretedMessage);
-                        break;
-                    case "IPAddress":
-                        response = this.IP(interpretedMessage, ip);
-                        break;
-                    case "Datalog":
-                        this.datalog(interpretedMessage);
-                        response = new JObject("{}");
-                        break;
-                    default:
-                        response = new JObject("{}");
-                        break;
-                }
+                    string message = reader.ReadLine();
 
-                writer.WriteLine(response.ToString());
-                writer.Flush();
+                    JObject interpretedMessage = this.interpreter.interpret(message);
+                    JObject response;
+
+                    switch ((string)interpretedMessage.GetValue("procedure"))
+                    {
+                        case "petWatchdog":
+                            response = this.pet(interpretedMessage);
+                            break;
+                        case "Startup":
+                            response = this.startup(interpretedMessage, ip);
+                            break;
+                        case "live data":
+                            response = this.live(interpretedMessage);
+                            break;
+                        case "IPAddress":
+                            response = this.IP(interpretedMessage, ip);
+                            break;
+                        case "Datalog":
+                            this.datalog(interpretedMessage);
+                            response = new JObject("{}");
+                            break;
+                        default:
+                            response = new JObject("{}");
+                            break;
+                    }
+
+                    writer.WriteLine(response.ToString());
+                    writer.Flush();
+                }
+                catch (IOException e) { this.stopped = true; }
             }
 
             if (registered)
@@ -77,6 +82,7 @@ namespace GreenhouseWeb.Services.Incoming
         public void stop()
         {
             this.stopped = true;
+            client.Close();
         }
 
         private JObject pet(JObject interpretedMessage)

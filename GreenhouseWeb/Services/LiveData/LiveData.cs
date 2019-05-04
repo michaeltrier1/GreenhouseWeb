@@ -26,10 +26,7 @@ namespace GreenhouseWeb.Services
                 if (!this.liveData.ContainsKey(greenhouseID)) {
                     this.liveData.Add(greenhouseID, new Measurements(null, null, null, null));
                     servicesFacade.startLiveDataStream(greenhouseID);
-                
-
-            }
-
+                }
                 return this.liveData[greenhouseID];
             }
             else

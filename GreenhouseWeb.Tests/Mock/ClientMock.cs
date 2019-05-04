@@ -18,22 +18,18 @@ namespace GreenhouseWeb.Tests.Mock
         private int port;
         private TcpListener listener;
         private Thread listeningThread;
+        private Thread pettingThread;
+        private bool petting;
 
         public string ID { get; set; }
         public bool ReceivedSchedule { get; set; }
-
-
-        ///
-        ///private Dictionary<string, SocketHandler> activeHandlers;
+        public bool RecievedRetryConnection { get; set; }
 
         public ClientMock(String ip, int port)
         {
-            this.ipAddress = IPAddress.Parse(ip); //TODO set right ip
+            this.ipAddress = IPAddress.Parse(ip);
             this.port = port;
             this.listener = new TcpListener(ipAddress, port);
-            /// 
-            /// this.servicesFacade = servicesFacade;
-            /// this.activeHandlers = new Dictionary<string, SocketHandler>();
 
             this.ID = "";
             this.ReceivedSchedule = false;
@@ -50,8 +46,6 @@ namespace GreenhouseWeb.Tests.Mock
 
                         TcpClient client = listener.AcceptTcpClient();
 
-                        //SocketHandler socketHandler = new SocketHandler(client, this);
-
                         NetworkStream stream = client.GetStream();
                         StreamReader reader = new StreamReader(stream);
                         StreamWriter writer = new StreamWriter(stream);
@@ -65,13 +59,12 @@ namespace GreenhouseWeb.Tests.Mock
                             case "applySchedule":
                                 ReceivedSchedule = true;
                                 break;
+                            case "retryConnection":
+                                RecievedRetryConnection = true;
+                                break;
                             default:
                                 break;
                         }
-
-                        /// handler
-                        ///Thread thread = new Thread(new ThreadStart(socketHandler.handleSocket));
-                        ///thread.Start();
                     }
                     catch (IOException e) { Console.Write(e.StackTrace); }
                     catch (InvalidOperationException e) { break; }
@@ -84,7 +77,66 @@ namespace GreenhouseWeb.Tests.Mock
 
         internal void Stop()
         {
-            this.listener.Stop();
+            if (listener != null)
+            {
+                this.listener.Stop();
+            }
+
+            if (pettingThread != null)
+            {
+                petting = false;
+                pettingThread.Interrupt();
+            } 
+        }
+
+        internal void pet(string greenhouseID)
+        {
+            TcpClient client = new TcpClient();
+            
+            client.Connect("127.0.0.1", 8090);
+            NetworkStream stream = client.GetStream();
+            StreamWriter writer = new StreamWriter(stream);
+
+            JObject message = new JObject();
+            message.Add("procedure", "petWatchdog");
+            message.Add("greenhouseID", ID);
+
+            String messageString = message.ToString(Newtonsoft.Json.Formatting.None);
+            writer.WriteLine(messageString);
+            writer.Flush();
+
+            writer.Close();
+            stream.Close();  
+        }
+
+        internal void petContinually(string greenhouseID)
+        {
+            pettingThread = new Thread(() =>
+            {
+                TcpClient client = new TcpClient();
+
+                client.Connect("127.0.0.1", 8090);
+                NetworkStream stream = client.GetStream();
+                StreamWriter writer = new StreamWriter(stream);
+
+                while (petting)
+                {
+                    JObject message = new JObject();
+                    message.Add("procedure", "petWatchdog");
+                    message.Add("greenhouseID", ID);
+
+                    String messageString = message.ToString(Newtonsoft.Json.Formatting.None);
+                    writer.WriteLine(messageString);
+                    writer.Flush();
+
+                    Thread.Sleep(1000);
+                }
+
+                writer.Close();
+                stream.Close();
+            });
+            pettingThread.Name = "Petting Thread";
+            pettingThread.Start();
         }
     }
 

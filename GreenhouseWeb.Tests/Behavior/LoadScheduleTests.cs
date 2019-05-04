@@ -6,6 +6,7 @@ using GreenhouseWeb.Controllers;
 using GreenhouseWeb.Models;
 using Newtonsoft.Json.Linq;
 using System.Web.Mvc;
+using GreenhouseWeb.Services;
 
 namespace GreenhouseWeb.Tests.Behavior
 {
@@ -123,6 +124,8 @@ namespace GreenhouseWeb.Tests.Behavior
             }
 
             db.SaveChanges();
+
+            ServiceFacadeGetter.getInstance().clear();
         }
 
         [TestCleanup()]

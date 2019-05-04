@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GreenhouseWeb.Models;
 using GreenhouseWeb.Tests.Mock;
 using GreenhouseWeb.Controllers;
+using GreenhouseWeb.Services;
 
 namespace GreenhouseWeb.Tests.Behavior
 {
@@ -94,6 +95,8 @@ namespace GreenhouseWeb.Tests.Behavior
             }
 
             db.SaveChanges();
+
+            ServiceFacadeGetter.getInstance().clear();
         }
 
 

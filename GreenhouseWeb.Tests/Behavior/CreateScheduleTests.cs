@@ -6,6 +6,7 @@ using GreenhouseWeb.Tests.Mock;
 using GreenhouseWeb.Controllers;
 using System.Web.Mvc;
 using GreenhouseWeb.Models;
+using GreenhouseWeb.Services;
 
 namespace GreenhouseWeb.Tests.Behavior
 {
@@ -20,12 +21,7 @@ namespace GreenhouseWeb.Tests.Behavior
         private static Greenhouse greenhouse;
         private ClientMock client;
 
-        public CreateScheduleTests()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
+        public CreateScheduleTests() { }
 
         private TestContext testContextInstance;
 
@@ -99,6 +95,7 @@ namespace GreenhouseWeb.Tests.Behavior
         public void MyTestCleanup() {
             client.Stop();
             client = null;
+            ServiceFacadeGetter.getInstance().clear();
         }
 
 

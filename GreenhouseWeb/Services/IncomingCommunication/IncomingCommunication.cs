@@ -32,7 +32,8 @@ namespace GreenhouseWeb.Services.Incoming
 
         public void listenForConnections()
         {
-            while (true)
+            bool stopped = false;
+            while (!stopped)
             {
                 try
                 {
@@ -44,10 +45,8 @@ namespace GreenhouseWeb.Services.Incoming
                     Thread thread = new Thread(new ThreadStart(socketHandler.handleSocket));
                     thread.Start();
                 }
-                catch (IOException e)
-                {
-                    Console.Write(e.StackTrace);
-                }
+                catch (IOException e) { Console.Write(e.StackTrace); }
+                catch (SocketException e) { stopped = true; }
             }
         }
 
@@ -116,10 +115,9 @@ namespace GreenhouseWeb.Services.Incoming
 
         internal JObject fetchSchedule(string greenHouseID)
         {
-
-            return new JObject();
+            return new JObject(); 
+            // TODO: 
         }
-
 
         public void datalog(string greenHouseID, long timeofreading, Nullable<double> internalTemperature, Nullable<double> externalTemperature, Nullable<double> humidity, Nullable<double> waterlevel)
         {
@@ -139,6 +137,14 @@ namespace GreenhouseWeb.Services.Incoming
 
         }
 
+        internal void clear()
+        {
+            listener.Stop();
+            foreach (SocketHandler handler in activeHandlers.Values)
+            {
+                handler.stop();
+            }
+        }
 
     }
 }

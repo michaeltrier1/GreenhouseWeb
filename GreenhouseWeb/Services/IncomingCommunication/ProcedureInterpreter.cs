@@ -30,7 +30,7 @@ namespace GreenhouseWeb.Services.Incoming
                     interpretedMessage.Add("procedure", procedure);
                     break;
                 case "petWatchdog":
-                    greenHouseID = (string)jsonMessage.GetValue("id");
+                    greenHouseID = (string)jsonMessage.GetValue("greenhouseID");
 
                     interpretedMessage.Add("id", greenHouseID);
                     interpretedMessage.Add("procedure", procedure);

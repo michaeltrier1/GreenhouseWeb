@@ -13,7 +13,7 @@ namespace GreenhouseWeb.Services.Communication
 
         public void SendRetryConnection(string greenhouseConnectionInfo)
         {
-            JObject jsonObject = new JObject("{}");
+            JObject jsonObject = new JObject();
             jsonObject.Add("procedure", "retryConnection");
 
             this.send(greenhouseConnectionInfo, jsonObject);
