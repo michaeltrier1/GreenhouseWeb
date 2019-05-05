@@ -68,11 +68,11 @@ namespace GreenhouseWeb.Services.Incoming
                     //waterLevel = Double.Parse((string)jsonMessage.GetValue("water level"));
 
 
-                    string timeOfReading = jsonMessage.GetValue("time of reading").ToString();
-                    string internalTemperature2 = jsonMessage.GetValue("internal temperature").ToString();
-                    string externalTemperature2 = jsonMessage.GetValue("external temperature").ToString();
-                    string humidity2 = jsonMessage.GetValue("humidity").ToString();
-                    string waterLevel2 = jsonMessage.GetValue("water level").ToString();
+                    //Nullable<double> timeOfReading = (Nullable<double>)jsonMessage.GetValue("time of reading");
+                    Nullable<double> internalTemperature2 = (Nullable<double>)jsonMessage.GetValue("internal temperature");
+                    Nullable<double> externalTemperature2 = (Nullable<double>)jsonMessage.GetValue("external temperature");
+                    Nullable<double> humidity2 = (Nullable<double>)jsonMessage.GetValue("humidity");
+                    Nullable<double> waterLevel2 = (Nullable<double>)jsonMessage.GetValue("water level");
 
                     interpretedMessage.Add("id", greenHouseID);
                     interpretedMessage.Add("internal temperature", internalTemperature2);

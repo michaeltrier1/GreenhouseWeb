@@ -67,8 +67,7 @@ namespace GreenhouseWeb.Services.Incoming
 
         internal void stopLiveData(string greenhouseID)
         {
-            if (greenhouseID == "") { }
-            else
+            if (activeHandlers.ContainsKey(greenhouseID))
             {
                 this.activeHandlers[greenhouseID].stop();
             }

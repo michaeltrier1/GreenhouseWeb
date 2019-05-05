@@ -32,6 +32,8 @@ namespace GreenhouseWeb.Tests.Mock
         string humidity;
         string waterLevel;
 
+        private bool sentNewLiveData;
+
         public string ID { get; set; }
         public bool ReceivedSchedule { get; set; }
         public bool RecievedRetryConnection { get; set; }
@@ -47,7 +49,10 @@ namespace GreenhouseWeb.Tests.Mock
 
             this.ID = "";
             this.ReceivedSchedule = false;
-        }
+            RecievedRetryConnection = false;
+
+            sentNewLiveData = false;
+    }
 
         public void ListenForCommunication()
         {
@@ -93,7 +98,6 @@ namespace GreenhouseWeb.Tests.Mock
             listeningThread.Name = "ClientMock";
             listeningThread.Start();
         }
-
 
         internal void pet()
         {
@@ -171,6 +175,7 @@ namespace GreenhouseWeb.Tests.Mock
                     writer.WriteLine(messageString);
                     writer.Flush();
 
+                    sentNewLiveData = true;
                     Thread.Sleep(1000);
                 }
 
@@ -207,6 +212,13 @@ namespace GreenhouseWeb.Tests.Mock
                 SendLiveData = false;
                 liveDataThread.Interrupt();
             }
+        }
+
+        internal bool isSentNewLiveData()
+        {
+            bool newData = this.sentNewLiveData;
+            this.sentNewLiveData = false;
+            return newData;
         }
 
     }

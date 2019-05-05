@@ -103,9 +103,6 @@ namespace GreenhouseWeb.Tests.Behavior
             ServiceFacadeGetter.getInstance().clear();
         }
 
-
-
-
         [TestMethod]
         public void GreenhouseIsActive()
         {
