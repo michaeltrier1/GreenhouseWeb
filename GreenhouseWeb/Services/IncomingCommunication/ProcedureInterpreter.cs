@@ -60,7 +60,6 @@ namespace GreenhouseWeb.Services.Incoming
                     break;
                 case "Datalog":
                     greenHouseID = jsonMessage.GetValue("greenhouseID").ToString();
-                    //long timeOfReading = (long)jsonMessage.GetValue("time of Reading");
 
                     string timeOfReadingString = (string)jsonMessage.GetValue("time of Reading");
                     DateTime timeOfReading = DateTime.Parse(timeOfReadingString, System.Globalization.CultureInfo.InvariantCulture);
@@ -80,7 +79,6 @@ namespace GreenhouseWeb.Services.Incoming
                 default:
                     break;
             }
-
 
             return interpretedMessage;
         }

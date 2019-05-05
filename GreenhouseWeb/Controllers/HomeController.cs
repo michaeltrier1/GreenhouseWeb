@@ -88,7 +88,6 @@ namespace GreenhouseWeb.Controllers
             return Json(new { stuff = "success" }, JsonRequestBehavior.AllowGet);
        } 
                   
-
         [HttpPost]
         public JsonResult applySchedule(string rawSchedule, string greenhouseID)
         {

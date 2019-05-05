@@ -75,7 +75,6 @@ namespace GreenhouseWeb.Tests.Behavior
         [ClassCleanup()]
         public static void MyClassCleanup()
         {
-
         }
 
         [TestInitialize()]
@@ -136,18 +135,14 @@ namespace GreenhouseWeb.Tests.Behavior
             ServiceFacadeGetter.getInstance().clear();
         }
 
-
-
-
         [TestMethod]
         public void DataIsValid()
         {
             // Arrange
             string greenhouseID = client.ID;
-
             String dateString = datalog.TimeOfReading.ToString("r", DateTimeFormatInfo.InvariantInfo);
-            //   Sun May 05 14:00:21 CEST 2019
-            //r :Thu, 17 Aug 2000 23:32:32 GMT
+
+            // Act
             client.uploadDataContinually(dateString, datalog.InternalTemperature.ToString(), datalog.ExternalTemperature, datalog.Humidity, datalog.Waterlevel);
             Thread.Sleep(5000);
 
@@ -170,16 +165,10 @@ namespace GreenhouseWeb.Tests.Behavior
         {
             // Arrange
             string greenhouseID = client.ID;
-
-            datalog = new Datalog();
-            datalog.Greenhouse_ID = greenhouse.GreenhouseID;
-            datalog.TimeOfReading = new DateTime();
-            datalog.ExternalTemperature = 20;
-            datalog.Humidity = 20;
-            datalog.Waterlevel = 20;
+            String dateString = datalog.TimeOfReading.ToString("r", DateTimeFormatInfo.InvariantInfo);
 
             // Act
-            client.uploadDataContinually("", "a", datalog.ExternalTemperature, datalog.Humidity, datalog.Waterlevel);
+            client.uploadDataContinually(dateString, "a", datalog.ExternalTemperature, datalog.Humidity, datalog.Waterlevel);
             Thread.Sleep(5000);
 
             // Assert

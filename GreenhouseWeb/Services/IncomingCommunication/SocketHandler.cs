@@ -33,8 +33,6 @@ namespace GreenhouseWeb.Services.Incoming
 
             string ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
 
-           
-
             while (!reader.EndOfStream && !stopped )
             {
                 try
@@ -67,7 +65,8 @@ namespace GreenhouseWeb.Services.Incoming
                             break;
                     }
 
-                    writer.WriteLine(response.ToString());
+                    string responseString = response.ToString(Newtonsoft.Json.Formatting.None);
+                    writer.WriteLine(responseString);
                     writer.Flush();
                 }
                 catch (IOException e) { this.stopped = true; }
@@ -101,7 +100,7 @@ namespace GreenhouseWeb.Services.Incoming
             string port = (string)interpretedMessage.GetValue("port");
             incomingCommunicator.setIPAddress(greenHouseID, ip, port);
 
-            return new JObject("{ }");
+            return new JObject();
         }
 
         private JObject live(JObject interpretedMessage)

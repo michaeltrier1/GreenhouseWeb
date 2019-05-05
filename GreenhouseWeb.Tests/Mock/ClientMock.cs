@@ -239,6 +239,55 @@ namespace GreenhouseWeb.Tests.Mock
             return newData;
         }
 
+        internal void sendIPAddress(int newPort)
+        {
+            TcpClient client = new TcpClient();
+
+            client.Connect(serverIpAddress, serverPort);
+            NetworkStream stream = client.GetStream();
+            StreamWriter writer = new StreamWriter(stream);
+
+            JObject message = new JObject();
+            message.Add("procedure", "IPAddress");
+            message.Add("greenhouseID", ID);
+            message.Add("port", newPort);
+
+            String messageString = message.ToString(Newtonsoft.Json.Formatting.None);
+            writer.WriteLine(messageString);
+            writer.Flush();
+
+            writer.Close();
+            stream.Close();
+        }
+
+        internal JObject sendStartupMessage(int newPort)
+        {
+            TcpClient client = new TcpClient();
+
+            client.Connect(serverIpAddress, serverPort);
+            NetworkStream stream = client.GetStream();
+            StreamWriter writer = new StreamWriter(stream);
+            StreamReader reader = new StreamReader(stream);
+
+            JObject message = new JObject();
+            message.Add("procedure", "Startup");
+            message.Add("greenhouseID", ID);
+            message.Add("port", newPort);
+
+            String messageString = message.ToString(Newtonsoft.Json.Formatting.None);
+            writer.WriteLine(messageString);
+            writer.Flush();
+
+            String response = reader.ReadLine();
+            JObject responseJSON = JObject.Parse(response);
+
+            writer.Close();
+            reader.Close();
+            stream.Close();
+
+            return responseJSON;
+        }
+
         internal void Stop()
         {
             if (listener != null)
@@ -258,7 +307,7 @@ namespace GreenhouseWeb.Tests.Mock
                 liveDataThread.Interrupt();
             }
 
-            if (liveDataThread != null)
+            if (uploadDataThread != null)
             {
                 uploadLiveData = false;
                 uploadDataThread.Interrupt();
