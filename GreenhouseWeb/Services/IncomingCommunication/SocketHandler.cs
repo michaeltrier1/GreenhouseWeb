@@ -141,16 +141,14 @@ namespace GreenhouseWeb.Services.Incoming
         private void datalog(JObject interpretedMessage)
         {
             string greenHouseID = (string)interpretedMessage.GetValue("id");
-            long timeOfReading = long.Parse((string)interpretedMessage.GetValue("time of reading"));
+            DateTime timeOfReading = (DateTime)interpretedMessage.GetValue("time of reading");
 
-            Nullable<double> internalTemperature = Double.Parse((string)interpretedMessage.GetValue("internal temperature"));
-            Nullable<double> externalTemperature = Double.Parse((string)interpretedMessage.GetValue("external temperature"));
-            Nullable<double> humidity = Double.Parse((string)interpretedMessage.GetValue("humidity"));
-            Nullable<double> waterLevel = Double.Parse((string)interpretedMessage.GetValue("water level"));
-
+            Nullable<double> internalTemperature = (Nullable<double>)interpretedMessage.GetValue("internal temperature");
+            Nullable<double> externalTemperature = (Nullable<double>)interpretedMessage.GetValue("external temperature");
+            Nullable<double> humidity = (Nullable<double>)interpretedMessage.GetValue("humidity");
+            Nullable<double> waterLevel = (Nullable<double>)interpretedMessage.GetValue("water level");
 
             incomingCommunicator.datalog(greenHouseID, timeOfReading, internalTemperature, externalTemperature, humidity, waterLevel);
-
         }
     }
     

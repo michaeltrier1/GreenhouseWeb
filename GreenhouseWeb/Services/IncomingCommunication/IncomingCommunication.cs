@@ -11,6 +11,7 @@ using GreenhouseWeb.Services.Interfaces;
 using Newtonsoft.Json.Linq;
 using GreenhouseWeb.Models;
 using System.Data.Entity;
+using System.Data.SqlTypes;
 
 namespace GreenhouseWeb.Services.Incoming
 {
@@ -118,13 +119,13 @@ namespace GreenhouseWeb.Services.Incoming
             // TODO: 
         }
 
-        public void datalog(string greenHouseID, long timeofreading, Nullable<double> internalTemperature, Nullable<double> externalTemperature, Nullable<double> humidity, Nullable<double> waterlevel)
+        public void datalog(string greenHouseID, DateTime timeofreading, Nullable<double> internalTemperature, Nullable<double> externalTemperature, Nullable<double> humidity, Nullable<double> waterlevel)
         {
             GreenhouseDBContext db = new GreenhouseDBContext();
             Datalog datalog = new Datalog();
 
             datalog.Greenhouse_ID = greenHouseID;
-            datalog.TimeOfReading = new DateTime(timeofreading);
+            datalog.TimeOfReading = timeofreading;
             datalog.InternalTemperature = (float)internalTemperature;
             datalog.ExternalTemperature = (float)externalTemperature;
             datalog.Humidity = (float)humidity;

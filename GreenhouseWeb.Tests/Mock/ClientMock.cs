@@ -27,12 +27,14 @@ namespace GreenhouseWeb.Tests.Mock
 
         private Thread liveDataThread;
         public bool SendLiveData { get; set; }
+        private bool sentNewLiveData;
         string internalTemperature;
         string externalTemperature;
         string humidity;
         string waterLevel;
 
-        private bool sentNewLiveData;
+        private Thread uploadDataThread;
+        private bool uploadLiveData;
 
         public string ID { get; set; }
         public bool ReceivedSchedule { get; set; }
@@ -150,6 +152,42 @@ namespace GreenhouseWeb.Tests.Mock
             pettingThread.Start();
         }
 
+        internal void uploadDataContinually(string timeOfReading, string internalTemperature, float externalTemperature, float humidity, float waterlevel)
+        {
+            uploadDataThread = new Thread(() =>
+            {
+                TcpClient client = new TcpClient();
+
+                client.Connect(serverIpAddress, serverPort);
+                NetworkStream stream = client.GetStream();
+                StreamWriter writer = new StreamWriter(stream);
+                uploadLiveData = true;
+
+                while (uploadLiveData)
+                {
+                    JObject message = new JObject();
+                    message.Add("procedure", "Datalog");
+                    message.Add("greenhouseID", ID);
+                    message.Add("time of Reading", timeOfReading);
+                    message.Add("internal temperature", internalTemperature);
+                    message.Add("external temperature", externalTemperature);
+                    message.Add("humidity", humidity);
+                    message.Add("waterlevel", waterlevel);
+
+                    String messageString = message.ToString(Newtonsoft.Json.Formatting.None);
+                    writer.WriteLine(messageString);
+                    writer.Flush();
+
+                    Thread.Sleep(1000);
+                }
+
+                writer.Close();
+                stream.Close();
+            });
+            uploadDataThread.Name = "Live Data Thread";
+            uploadDataThread.Start();
+        }
+
         internal void sendLiveDataContinually(IPAddress iPAddress, int port)
         {
             liveDataThread = new Thread(() =>
@@ -194,6 +232,13 @@ namespace GreenhouseWeb.Tests.Mock
             this.waterLevel = waterLevel;
         }
 
+        internal bool isSentNewLiveData()
+        {
+            bool newData = this.sentNewLiveData;
+            this.sentNewLiveData = false;
+            return newData;
+        }
+
         internal void Stop()
         {
             if (listener != null)
@@ -212,14 +257,14 @@ namespace GreenhouseWeb.Tests.Mock
                 SendLiveData = false;
                 liveDataThread.Interrupt();
             }
+
+            if (liveDataThread != null)
+            {
+                uploadLiveData = false;
+                uploadDataThread.Interrupt();
+            }
         }
 
-        internal bool isSentNewLiveData()
-        {
-            bool newData = this.sentNewLiveData;
-            this.sentNewLiveData = false;
-            return newData;
-        }
 
     }
 

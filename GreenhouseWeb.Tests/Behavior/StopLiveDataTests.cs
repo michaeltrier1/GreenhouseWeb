@@ -71,7 +71,6 @@ namespace GreenhouseWeb.Tests.Behavior
             db = new GreenhouseDBContext();
         }
 
-
         [TestInitialize()]
         public void MyTestInitialize()
         {
@@ -102,10 +101,6 @@ namespace GreenhouseWeb.Tests.Behavior
             ServiceFacadeGetter.getInstance().clear();
         }
 
-
-
-
-
         [TestMethod]
         public void GreenhouseIsActive()
         {
@@ -133,17 +128,6 @@ namespace GreenhouseWeb.Tests.Behavior
 
             bool haveSentMoreData = client.isSentNewLiveData();
             Assert.IsFalse(haveSentMoreData);
-
-
-            /*
-
-                Given the greenhouse is selected in the UI
-                And Server can send command to the greenhouse
-                    Create client
-                When stop signal is sent
-                Then subscriber is no longer subscribed
-                    And the server receives no more data
-            */
         }
 
         [TestMethod]
@@ -174,15 +158,6 @@ namespace GreenhouseWeb.Tests.Behavior
 
             bool haveSentMoreData = client.isSentNewLiveData();
             Assert.IsTrue(haveSentMoreData);
-            /*
-                Given another greenhouse is selected in the UI
-                When stop signal is sent
-                And Server can’t send command to the greenhouse
-                    create only one client
-                Then subscriber is still subscribed
-                    And the server receives more data
-            */
-
         }
     }
 }

@@ -60,26 +60,22 @@ namespace GreenhouseWeb.Services.Incoming
                     break;
                 case "Datalog":
                     greenHouseID = jsonMessage.GetValue("greenhouseID").ToString();
+                    //long timeOfReading = (long)jsonMessage.GetValue("time of Reading");
 
-                    //Nullable<long> timeOfReading = long.Parse((string)jsonMessage.GetValue("time of reading"));
-                    //internalTemperature = Double.Parse((string)jsonMessage.GetValue("internal temperature"));
-                    //externalTemperature = Double.Parse((string)jsonMessage.GetValue("external temperature"));
-                    //humidity = Double.Parse((string)jsonMessage.GetValue("humidity"));
-                    //waterLevel = Double.Parse((string)jsonMessage.GetValue("water level"));
-
-
-                    //Nullable<double> timeOfReading = (Nullable<double>)jsonMessage.GetValue("time of reading");
-                    Nullable<double> internalTemperature2 = (Nullable<double>)jsonMessage.GetValue("internal temperature");
-                    Nullable<double> externalTemperature2 = (Nullable<double>)jsonMessage.GetValue("external temperature");
-                    Nullable<double> humidity2 = (Nullable<double>)jsonMessage.GetValue("humidity");
-                    Nullable<double> waterLevel2 = (Nullable<double>)jsonMessage.GetValue("water level");
+                    string timeOfReadingString = (string)jsonMessage.GetValue("time of Reading");
+                    DateTime timeOfReading = DateTime.Parse(timeOfReadingString, System.Globalization.CultureInfo.InvariantCulture);
+                    Nullable<double> internalTemperatureDatalog = (Nullable<double>)jsonMessage.GetValue("internal temperature");
+                    Nullable<double> externalTemperatureDatalog = (Nullable<double>)jsonMessage.GetValue("external temperature");
+                    Nullable<double> humidityDatalog = (Nullable<double>)jsonMessage.GetValue("humidity");
+                    Nullable<double> waterLevelDatalog = (Nullable<double>)jsonMessage.GetValue("waterlevel");
 
                     interpretedMessage.Add("id", greenHouseID);
-                    interpretedMessage.Add("internal temperature", internalTemperature2);
-                    interpretedMessage.Add("external temperature", externalTemperature2);
-                    interpretedMessage.Add("humidity", humidity2);
-                    interpretedMessage.Add("water level", waterLevel2);
+                    interpretedMessage.Add("internal temperature", internalTemperatureDatalog);
+                    interpretedMessage.Add("external temperature", externalTemperatureDatalog);
+                    interpretedMessage.Add("humidity", humidityDatalog);
+                    interpretedMessage.Add("water level", waterLevelDatalog);
                     interpretedMessage.Add("procedure", procedure);
+                    interpretedMessage.Add("time of reading", timeOfReading);
                     break;
                 default:
                     break;
