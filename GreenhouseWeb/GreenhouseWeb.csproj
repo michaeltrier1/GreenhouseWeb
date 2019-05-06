@@ -93,6 +93,7 @@
     <Reference Include="Google.Apis.Sheets.v4, Version=1.38.0.1545, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Sheets.v4.1.38.0.1545\lib\net45\Google.Apis.Sheets.v4.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Scaffolding.EntityFramework.12.0, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
