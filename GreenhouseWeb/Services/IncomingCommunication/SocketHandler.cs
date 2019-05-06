@@ -35,7 +35,7 @@ namespace GreenhouseWeb.Services.Incoming
 
             string ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
 
-            while (!reader.EndOfStream && !stopped )
+            while (!stopped)
             {
                 try
                 {
@@ -48,23 +48,28 @@ namespace GreenhouseWeb.Services.Incoming
                     {
                         case "petWatchdog":
                             response = this.pet(interpretedMessage);
+                            stopped = true;
                             break;
                         case "Startup":
                             response = this.startup(interpretedMessage, ip);
                             sendReply = true;
+                            stopped = true;
                             break;
                         case "live data":
                             response = this.live(interpretedMessage);
                             break;
                         case "IPAddress":
                             response = this.IP(interpretedMessage, ip);
+                            stopped = true;
                             break;
                         case "Datalog":
                             this.datalog(interpretedMessage);
                             response = new JObject();
+                            stopped = true;
                             break;
                         default:
                             response = new JObject();
+                            stopped = true;
                             break;
                     }
 
@@ -76,6 +81,7 @@ namespace GreenhouseWeb.Services.Incoming
                     }
                 }
                 catch (IOException e) { this.stopped = true; }
+                catch (OutOfMemoryException e) { this.stopped = true; }
                 catch (SocketException e) { this.stopped = true; }
 
             }

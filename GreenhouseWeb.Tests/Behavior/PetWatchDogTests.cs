@@ -116,7 +116,7 @@ namespace GreenhouseWeb.Tests.Behavior
 
             // Act
             client.petContinually();
-            Thread.Sleep(5000);
+            Thread.Sleep(13000);
 
             // Assert
             bool receivedRetry = client.RecievedRetryConnection;
@@ -131,7 +131,7 @@ namespace GreenhouseWeb.Tests.Behavior
             client.pet();
 
             // Act
-            Thread.Sleep(5000);
+            Thread.Sleep(13000);
 
             // Assert
             bool receivedRetry = client.RecievedRetryConnection;
