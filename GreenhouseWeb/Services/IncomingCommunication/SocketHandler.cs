@@ -35,7 +35,7 @@ namespace GreenhouseWeb.Services.Incoming
 
             string ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
 
-            while (!reader.EndOfStream && !stopped )
+            while (!stopped )
             {
                 try
                 {
@@ -73,6 +73,10 @@ namespace GreenhouseWeb.Services.Incoming
                         string responseString = response.ToString(Newtonsoft.Json.Formatting.None);
                         writer.WriteLine(responseString);
                         writer.Flush();
+                    }
+                    if (reader.EndOfStream)
+                    {
+                        stopped = true;
                     }
                 }
                 catch (IOException e) { this.stopped = true; }

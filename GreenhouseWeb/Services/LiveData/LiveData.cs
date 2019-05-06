@@ -47,6 +47,9 @@ namespace GreenhouseWeb.Services
             }
         }
 
-
+        internal void stopLiveData(string greenhouseID)
+        {
+            this.liveData.Remove(greenhouseID);
+        }
     }
 }
