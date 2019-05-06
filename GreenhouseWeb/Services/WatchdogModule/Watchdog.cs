@@ -47,7 +47,7 @@ namespace GreenhouseWeb.Services.WatchdogModule
                     DateTime now = DateTime.Now;
                     TimeSpan difference = now.Subtract(entry.Value);
                     //if (difference.Minutes > 2) //for production
-                    if (difference.Seconds > 3) //TODO for testing
+                    if (difference.Seconds > 10) //TODO for testing
                     {
                         RetryConnection(entry.Key);
                     }
