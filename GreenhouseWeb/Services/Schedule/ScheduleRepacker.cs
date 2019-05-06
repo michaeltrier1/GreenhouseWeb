@@ -16,7 +16,7 @@ namespace GreenhouseWeb.Services
             //get number of days
             int numberOfDays = 1;
             
-            for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++)
+            for (int dayNumber = 1; dayNumber < numberOfDays+1; dayNumber++)
             {
                 JObject day = new JObject();
 

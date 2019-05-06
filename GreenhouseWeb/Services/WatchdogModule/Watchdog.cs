@@ -42,6 +42,7 @@ namespace GreenhouseWeb.Services.WatchdogModule
                     this.PetWatchdog(greenhouseID);
                 }
 
+                HashSet<string> toBePetted = new HashSet<string>();
                 foreach (KeyValuePair<string, DateTime> entry in greenhouses)
                 {
                     DateTime now = DateTime.Now;
@@ -50,12 +51,14 @@ namespace GreenhouseWeb.Services.WatchdogModule
                     if (difference.Seconds > 10) //TODO for testing
                     {
                         RetryConnection(entry.Key);
+                        toBePetted.Add(entry.Key);
                     }
-
                 }
 
+                queue.putPetting(toBePetted);
+
                 //try  { Thread.Sleep(15000); } //for production
-                try { Thread.Sleep(1000); } //TODO for testing
+                try { Thread.Sleep(5000); } //TODO for testing
                 catch (ThreadInterruptedException e) { stopped = true; }
             }
         }

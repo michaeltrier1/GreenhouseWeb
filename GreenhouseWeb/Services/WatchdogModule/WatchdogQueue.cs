@@ -30,7 +30,7 @@ namespace GreenhouseWeb.Services.WatchdogModule
                 }
                 else
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(200);
                 }
             }
         }
@@ -53,12 +53,30 @@ namespace GreenhouseWeb.Services.WatchdogModule
                 }
                 else
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(30);
                 }
             }
 
             return temp;
         }
 
+        internal void putPetting(HashSet<string> toBePetted)
+        {
+            bool accessed = false;
+            while (!accessed)
+            {
+                if (!Semaphore)
+                {
+                    Semaphore = true;
+                    this.pettingQueue.UnionWith(toBePetted);
+                    accessed = true;
+                    Semaphore = false;
+                }
+                else
+                {
+                    Thread.Sleep(30);
+                }
+            }
+        }
     }
 }
