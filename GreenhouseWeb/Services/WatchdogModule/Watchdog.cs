@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using GreenhouseWeb.Services.Interfaces;
 
@@ -37,14 +38,17 @@ namespace GreenhouseWeb.Services.WatchdogModule
                 {
                     DateTime now = DateTime.Now;
                     TimeSpan difference = now.Subtract(entry.Value);
-                    if (difference.Minutes > 2)
+                    //if (difference.Minutes > 2) //for production
+                    if (difference.Seconds > 3) //TODO for testing
                     {
                         RetryConnection(entry.Key);
                     }
+
+                    //try  { Thread.Sleep(15000); } //for production
+                    try { Thread.Sleep(1000); } //TODO for testing
+                    catch (ThreadInterruptedException e) { stopped = true; }
                 }
-
             }
-
         }
 
         private void RetryConnection(string greenhouseID)

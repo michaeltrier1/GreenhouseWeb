@@ -13,7 +13,7 @@ namespace GreenhouseWeb.Services.WatchdogModule
         IServicesFacadeForServices servicesFacade;
 
         private Watchdog watchdog;
-        private Thread thr;
+        private Thread watchdogThread;
 
         public WatchdogFacade(IServicesFacadeForServices servicesFacade)
         {
@@ -21,7 +21,8 @@ namespace GreenhouseWeb.Services.WatchdogModule
         
             watchdog = new Watchdog(this);
 
-            thr = new Thread(new ThreadStart(watchdog.StartWatchdog));
+            watchdogThread = new Thread(new ThreadStart(watchdog.StartWatchdog));
+            watchdogThread.Start();
         }
 
         public void PetWatchdog(string greenhouseID) => Watchdog.PetWatchdog(greenhouseID);
@@ -30,5 +31,11 @@ namespace GreenhouseWeb.Services.WatchdogModule
         {
             servicesFacade.RetryConnection(greenhouseID);
         }
+
+        internal void clear()
+        {
+            watchdogThread.Interrupt();
+        }
+
     }
 }

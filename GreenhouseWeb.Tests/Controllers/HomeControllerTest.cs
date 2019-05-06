@@ -12,6 +12,8 @@ namespace GreenhouseWeb.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
+
+        /*
         [TestMethod]
         public void Index()
         {
@@ -50,5 +52,7 @@ namespace GreenhouseWeb.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+    */
     }
 }

@@ -6,11 +6,9 @@
 
 @if (Request.IsAuthenticated)
 {
-
-
     <!DOCTYPE html>
     <html>
-    <head>
+    <head> 
         <meta charset="utf-8">
         <!--Script Reference[1]-->
         <script src="~/Scripts/HomeControllerScripts.js"></script>
@@ -18,39 +16,45 @@
     </head>
     <body>
 
+
         <script>var currentID = '';</script>
 
-        <div class="col-4" style="width:20%">
+        <div style=" margin-top: 50px;">
+            <div class="col-4 " style="width:20%; display: inline-block; vertical-align: top;">
 
 
-            @foreach (var item in Model)
-            {
-                if (item.User == User.Identity.GetUserName())
+                @foreach (var item in Model)
                 {
-                    <div onclick="setGreenhouseID(this.id)" id="@item.GreenhouseID" name="testgreenhouse" class="list-group-item">
-                        <p>Greenhouse ID: @item.GreenhouseID</p>
-                    </div>
+                    if (item.User == User.Identity.GetUserName())
+                    {
+                        <div onclick="setGreenhouseID(this.id)" id="@item.GreenhouseID" name="testgreenhouse" class="list-group-item">
+                            <p>Greenhouse ID: @item.GreenhouseID</p>
+                        </div>
+                    }
                 }
-            }
-        </div>
+            </div>
+
+
+            <div id="gauges" style="display: inline-block;">
+                <!--Chart Placement[2]-->
+                <div style="display: inline-block;">
+                    <div id="InTemperature"></div>
+                    <div id="outTemperature"></div>
+                </div>
+                <div style="display: inline-block;">
+                    <div id="Humidity"></div>
+                    <div id="Waterlevel"></div>
+                </div>
+                </div>
+            </div>
+
 
         <script>
 
             setInterval(updateData, 1000);
 
         </script>
-
-        <div id="gauges">
-            <!--Chart Placement[2]-->
-            <div id="InTemperature"></div>
-            <div id="outTemperature"></div>
-            <div id="Humidity"></div>
-            <div id="Waterlevel"></div>
-        </div>
-       
-
         <button onclick="stopLiveData()">Stop Live Data</button>
-   
     </body>
 </html>
 

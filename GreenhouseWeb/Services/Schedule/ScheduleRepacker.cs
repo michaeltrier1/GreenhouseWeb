@@ -8,7 +8,7 @@ namespace GreenhouseWeb.Services
 
         internal JObject repackage(JObject rawSchedule)
         {
-            JObject schedule = new JObject("{}");
+            JObject schedule = new JObject();
             
             //get raw data to readable format
             JArray data = (JArray)rawSchedule.GetValue("data");
@@ -18,11 +18,11 @@ namespace GreenhouseWeb.Services
             
             for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++)
             {
-                JObject day = new JObject("{}");
+                JObject day = new JObject();
 
                 for (int blockNumber = 1; blockNumber < 13; blockNumber++)
                 {
-                    JObject setpoints = new JObject("{}");
+                    JObject setpoints = new JObject();
                     JArray blockData = (JArray)data[blockNumber-1];
 
                     double blueLight = (double)blockData[1];
