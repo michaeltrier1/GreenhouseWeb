@@ -313,6 +313,7 @@
     <Compile Include="Services\ServiceFacadeGetter.cs" />
     <Compile Include="Services\ServicesFacade.cs" />
     <Compile Include="Services\IncomingCommunication\SocketHandler.cs" />
+    <Compile Include="Services\WatchdogModule\WatchdogQueue.cs" />
     <Compile Include="Services\WatchdogModule\WatchdogFacade.cs" />
     <Compile Include="Services\WatchdogModule\Watchdog.cs" />
     <Compile Include="Startup.cs" />

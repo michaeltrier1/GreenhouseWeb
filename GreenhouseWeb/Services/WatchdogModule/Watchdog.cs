@@ -11,13 +11,15 @@ namespace GreenhouseWeb.Services.WatchdogModule
     {
         private static Dictionary<string, DateTime> greenhouses = new Dictionary<string, DateTime>();
         private WatchdogFacade watchdogFacade;
+        private WatchdogQueue queue;
 
-        public Watchdog(WatchdogFacade facade)
+        public Watchdog(WatchdogFacade facade, WatchdogQueue queue)
         {
             watchdogFacade = facade;
+            this.queue = queue;
         }
 
-        public static void PetWatchdog(string greenhouseID)
+        private void PetWatchdog(string greenhouseID)
         {
             if (greenhouses.ContainsKey(greenhouseID))
             {
@@ -34,6 +36,12 @@ namespace GreenhouseWeb.Services.WatchdogModule
             Boolean stopped = false;
             while (!stopped)
             {
+                HashSet<string> tmpqueu = queue.getPettings();
+                foreach (string greenhouseID in tmpqueu)
+                {
+                    this.PetWatchdog(greenhouseID);
+                }
+
                 foreach (KeyValuePair<string, DateTime> entry in greenhouses)
                 {
                     DateTime now = DateTime.Now;
