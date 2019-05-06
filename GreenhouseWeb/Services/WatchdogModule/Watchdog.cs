@@ -44,10 +44,11 @@ namespace GreenhouseWeb.Services.WatchdogModule
                         RetryConnection(entry.Key);
                     }
 
-                    //try  { Thread.Sleep(15000); } //for production
-                    try { Thread.Sleep(1000); } //TODO for testing
-                    catch (ThreadInterruptedException e) { stopped = true; }
                 }
+
+                //try  { Thread.Sleep(15000); } //for production
+                try { Thread.Sleep(1000); } //TODO for testing
+                catch (ThreadInterruptedException e) { stopped = true; }
             }
         }
 

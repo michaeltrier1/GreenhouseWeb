@@ -14,6 +14,7 @@ namespace GreenhouseWeb.Services.Incoming
         private ProcedureInterpreter interpreter;
         private bool stopped;
         private bool registered;
+        private bool sendReply;
         private string registerID;
 
         public SocketHandler(TcpClient client, IncomingCommunicator incomingCommunicator)
@@ -23,6 +24,7 @@ namespace GreenhouseWeb.Services.Incoming
             this.incomingCommunicator = incomingCommunicator;
             this.stopped = false;
             this.registered = false;
+            this.sendReply = false;
         }
 
         public void handleSocket()
@@ -49,6 +51,7 @@ namespace GreenhouseWeb.Services.Incoming
                             break;
                         case "Startup":
                             response = this.startup(interpretedMessage, ip);
+                            sendReply = true;
                             break;
                         case "live data":
                             response = this.live(interpretedMessage);
@@ -65,9 +68,12 @@ namespace GreenhouseWeb.Services.Incoming
                             break;
                     }
 
-                    string responseString = response.ToString(Newtonsoft.Json.Formatting.None);
-                    writer.WriteLine(responseString);
-                    writer.Flush();
+                    if (sendReply)
+                    {
+                        string responseString = response.ToString(Newtonsoft.Json.Formatting.None);
+                        writer.WriteLine(responseString);
+                        writer.Flush();
+                    }
                 }
                 catch (IOException e) { this.stopped = true; }
                 catch (SocketException e) { this.stopped = true; }
@@ -91,7 +97,7 @@ namespace GreenhouseWeb.Services.Incoming
             string greenHouseID = (string)interpretedMessage.GetValue("id");
             incomingCommunicator.petWatchdog(greenHouseID);
 
-            return new JObject("{ }");
+            return new JObject();
         }
 
         private JObject IP(JObject interpretedMessage, string ip)
