@@ -44,7 +44,11 @@ namespace GreenhouseWeb.Services.Communication
                     writer.Close();
                     stream.Close();
                 }
-            } catch (Exception e) { Console.WriteLine("Sending exception"); };
+            } catch (Exception e)
+            {
+                Console.WriteLine("Sending exception");
+                Console.WriteLine(e.StackTrace);
+            };
         }
 
         public void getLiveData(string greenhouseConnectionInfo, JObject message)
