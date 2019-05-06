@@ -91,24 +91,36 @@ namespace GreenhouseWeb.Services.Incoming
             Greenhouse greenhouse = new Greenhouse();
 
             String password = "";
-
+            bool changes = true;
             foreach (Greenhouse item in db.Greenhouses)
             {
                 if (item.GreenhouseID == id)
                 {
-                    password = item.Password;
-                    db.Greenhouses.Remove(item);
+
+                    if (!(item.IP == ip && item.Port == int.Parse(port)))
+                    {
+                        password = item.Password;
+                        db.Greenhouses.Remove(item);
+                    }
+                    else
+                    {
+                        changes = false;
+                    }
                 }
             }
-            db.SaveChanges();
 
-            greenhouse.GreenhouseID = id;
-            greenhouse.IP = ip;
-            greenhouse.Port = int.Parse(port);
-            greenhouse.Password = password;
+            if (changes)
+            {
+                db.SaveChanges();
 
-            db.Greenhouses.Add(greenhouse);
-            db.SaveChanges();
+                greenhouse.GreenhouseID = id;
+                greenhouse.IP = ip;
+                greenhouse.Port = int.Parse(port);
+                greenhouse.Password = password;
+
+                db.Greenhouses.Add(greenhouse);
+                db.SaveChanges();
+            }
         }
 
         internal JObject fetchSchedule(string greenHouseID)
