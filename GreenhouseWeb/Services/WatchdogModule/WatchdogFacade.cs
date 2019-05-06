@@ -21,8 +21,8 @@ namespace GreenhouseWeb.Services.WatchdogModule
         
             watchdog = new Watchdog(this);
 
-            watchdogThread = new Thread(new ThreadStart(watchdog.StartWatchdog));
-            watchdogThread.Start();
+            //watchdogThread = new Thread(new ThreadStart(watchdog.StartWatchdog));
+            //watchdogThread.Start();
         }
 
         public void PetWatchdog(string greenhouseID) => Watchdog.PetWatchdog(greenhouseID);
