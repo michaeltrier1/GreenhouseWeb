@@ -11,5 +11,6 @@ namespace GreenhouseWeb.Services.Interfaces
         void PetWatchdog(string greenhouseID);
         void RetryConnection(string greenhouseID);
         void SetMeasurement(string greenhouseID, IMeasurement measurement);
+        void startLiveDataStream(string greenhouseID);
     }
 }

@@ -23,7 +23,6 @@ namespace GreenhouseWeb.Services
 
         public ServicesFacade()
         {
-            this.liveData = new LiveData();
             this.scheduleFacade = new ScheduleFacade();
         }
 
@@ -32,8 +31,8 @@ namespace GreenhouseWeb.Services
             this.communicationFacade = new CommunicationFacade(this);
             this.wactchdogFacade = new WatchdogFacade(this);
             this.incommingCommunication = new IncomingCommunicator(this);
+            this.liveData = new LiveData(this);
 
-            incommingCommunication = new IncomingCommunicator(this);
             Thread thread = new Thread(new ThreadStart(incommingCommunication.listenForConnections));
             thread.Start();
         }
@@ -69,5 +68,17 @@ namespace GreenhouseWeb.Services
 
             this.communicationFacade.applySchedule(greenhouseID, processedSchedule);
         }
+
+        public void startLiveDataStream(string greenhouseID)
+        {
+            this.communicationFacade.getLiveData(greenhouseID);
+        }
+
+        internal void clear()
+        {
+            incommingCommunication.clear();
+            wactchdogFacade.clear();
+        }
+
     }
 }
