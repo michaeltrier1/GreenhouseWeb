@@ -60,6 +60,7 @@ namespace GreenhouseWeb.Services
         public void stopLiveData(string greenhouseID)
         {
             this.incommingCommunication.stopLiveData(greenhouseID);
+            this.liveData.stopLiveData(greenhouseID);
         }
 
         public void applySchedule(string greenhouseID, JObject rawSchedule)
