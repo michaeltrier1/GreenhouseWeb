@@ -14,6 +14,7 @@ namespace GreenhouseWeb.Services.Incoming
         private ProcedureInterpreter interpreter;
         private bool stopped;
         private bool registered;
+        private bool sendReply;
         private string registerID;
 
         public SocketHandler(TcpClient client, IncomingCommunicator incomingCommunicator)
@@ -23,56 +24,88 @@ namespace GreenhouseWeb.Services.Incoming
             this.incomingCommunicator = incomingCommunicator;
             this.stopped = false;
             this.registered = false;
+            this.sendReply = false;
         }
 
         public void handleSocket()
         {
-            NetworkStream stream = client.GetStream();
-            StreamReader reader = new StreamReader(stream);
-            StreamWriter writer = new StreamWriter(stream);
-
-            string ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
-
-            bool readMore = true;
-
-            while (readMore && !stopped)
+            try
             {
-                string message = reader.ReadLine();
-                JObject interpretedMessage = this.interpreter.interpret(message);
-                JObject response;
 
-                switch ((string)interpretedMessage.GetValue("procedure"))
+                NetworkStream stream = client.GetStream();
+                StreamReader reader = new StreamReader(stream);
+                StreamWriter writer = new StreamWriter(stream);
+
+                string ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
+
+                while (!stopped)
                 {
-                    case "petWatchdog":
-                        response = this.pet(interpretedMessage);
-                        break;
-                    case "Startup":
-                        response = this.startup(interpretedMessage, ip);
-                        break;
-                    case "live data":
-                        response = this.live(interpretedMessage);
-                        break;
-                    case "IPAddress":
-                        response = this.IP(interpretedMessage, ip);
-                        break;
-                    default:
-                        response = new JObject("{}");
-                        break;
+                    try
+                    {
+                        string message = reader.ReadLine();
+
+                        JObject interpretedMessage = this.interpreter.interpret(message);
+                        JObject response;
+
+                        switch ((string)interpretedMessage.GetValue("procedure"))
+                        {
+                            case "petWatchdog":
+                                response = this.pet(interpretedMessage);
+                                stopped = true;
+                                break;
+                            case "Startup":
+                                response = this.startup(interpretedMessage, ip);
+                                sendReply = true;
+                                stopped = true;
+                                break;
+                            case "live data":
+                                response = this.live(interpretedMessage);
+                                break;
+                            case "IPAddress":
+                                response = this.IP(interpretedMessage, ip);
+                                stopped = true;
+                                break;
+                            case "Datalog":
+                                this.datalog(interpretedMessage);
+                                response = new JObject();
+                                stopped = true;
+                                break;
+                            default:
+                                response = new JObject();
+                                stopped = true;
+                                break;
+                        }
+
+                        if (sendReply)
+                        {
+                            string responseString = response.ToString(Newtonsoft.Json.Formatting.None);
+                            writer.WriteLine(responseString);
+                            writer.Flush();
+                        }
+                        /*if (reader.EndOfStream)
+                        {
+                            stopped = true;
+                        }*/
+                    }
+                    catch (IOException e) { this.stopped = true; }
+                    catch (OutOfMemoryException e) { this.stopped = true; }
+                    catch (SocketException e) { this.stopped = true; }
+
                 }
 
-                writer.WriteLine(response.ToString());
-                writer.Flush();
-            }
-
-            if (registered)
-            {
-                this.incomingCommunicator.unregisterSocketHandler(registerID);
+                if (registered)
+                {
+                    this.incomingCommunicator.unregisterSocketHandler(registerID);
+                }
+            } catch (Exception e) {
+                Console.WriteLine(e.StackTrace);
             }
         }
 
         public void stop()
         {
             this.stopped = true;
+            client.Close();
         }
 
         private JObject pet(JObject interpretedMessage)
@@ -80,7 +113,7 @@ namespace GreenhouseWeb.Services.Incoming
             string greenHouseID = (string)interpretedMessage.GetValue("id");
             incomingCommunicator.petWatchdog(greenHouseID);
 
-            return new JObject("{ }");
+            return new JObject();
         }
 
         private JObject IP(JObject interpretedMessage, string ip)
@@ -89,7 +122,7 @@ namespace GreenhouseWeb.Services.Incoming
             string port = (string)interpretedMessage.GetValue("port");
             incomingCommunicator.setIPAddress(greenHouseID, ip, port);
 
-            return new JObject("{ }");
+            return new JObject();
         }
 
         private JObject live(JObject interpretedMessage)
@@ -107,14 +140,12 @@ namespace GreenhouseWeb.Services.Incoming
 
             if (!registered)
             {
-                this.incomingCommunicator.registerSocketHandler(registerID, this);
                 registered = true;
                 registerID = greenHouseID;
+                this.incomingCommunicator.registerSocketHandler(registerID, this);
             }
 
-            
-
-            return new JObject("{ }");
+            return new JObject();
         }
 
         private JObject startup(JObject interpretedMessage, string ip)
@@ -128,6 +159,18 @@ namespace GreenhouseWeb.Services.Incoming
             return schedule;
         }
         
+        private void datalog(JObject interpretedMessage)
+        {
+            string greenHouseID = (string)interpretedMessage.GetValue("id");
+            DateTime timeOfReading = (DateTime)interpretedMessage.GetValue("time of reading");
+
+            Nullable<double> internalTemperature = (Nullable<double>)interpretedMessage.GetValue("internal temperature");
+            Nullable<double> externalTemperature = (Nullable<double>)interpretedMessage.GetValue("external temperature");
+            Nullable<double> humidity = (Nullable<double>)interpretedMessage.GetValue("humidity");
+            Nullable<double> waterLevel = (Nullable<double>)interpretedMessage.GetValue("water level");
+
+            incomingCommunicator.datalog(greenHouseID, timeOfReading, internalTemperature, externalTemperature, humidity, waterLevel);
+        }
     }
     
 }

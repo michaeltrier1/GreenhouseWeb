@@ -107,7 +107,7 @@ function save() {
     } else if (scheduleName) { // save schedule
         var scheduleNAME = scheduleName.trim();
 
-        var schedule = JSON.stringify({ rawSchedule: table.getData() });
+        var schedule = JSON.stringify({ data: table.getData() });
         $.ajax({
             type: "POST",
             url: "saveSchedule",
@@ -130,18 +130,19 @@ function loadSchedule(id) {
         success: function (schedule) {
             table.destroy();
             var timeArray = [
-            '00.00-02.00',
-            '02.00-04.00',
-            '04.00-06.00',
-            '06.00-08.00',
-            '08.00-10.00',
-            '10.00-12.00',
-            '12.00-14.00',
-            '14.00-16.00',
-            '16.00-18.00',
-            '18.00-20.00',
-            '20.00-22.00',
-            '22.00-24.00'];
+                '00.00-02.00',
+                '02.00-04.00',
+                '04.00-06.00',
+                '06.00-08.00',
+                '08.00-10.00',
+                '10.00-12.00',
+                '12.00-14.00',
+                '14.00-16.00',
+                '16.00-18.00',
+                '18.00-20.00',
+                '20.00-22.00',
+                '22.00-24.00'
+                ];
 
             var recreatedSchedule = [];
             var j = 0;
@@ -201,7 +202,6 @@ function loadSchedule(id) {
 
                         validator: 'waterlevel1'
                     },
-
                 ],
             });
             
@@ -209,8 +209,6 @@ function loadSchedule(id) {
         
             console.log(recreatedSchedule);
         }
-
-
     });
 }
 
@@ -231,22 +229,18 @@ function load() {
                 console.log(div);
                 div.innerHTML = id;
                 document.getElementById("listview").appendChild(div);
-
             }
-
         }
-
-
     });
     document.getElementById("label").innerHTML =
         "Schedule" + " " + name + " " + "succesfully loaded";
 }
 
 function apply() {
-    var schedule = JSON.stringify({ rawSchedule: table.getData() });
+    var schedule = JSON.stringify({ data: table.getData() });
     $.ajax({
         type: "POST",
-        url: "saveSchedule",
+        url: "applySchedule",
         data: { rawSchedule: schedule, greenhouseID: greenhouseId }, //insert id as parameter
         success: function (data) {
             document.getElementById("label").innerHTML =

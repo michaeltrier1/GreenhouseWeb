@@ -3,19 +3,24 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GreenhouseWeb.Tests.Behavior
+namespace GreenhouseWeb.Tests
 {
     /// <summary>
-    /// Summary description for RetryConnectionTests
+    /// Summary description for UnitTest1
     /// </summary>
-    //[TestClass]
-    public class RetryConnectionTests
+    [TestClass]
+    public class UnitTest1
     {
-        public RetryConnectionTests()
+
+        String message;
+
+        public UnitTest1()
         {
             //
             // TODO: Add constructor logic here
             //
+
+            //message = "constructor";
         }
 
         private TestContext testContextInstance;
@@ -58,32 +63,29 @@ namespace GreenhouseWeb.Tests.Behavior
         //
         #endregion
 
-
-
-
-        //[TestMethod]
-        public void GreenhouseConnectionSucceeds()
+        [ClassInitialize()]
+        public static void MyClassInitialize(TestContext testContext)
         {
 
-            // Arrange
-
-            // Act
-
-            // Assert
-            //Just don't crash
-            Assert.IsTrue(false);
         }
 
-        //[TestMethod]
-        public void GreenhouseConnectionFails()
+        [TestMethod]
+        public void TestMethod1()
         {
+            //
+            // TODO: Add test logic here
+            //
 
-            // Arrange
+            this.message = "1";
+        }
 
-            // Act
-
-            // Assert
-            Assert.IsTrue(false);
+        [TestMethod]
+        public void TestMethod2()
+        {
+            //
+            // TODO: Add test logic here
+            //
+            this.message = "2";
         }
     }
 }

@@ -20,6 +20,8 @@ namespace GreenhouseWeb.Services
             if (instance == null)
             {
                 instance = new ServiceFacadeGetter();
+
+                instance.initialiseServices();
             }
             return instance;
         }
@@ -33,6 +35,13 @@ namespace GreenhouseWeb.Services
         public IServiceFacade getFacade()
         {
             return facade;
+        }
+
+        public void clear()
+        {
+            instance = null;
+            facade.clear();
+            facade = null;
         }
 
     }

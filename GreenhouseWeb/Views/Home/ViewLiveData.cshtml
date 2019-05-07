@@ -6,11 +6,9 @@
 
 @if (Request.IsAuthenticated)
 {
-
-
     <!DOCTYPE html>
     <html>
-    <head>
+    <head> 
         <meta charset="utf-8">
         <!--Script Reference[1]-->
         <script src="~/Scripts/HomeControllerScripts.js"></script>
@@ -21,8 +19,8 @@
 
         <script>var currentID = '';</script>
 
-        <div>
-            <div class="col-4 " style="width:20%; display: inline-block; vertical-align: top; margin-top: 50px;">
+        <div style=" margin-top: 50px;">
+            <div class="col-4 " style="width:20%; display: inline-block; vertical-align: top;">
 
 
                 @foreach (var item in Model)
@@ -57,7 +55,6 @@
 
         </script>
         <button onclick="stopLiveData()">Stop Live Data</button>
-
     </body>
 </html>
 
