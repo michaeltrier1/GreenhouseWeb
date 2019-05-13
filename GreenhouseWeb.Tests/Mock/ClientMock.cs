@@ -125,15 +125,15 @@ namespace GreenhouseWeb.Tests.Mock
         {
             pettingThread = new Thread(() =>
             {
-                TcpClient client = new TcpClient();
-
-                client.Connect(serverIpAddress, serverPort);
-                NetworkStream stream = client.GetStream();
-                StreamWriter writer = new StreamWriter(stream);
-                petting = true;
-
                 while (petting)
                 {
+                    TcpClient client = new TcpClient();
+
+                    client.Connect(serverIpAddress, serverPort);
+                    NetworkStream stream = client.GetStream();
+                    StreamWriter writer = new StreamWriter(stream);
+                    petting = true;
+
                     JObject message = new JObject();
                     message.Add("procedure", "petWatchdog");
                     message.Add("greenhouseID", ID);
@@ -142,11 +142,13 @@ namespace GreenhouseWeb.Tests.Mock
                     writer.WriteLine(messageString);
                     writer.Flush();
 
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
+                    writer.Close();
+                    stream.Close();
+                    Thread.Sleep(2000);
                 }
 
-                writer.Close();
-                stream.Close();
+                
             });
             pettingThread.Name = "Petting Thread";
             pettingThread.Start();

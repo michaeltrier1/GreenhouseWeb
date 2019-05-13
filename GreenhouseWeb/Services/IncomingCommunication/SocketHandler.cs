@@ -29,64 +29,76 @@ namespace GreenhouseWeb.Services.Incoming
 
         public void handleSocket()
         {
-            NetworkStream stream = client.GetStream();
-            StreamReader reader = new StreamReader(stream);
-            StreamWriter writer = new StreamWriter(stream);
-
-            string ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
-
-            while (!stopped )
+            try
             {
-                try
+
+                NetworkStream stream = client.GetStream();
+                StreamReader reader = new StreamReader(stream);
+                StreamWriter writer = new StreamWriter(stream);
+
+                string ip = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
+
+                while (!stopped)
                 {
-                    string message = reader.ReadLine();
-
-                    JObject interpretedMessage = this.interpreter.interpret(message);
-                    JObject response;
-
-                    switch ((string)interpretedMessage.GetValue("procedure"))
+                    try
                     {
-                        case "petWatchdog":
-                            response = this.pet(interpretedMessage);
-                            break;
-                        case "Startup":
-                            response = this.startup(interpretedMessage, ip);
-                            sendReply = true;
-                            break;
-                        case "live data":
-                            response = this.live(interpretedMessage);
-                            break;
-                        case "IPAddress":
-                            response = this.IP(interpretedMessage, ip);
-                            break;
-                        case "Datalog":
-                            this.datalog(interpretedMessage);
-                            response = new JObject();
-                            break;
-                        default:
-                            response = new JObject();
-                            break;
-                    }
+                        string message = reader.ReadLine();
 
-                    if (sendReply)
-                    {
-                        string responseString = response.ToString(Newtonsoft.Json.Formatting.None);
-                        writer.WriteLine(responseString);
-                        writer.Flush();
+                        JObject interpretedMessage = this.interpreter.interpret(message);
+                        JObject response;
+
+                        switch ((string)interpretedMessage.GetValue("procedure"))
+                        {
+                            case "petWatchdog":
+                                response = this.pet(interpretedMessage);
+                                stopped = true;
+                                break;
+                            case "Startup":
+                                response = this.startup(interpretedMessage, ip);
+                                sendReply = true;
+                                stopped = true;
+                                break;
+                            case "live data":
+                                response = this.live(interpretedMessage);
+                                break;
+                            case "IPAddress":
+                                response = this.IP(interpretedMessage, ip);
+                                stopped = true;
+                                break;
+                            case "Datalog":
+                                this.datalog(interpretedMessage);
+                                response = new JObject();
+                                stopped = true;
+                                break;
+                            default:
+                                response = new JObject();
+                                stopped = true;
+                                break;
+                        }
+
+                        if (sendReply)
+                        {
+                            string responseString = response.ToString(Newtonsoft.Json.Formatting.None);
+                            writer.WriteLine(responseString);
+                            writer.Flush();
+                        }
+                        /*if (reader.EndOfStream)
+                        {
+                            stopped = true;
+                        }*/
                     }
-                    if (reader.EndOfStream)
-                    {
-                        stopped = true;
-                    }
+                    catch (IOException e) { this.stopped = true; }
+                    catch (OutOfMemoryException e) { this.stopped = true; }
+                    catch (SocketException e) { this.stopped = true; }
+
                 }
-                catch (IOException e) { this.stopped = true; }
-                catch (SocketException e) { this.stopped = true; }
 
-            }
-
-            if (registered)
-            {
-                this.incomingCommunicator.unregisterSocketHandler(registerID);
+                if (registered)
+                {
+                    this.incomingCommunicator.unregisterSocketHandler(registerID);
+                }
+            } catch (Exception e) {
+                Console.WriteLine(e.StackTrace);
             }
         }
 
