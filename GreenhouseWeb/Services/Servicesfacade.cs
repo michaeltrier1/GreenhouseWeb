@@ -15,11 +15,11 @@ namespace GreenhouseWeb.Services
 {
     public class ServicesFacade : IServicesFacadeForServices, IServiceFacade
     {
-        private IncomingCommunicator incommingCommunication;
-        private LiveData liveData;
-        private WatchdogFacade wactchdogFacade;
-        private CommunicationFacade communicationFacade;
-        private ScheduleFacade scheduleFacade;
+        private IIncomingCommunicator incommingCommunication;
+        private ILiveDataFacade liveData;
+        private IWatchdogFacade wactchdogFacade;
+        private ICommunicationFacade communicationFacade;
+        private IScheduleFacade scheduleFacade;
 
         public ServicesFacade()
         {
