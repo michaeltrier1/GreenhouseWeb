@@ -15,7 +15,7 @@ using System.Data.SqlTypes;
 
 namespace GreenhouseWeb.Services.Incoming
 {
-    public class IncomingCommunicator
+    public class IncomingCommunicator : IIncomingCommunicator
     {
 
         private IPAddress ipAddress;

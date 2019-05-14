@@ -7,11 +7,11 @@ using Newtonsoft.Json.Linq;
 
 namespace GreenhouseWeb.Services.Communication
 {
-    public class CommunicationFacade
+    public class CommunicationFacade : ICommunicationFacade
     {
-        private ServicesFacade servicesFacade;
+        private IServicesFacadeForServices servicesFacade;
 
-        public CommunicationFacade(ServicesFacade servicesFacade)
+        public CommunicationFacade(IServicesFacadeForServices servicesFacade)
         {
             this.servicesFacade = servicesFacade;
         }

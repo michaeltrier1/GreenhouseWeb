@@ -9,7 +9,7 @@ namespace GreenhouseWeb.Services
     public class ServiceFacadeGetter
     {
         private static ServiceFacadeGetter instance;
-        private ServicesFacade facade;
+        private IServiceFacade facade;
 
         private ServiceFacadeGetter()
         {
@@ -28,8 +28,9 @@ namespace GreenhouseWeb.Services
 
         public void initialiseServices()
         {
-            facade = new ServicesFacade();
+            ServicesFacade facade = new ServicesFacade();
             facade.initialise();
+            this.facade = facade;
         }
 
         public IServiceFacade getFacade()

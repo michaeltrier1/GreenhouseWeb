@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GreenhouseWeb.Services.Schedule
 {
-    public class ScheduleFacade
+    public class ScheduleFacade : IScheduleFacade
     {
 
         public JObject repackage(JObject rawSchedule)

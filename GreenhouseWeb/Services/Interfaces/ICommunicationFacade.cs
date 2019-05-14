@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json.Linq;
 
-namespace GreenhouseWeb.Services.Interfaces
+namespace GreenhouseWeb.Services.Communication
 {
-    interface ICommunicationFacade
+    public interface ICommunicationFacade
     {
-        
+        void RetryConnection(string greenhouseID);
+        void applySchedule(string greenhouseID, JObject processedSchedule);
+        void getLiveData(string greenhouseID);
     }
-
 }

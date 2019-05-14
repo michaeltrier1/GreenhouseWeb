@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace GreenhouseWeb.Services.WatchdogModule
 {
-    public class WatchdogFacade
+    public class WatchdogFacade : IWatchdogFacade
     {
         IServicesFacadeForServices servicesFacade;
 

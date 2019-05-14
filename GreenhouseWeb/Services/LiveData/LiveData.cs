@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GreenhouseWeb.Services
 {
-    public class LiveData
+    public class LiveData : ILiveDataFacade
     {
         private Dictionary<String , IMeasurement> liveData;
         private IServicesFacadeForServices servicesFacade;
