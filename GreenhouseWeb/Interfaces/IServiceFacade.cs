@@ -13,5 +13,6 @@ namespace GreenhouseWeb.Interfaces
         IMeasurement getCurrentLiveData(String greenhouseID);
         void stopLiveData(string greenhouseID);
         void applySchedule(string greenhouseID, JObject schedule);
+        void clear();
     }
 }

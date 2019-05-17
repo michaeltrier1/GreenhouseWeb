@@ -75,7 +75,7 @@ namespace GreenhouseWeb.Services
             this.communicationFacade.getLiveData(greenhouseID);
         }
 
-        internal void clear()
+        public void clear()
         {
             incommingCommunication.clear();
             wactchdogFacade.clear();

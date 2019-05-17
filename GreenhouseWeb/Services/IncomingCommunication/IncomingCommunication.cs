@@ -66,7 +66,7 @@ namespace GreenhouseWeb.Services.Incoming
             this.activeHandlers.Add(greenhouseID, handler);
         }
 
-        internal void stopLiveData(string greenhouseID)
+        public void stopLiveData(string greenhouseID)
         {
             if (activeHandlers.ContainsKey(greenhouseID))
             {
@@ -186,7 +186,7 @@ namespace GreenhouseWeb.Services.Incoming
 
         }
 
-        internal void clear()
+        public void clear()
         {
             listener.Stop();
             foreach (SocketHandler handler in activeHandlers.Values)

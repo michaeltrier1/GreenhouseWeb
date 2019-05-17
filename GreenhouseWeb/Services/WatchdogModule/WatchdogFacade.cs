@@ -37,7 +37,7 @@ namespace GreenhouseWeb.Services.WatchdogModule
             servicesFacade.RetryConnection(greenhouseID);
         }
 
-        internal void clear()
+        public void clear()
         {
             watchdogThread.Interrupt();
         }
