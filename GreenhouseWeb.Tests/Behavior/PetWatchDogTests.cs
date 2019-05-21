@@ -70,12 +70,6 @@ namespace GreenhouseWeb.Tests.Behavior
             db = new GreenhouseDBContext();
         }
 
-        [ClassCleanup()]
-        public static void MyClassCleanup()
-        {
-
-        }
-
         [TestInitialize()]
         public void MyTestInitialize()
         {
@@ -110,9 +104,6 @@ namespace GreenhouseWeb.Tests.Behavior
         [TestMethod]
         public void WatchdogIsPetted()
         {
-            // Arrange
-            string greenhouseID = client.ID;
-
             // Act
             client.petContinually();
             Thread.Sleep(25000);
@@ -126,7 +117,6 @@ namespace GreenhouseWeb.Tests.Behavior
         public void WatchdogIsNotPetted()
         {
             // Arrange
-            string greenhouseID = client.ID;
             client.pet();
 
             // Act

@@ -149,7 +149,6 @@
     <Compile Include="Behavior\CreateScheduleTests.cs" />
     <Compile Include="Behavior\LoadScheduleTests.cs" />
     <Compile Include="Behavior\PetWatchDogTests.cs" />
-    <Compile Include="Behavior\RetryConnectionTests.cs" />
     <Compile Include="Behavior\SaveScheduleTests.cs" />
     <Compile Include="Behavior\StopLiveDataTests.cs" />
     <Compile Include="Behavior\UploadDataTests.cs" />
