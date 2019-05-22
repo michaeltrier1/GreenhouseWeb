@@ -8,6 +8,8 @@ namespace GreenhouseWeb.Services.WatchdogModule
 {
     public class WatchdogQueue
     {
+        private static int pettingLock = 0;
+
         private bool Semaphore { get; set; }
         private HashSet<string> pettingQueue;
 
@@ -21,12 +23,11 @@ namespace GreenhouseWeb.Services.WatchdogModule
             bool accessed = false;
             while (!accessed)
             {
-                if (!Semaphore)
+                if (0 == Interlocked.Exchange(ref pettingLock, 1))
                 {
-                    Semaphore = true;
                     this.pettingQueue.Add(greenhouseID);
+                    Interlocked.Exchange(ref pettingLock, 0);
                     accessed = true;
-                    Semaphore = false;
                 }
                 else
                 {
@@ -42,13 +43,11 @@ namespace GreenhouseWeb.Services.WatchdogModule
 
             while (!accessed)
             {
-                if (!Semaphore)
+                if (0 == Interlocked.Exchange(ref pettingLock, 1))
                 {
-                    Semaphore = true;
                     temp = new HashSet<string>(this.pettingQueue);
                     this.pettingQueue = new HashSet<string>();
-                    accessed = true;
-                    Semaphore = false;
+                    Interlocked.Exchange(ref pettingLock, 0);
                     return temp;
                 }
                 else
@@ -65,12 +64,11 @@ namespace GreenhouseWeb.Services.WatchdogModule
             bool accessed = false;
             while (!accessed)
             {
-                if (!Semaphore)
+                if (0 == Interlocked.Exchange(ref pettingLock, 1))
                 {
-                    Semaphore = true;
                     this.pettingQueue.UnionWith(toBePetted);
+                    Interlocked.Exchange(ref pettingLock, 0);
                     accessed = true;
-                    Semaphore = false;
                 }
                 else
                 {
