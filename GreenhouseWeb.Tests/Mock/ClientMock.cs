@@ -93,8 +93,8 @@ namespace GreenhouseWeb.Tests.Mock
                         }
                     }
                     catch (IOException e) { Console.Write(e.StackTrace); }
-                    catch (InvalidOperationException e) { break; }
-                    catch (SocketException e) { break; }
+                    catch (InvalidOperationException e) { Console.Write(e.StackTrace); break; }
+                    catch (SocketException e) { Console.Write(e.StackTrace); break; }
                 }
             });
             listeningThread.Name = "ClientMock";

@@ -115,6 +115,10 @@ function save() {
             success: function (data) {
                 document.getElementById("label").innerHTML =
                     "Schedule" + " " + scheduleName + " " + "succesfully saved";
+            },
+            failure: function (data) {
+                document.getElementById("label").innerHTML =
+                    "Schedule" + " " + scheduleName + " " + "not succesfully saved";
             }
         });
     } else { // do nothing

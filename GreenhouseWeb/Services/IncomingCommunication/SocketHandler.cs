@@ -82,18 +82,12 @@ namespace GreenhouseWeb.Services.Incoming
                             writer.WriteLine(responseString);
                             writer.Flush();
                         }
-                        /*if (reader.EndOfStream)
-                        {
-                            stopped = true;
-                        }*/
                     }
                     catch (IOException e) { this.stopped = true; }
                     catch (OutOfMemoryException e) { this.stopped = true; }
                     catch (SocketException e) { this.stopped = true; }
-
                 }
-
-                if (registered)
+               if (registered)
                 {
                     this.incomingCommunicator.unregisterSocketHandler(registerID);
                 }
