@@ -11,7 +11,7 @@ function setGreenhouseID(id) {
 function updateData() {
     var response;
     $.ajax({
-        url: "getNewestData",
+        url: "getNewestData/",
         data: {
             GreenhouseID: greenhouseID
         },
